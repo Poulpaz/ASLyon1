@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">AS Lyon I</string>
+    <string name="app_name">AS Lyon 1</string>
+
+    <!-- Title -->
+    <string name="title_home">Home</string>
+    <string name="title_tournament">Tournament</string>
+    <string name="title_shop">Shop</string>
+    <string name="title_profile">Profile</string>
+
 </resources>

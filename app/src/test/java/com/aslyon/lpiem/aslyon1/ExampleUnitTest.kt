@@ -1,4 +1,4 @@
-package com.aslyon.lpiem.aslyoni
+package com.aslyon.lpiem.aslyon1
 
 import org.junit.Test
 
