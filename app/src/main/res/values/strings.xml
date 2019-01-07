@@ -7,4 +7,13 @@
     <string name="title_shop">Shop</string>
     <string name="title_profile">Profile</string>
 
+    <!-- Profile Fragment -->
+    <string name="ti_signin_profile_fragment">Sign In</string>
+    <string name="ti_signup_profile_fragment">Sign Up</string>
+    <string name="tv_sign_profile_fragment">Veuillez vous connecter ou vous inscrire</string>
+
+    <!-- Sign In Fragment -->
+    <string name="tv_email">Email</string>
+    <string name="tv_password">Password</string>
+
 </resources>

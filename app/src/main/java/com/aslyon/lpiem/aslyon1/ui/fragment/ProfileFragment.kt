@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.aslyon.lpiem.aslyon1.R
+import com.aslyon.lpiem.aslyon1.adapter.ProfileViewPagerAdapter
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment() {
 
@@ -20,10 +22,19 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setDisplayHomeAsUpEnabled(false)
         setDisplayBotomBarNavigation(true)
 
+        setupViewPager()
+
+    }
+
+    private fun setupViewPager() {
+        val adapter = ProfileViewPagerAdapter(childFragmentManager)
+        adapter.addFragment(SignInFragment.newInstance(), getString(R.string.ti_signin_profile_fragment))
+        adapter.addFragment(SignUpFragment.newInstance(), getString(R.string.ti_signup_profile_fragment))
+        vp_sign_profile_fragment.adapter = adapter
+        tl_sign_profile_fragment.setupWithViewPager(vp_sign_profile_fragment)
     }
 
 }
