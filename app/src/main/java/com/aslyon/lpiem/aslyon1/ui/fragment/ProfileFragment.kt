@@ -34,7 +34,7 @@ class ProfileFragment : BaseFragment() {
         adapter.addFragment(SignInFragment.newInstance(), getString(R.string.ti_signin_profile_fragment))
         adapter.addFragment(SignUpFragment.newInstance(), getString(R.string.ti_signup_profile_fragment))
         vp_sign_profile_fragment.adapter = adapter
-        tl_shop_fragment.setupWithViewPager(vp_sign_profile_fragment)
+        tl_sign_profile_fragment.setupWithViewPager(vp_sign_profile_fragment)
     }
 
 }

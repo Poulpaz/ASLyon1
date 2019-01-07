@@ -15,8 +15,5 @@
     <!-- Sign In Fragment -->
     <string name="tv_email">Email</string>
     <string name="tv_password">Password</string>
-    <string name="promotions_matchs">Promotions matchs</string>
-    <string name="boutique">Boutique</string>
-    <string name="redirection">Veuilez pressez l\'image afin d\'être redirigé sur le site de la boutique</string>
 
 </resources>
