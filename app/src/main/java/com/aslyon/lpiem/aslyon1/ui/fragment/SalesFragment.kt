@@ -12,6 +12,9 @@ import androidx.annotation.RequiresApi
 import com.aslyon.lpiem.aslyon1.R
 
 import kotlinx.android.synthetic.main.fragment_sales.*
+import android.view.MotionEvent
+
+
 
 class SalesFragment : BaseFragment(){
 
@@ -31,20 +34,18 @@ class SalesFragment : BaseFragment(){
         wv_sales_fragment.webViewClient=MyWebViewClient()
         wv_sales_fragment.loadUrl("https://as.univ-lyon1.fr/boutique/")
 
+
     }
 
     class MyWebViewClient : WebViewClient(){
 
         @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
         override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-            view?.loadUrl(request?.url.toString())
+            view?.loadUrl("https://as.univ-lyon1.fr/boutique/")
             return true
         }
 
-        override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
-            view?.loadUrl(url)
-            return true
-        }
+
 
     }
 }
