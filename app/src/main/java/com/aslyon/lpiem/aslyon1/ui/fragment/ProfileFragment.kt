@@ -4,12 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.aslyon.lpiem.aslyon1.R
-import com.aslyon.lpiem.aslyon1.adapter.ProfileViewPagerAdapter
-import com.aslyon.lpiem.aslyon1.viewModel.AuthentificationViewModel
 import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
-import kotlinx.android.synthetic.main.fragment_profile.*
 import org.kodein.di.generic.instance
 
 class ProfileFragment : BaseFragment() {
@@ -35,7 +31,7 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun setActiveFragment() {
-        val fragment = if(viewModel.connectedUser()) HomeFragment() else AuthentificationFragment()
+        val fragment = if(viewModel.connectedUser()) AccountInformationsFragment() else AuthentificationFragment()
 
         fragmentManager?.beginTransaction()
                 ?.replace(R.id.container_profile_fragment, fragment, fragment::class.java.name)
