@@ -14,7 +14,18 @@
 
     <!-- Sign In Fragment -->
     <string name="tv_email">Email</string>
-    <string name="tv_password">Password</string>
+    <string name="tv_password">Mot de passe</string>
+    <string name="b_signin">Se connecter</string>
+
+    <!-- Sign Up Fragment -->
+    <string name="tv_lastname">Nom</string>
+    <string name="tv_firstname">Prenom</string>
+    <string name="tv_pick_birthday">Choisir votre date de naissance</string>
+    <string name="tv_phone">Téléphone</string>
+    <string name="tv_confirm_password">Confirmation du mot de passe</string>
+    <string name="b_signup">S\'inscrire</string>
+
+    <!-- Shop Fragment -->
     <string name="ti_sales_shop_fragment">Boutique</string>
     <string name="ti_fixtures_shop_fragment">Promotions match</string>
     <string name="ti_sales_shop_activity">Boutique</string>
