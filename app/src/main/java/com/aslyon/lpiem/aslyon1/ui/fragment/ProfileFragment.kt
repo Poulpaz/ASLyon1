@@ -25,16 +25,6 @@ class ProfileFragment : BaseFragment() {
         setDisplayHomeAsUpEnabled(false)
         setDisplayBotomBarNavigation(true)
 
-        setupViewPager()
-
-    }
-
-    private fun setupViewPager() {
-        val adapter = ProfileViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(SignInFragment.newInstance(), getString(R.string.ti_signin_profile_fragment))
-        adapter.addFragment(SignUpFragment.newInstance(), getString(R.string.ti_signup_profile_fragment))
-        vp_sign_profile_fragment.adapter = adapter
-        tl_sign_profile_fragment.setupWithViewPager(vp_sign_profile_fragment)
     }
 
 }
