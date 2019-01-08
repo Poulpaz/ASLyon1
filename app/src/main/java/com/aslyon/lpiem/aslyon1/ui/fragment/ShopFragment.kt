@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.aslyon.lpiem.aslyon1.R
+import com.aslyon.lpiem.aslyon1.adapter.ProfileViewPagerAdapter
+import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.fragment_shop.*
 
 class ShopFragment : BaseFragment() {
 
@@ -24,6 +27,17 @@ class ShopFragment : BaseFragment() {
         setDisplayHomeAsUpEnabled(false)
         setDisplayBotomBarNavigation(true)
 
+        setupViewPager()
+
+    }
+
+    private fun setupViewPager() {
+        val adapter = ProfileViewPagerAdapter(childFragmentManager) //LAAAAAAAAAA//
+
+        adapter.addFragment(SalesFragment.newInstance(), getString(R.string.ti_sales_shop_fragment))
+       // adapter.addFragment(FixtureFragment.newInstance(), getString(R.string.ti_fixtures_shop_fragment))
+        vp_shop_fragment.adapter = adapter
+        tl_shop_fragment.setupWithViewPager(vp_shop_fragment)
     }
 
 }

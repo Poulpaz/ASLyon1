@@ -3,14 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_battle"
-    app:startDestination="@id/battle_fragment">
+    app:startDestination="@id/shop_fragment">
 
     <fragment
-        android:id="@+id/battle_fragment"
+        android:id="@+id/shop_fragment"
         android:name="com.aslyon.lpiem.aslyon1.ui.fragment.ShopFragment"
         android:label="ShopFragment"
         tools:layout="@layout/fragment_shop" >
 
     </fragment>
+
+
 
 </navigation>

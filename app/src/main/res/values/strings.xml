@@ -15,5 +15,9 @@
     <!-- Sign In Fragment -->
     <string name="tv_email">Email</string>
     <string name="tv_password">Password</string>
+    <string name="ti_sales_shop_fragment">Boutique</string>
+    <string name="ti_fixtures_shop_fragment">Promotions match</string>
+    <string name="ti_sales_shop_activity">Boutique</string>
+    <string name="ti_fixtures_shop_activity">Promotions Matchs</string>
 
 </resources>
