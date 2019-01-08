@@ -87,4 +87,5 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }

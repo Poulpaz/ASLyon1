@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_photo_fragment_account_informations"
+        android:layout_width="match_parent"
+        android:layout_height="106dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_profile" />
+
+    <TextView
+        android:id="@+id/tv_name_fragment_account_informations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_photo_fragment_account_informations"
+        android:text="Nom Prenom" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_fragment_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="tv_birthdate_fragment_account_informations, tv_mail_fragment_account_informations, tv_phone_fragment_account_informations" />
+
+    <TextView
+        android:id="@+id/tv_birthdate_fragment_account_informations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_fragment_account_informations"
+        android:text="Date de naissance" />
+
+
+
+    <TextView
+        android:id="@+id/tv_mail_fragment_account_informations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adressil"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_birthdate_fragment_account_informations"/>
+
+    <TextView
+        android:id="@+id/tv_phone_fragment_account_informations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telephone"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_mail_fragment_account_informations" />
+
+    <ImageView
+        android:id="@+id/iv_phone_fragment_account_informations"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+
+        app:layout_constraintEnd_toStartOf="@id/barrier_fragment_account"
+        app:srcCompat="@drawable/ic_phone"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@id/tv_phone_fragment_account_informations"
+        app:layout_constraintBottom_toBottomOf="@id/tv_phone_fragment_account_informations"
+        />
+
+    <ImageView
+        android:id="@+id/iv_birthdate_fragment_account_informations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@id/tv_birthdate_fragment_account_informations"
+        app:layout_constraintBottom_toBottomOf="@id/tv_birthdate_fragment_account_informations"
+        app:layout_constraintEnd_toStartOf="@id/barrier_fragment_account"
+        app:srcCompat="@drawable/ic_calendar"
+        />
+
+    <ImageView
+        android:id="@+id/iv_mail_fragment_account_informations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_mail"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@id/tv_mail_fragment_account_informations"
+        app:layout_constraintBottom_toBottomOf="@id/tv_mail_fragment_account_informations"
+        app:layout_constraintEnd_toStartOf="@id/barrier_fragment_account"
+
+        />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
