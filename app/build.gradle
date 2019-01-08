@@ -83,4 +83,8 @@ dependencies {
 
     //Picasso
     implementation "com.squareup.picasso:picasso:$versions.picasso"
+
+    //Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
 }

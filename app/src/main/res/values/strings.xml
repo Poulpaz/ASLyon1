@@ -2,18 +2,27 @@
     <string name="app_name">AS Lyon 1</string>
 
     <!-- Title -->
-    <string name="title_home">Home</string>
-    <string name="title_tournament">Tournament</string>
-    <string name="title_shop">Shop</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_home">Accueil</string>
+    <string name="title_tournament">Tournoi</string>
+    <string name="title_shop">Boutique</string>
+    <string name="title_profile">Profil</string>
 
     <!-- Profile Fragment -->
-    <string name="ti_signin_profile_fragment">Sign In</string>
-    <string name="ti_signup_profile_fragment">Sign Up</string>
+    <string name="ti_signin_profile_fragment">Se connecter</string>
+    <string name="ti_signup_profile_fragment">S\'inscrire</string>
     <string name="tv_sign_profile_fragment">Veuillez vous connecter ou vous inscrire</string>
 
     <!-- Sign In Fragment -->
     <string name="tv_email">Email</string>
-    <string name="tv_password">Password</string>
+    <string name="tv_password">Mot de passe</string>
+    <string name="b_signin">Se connecter</string>
+
+    <!-- Sign Up Fragment -->
+    <string name="tv_lastname">Nom</string>
+    <string name="tv_firstname">Prenom</string>
+    <string name="tv_pick_birthday">Choisir votre date de naissance</string>
+    <string name="tv_phone">Téléphone</string>
+    <string name="tv_confirm_password">Confirmation du mot de passe</string>
+    <string name="b_signup">S\'inscrire</string>
 
 </resources>

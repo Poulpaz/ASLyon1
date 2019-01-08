@@ -2,6 +2,9 @@ package com.aslyon.lpiem.aslyon1
 
 import android.app.Application
 import android.content.Context
+import com.aslyon.lpiem.aslyon1.dependencyinjection.networkModule
+import com.aslyon.lpiem.aslyon1.dependencyinjection.repoModule
+import com.aslyon.lpiem.aslyon1.dependencyinjection.viewModelModule
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.bind
@@ -16,9 +19,9 @@ class App : Application(), KodeinAware {
         bind<Application>() with singleton { this@App}
         bind<Context>() with singleton { instance<Application>() }
 
-        /*import(networkModule)
+        import(networkModule)
         import(repoModule)
-        import(viewModelModule)*/
+        import(viewModelModule)
     }
 
     override fun onCreate() {
