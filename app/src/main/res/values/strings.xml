@@ -2,14 +2,14 @@
     <string name="app_name">AS Lyon 1</string>
 
     <!-- Title -->
-    <string name="title_home">Accueil</string>
-    <string name="title_tournament">Tournoi</string>
-    <string name="title_shop">Boutique</string>
-    <string name="title_profile">Profil</string>
+    <string name="title_home">Home</string>
+    <string name="title_tournament">Tournament</string>
+    <string name="title_shop">Shop</string>
+    <string name="title_profile">Profile</string>
 
     <!-- Profile Fragment -->
-    <string name="ti_signin_profile_fragment">Se connecter</string>
-    <string name="ti_signup_profile_fragment">S\'inscrire</string>
+    <string name="ti_signin_profile_fragment">Sign In</string>
+    <string name="ti_signup_profile_fragment">Sign Up</string>
     <string name="tv_sign_profile_fragment">Veuillez vous connecter ou vous inscrire</string>
 
     <!-- Sign In Fragment -->
@@ -24,5 +24,11 @@
     <string name="tv_phone">Téléphone</string>
     <string name="tv_confirm_password">Confirmation du mot de passe</string>
     <string name="b_signup">S\'inscrire</string>
+
+    <!-- Shop Fragment -->
+    <string name="ti_sales_shop_fragment">Boutique</string>
+    <string name="ti_fixtures_shop_fragment">Promotions match</string>
+    <string name="ti_sales_shop_activity">Boutique</string>
+    <string name="ti_fixtures_shop_activity">Promotions Matchs</string>
 
 </resources>
