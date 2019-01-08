@@ -2,9 +2,7 @@ package com.aslyon.lpiem.aslyon1
 
 import android.app.Application
 import android.content.Context
-import com.aslyon.lpiem.aslyon1.dependencyinjection.networkModule
-import com.aslyon.lpiem.aslyon1.dependencyinjection.repoModule
-import com.aslyon.lpiem.aslyon1.dependencyinjection.viewModelModule
+import com.aslyon.lpiem.aslyon1.dependencyinjection.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.bind
@@ -22,6 +20,8 @@ class App : Application(), KodeinAware {
         import(networkModule)
         import(repoModule)
         import(viewModelModule)
+        import(managerModule)
+        import(preferenceModule)
     }
 
     override fun onCreate() {
