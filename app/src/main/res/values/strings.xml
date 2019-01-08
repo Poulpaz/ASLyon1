@@ -7,6 +7,10 @@
     <string name="title_shop">Shop</string>
     <string name="title_profile">Profile</string>
 
+    <!-- Home Fragment -->
+    <string name="ti_events_home_fragment">Events</string>
+    <string name="ti_actus_home_fragment">Actus</string>
+
     <!-- Profile Fragment -->
     <string name="ti_signin_profile_fragment">Sign In</string>
     <string name="ti_signup_profile_fragment">Sign Up</string>
