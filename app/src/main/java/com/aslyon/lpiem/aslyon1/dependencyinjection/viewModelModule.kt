@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.aslyon.lpiem.aslyon1.viewModel.AuthentificationViewModel
 import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
+import com.aslyon.lpiem.aslyon1.viewModel.OfferFragmentViewModel
 import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -28,6 +29,12 @@ val viewModelModule = Kodein.Module("ViewModelModule") {
     bind<ProfileViewModel>() with factory { fragment: Fragment ->
         ViewModelProvider(fragment, instance<ProfileViewModel.Factory>())
                 .get(ProfileViewModel::class.java)
+    }
+
+    bind<OfferFragmentViewModel.Factory>() with provider { OfferFragmentViewModel.Factory(instance()) }
+    bind<OfferFragmentViewModel>() with factory { fragment: Fragment ->
+        ViewModelProvider(fragment, instance<OfferFragmentViewModel.Factory>())
+                .get(OfferFragmentViewModel::class.java)
     }
 
 }
