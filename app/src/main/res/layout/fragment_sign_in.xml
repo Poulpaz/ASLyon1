@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/tv_password"
             android:maxLength="100"
-            android:inputType="textMultiLine"/>
+            android:inputType="textEmailAddress"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ListTournamentAdapter
+import com.aslyon.lpiem.aslyon1.ui.activity.AddTournamentActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import kotlinx.android.synthetic.main.fragment_tournament.*
+import timber.log.Timber
 
 class TournamentFragment : BaseFragment() {
 
@@ -27,12 +30,15 @@ class TournamentFragment : BaseFragment() {
         setDisplayHomeAsUpEnabled(false)
         setDisplayBotomBarNavigation(true)
 
-        val adapterPlayers = ListTournamentAdapter()
-        rv_tournament_fragment.adapter = adapterPlayers
+        val adapter = ListTournamentAdapter()
+        rv_tournament_fragment.adapter = adapter
         val layoutManager = LinearLayoutManager(context)
         rv_tournament_fragment.setItemAnimator(DefaultItemAnimator())
         rv_tournament_fragment.layoutManager = layoutManager
 
+        fab_tournament_fragment.setOnClickListener {
+            AddTournamentActivity.start(activity as MainActivity)
+        }
     }
 
 }
