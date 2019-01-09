@@ -50,6 +50,7 @@ class UserRepository(private val service: AsLyonService,
                     connectedUser.onNext(it.user)
                     token = it.token
                 }
+
                 .map<NetworkEvent> { NetworkEvent.Success }
                 .onErrorReturn { NetworkEvent.Error(it) }
                 .startWith(NetworkEvent.InProgress)
