@@ -6,6 +6,7 @@
     <string name="title_tournament">Tournament</string>
     <string name="title_shop">Shop</string>
     <string name="title_profile">Profile</string>
+    <string name="title_add_tournament">Ajout d\'un tournoi</string>
 
     <!-- Home Fragment -->
     <string name="ti_events_home_fragment">Events</string>
@@ -15,6 +16,14 @@
     <string name="ti_signin_profile_fragment">Connexion</string>
     <string name="ti_signup_profile_fragment">Inscription</string>
     <string name="tv_sign_profile_fragment">Veuillez vous connecter ou vous inscrire</string>
+
+    <!-- Tournament Fragment -->
+    <string name="tv_title">Title</string>
+    <string name="tv_nb_team_tournament">Nombre d\'équipes</string>
+    <string name="tv_nb_players_team_tournament">Nombre de joueurs par équipe</string>
+    <string name="tv_date_tournament">Choisissez la date du tournoi</string>
+    <string name="tv_description">Description</string>
+    <string name="tv_price">Prix</string>
 
     <!-- Sign In Fragment -->
     <string name="tv_email">Email</string>

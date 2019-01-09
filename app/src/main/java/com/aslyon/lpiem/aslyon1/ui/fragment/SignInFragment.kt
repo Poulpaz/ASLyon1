@@ -63,11 +63,11 @@ class SignInFragment : BaseFragment() {
     }
 
     private fun onSignInStateError(error: NetworkEvent.Error) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     private fun onSignInStateInProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     private fun login() {

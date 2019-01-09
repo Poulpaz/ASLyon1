@@ -12,6 +12,7 @@ import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.utils.or
 import com.facebook.AccessToken
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.FirebaseApp
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -99,6 +100,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        FirebaseApp.initializeApp(this)
         initView()
 
         currentController = navControllerHome
