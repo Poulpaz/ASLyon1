@@ -47,7 +47,7 @@ class UserRepository(private val service: AsLyonService,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    connectedUser.onNext(it.user)
+                    //connectedUser.onNext(it.user)
                     token = it.token
                 }
 
