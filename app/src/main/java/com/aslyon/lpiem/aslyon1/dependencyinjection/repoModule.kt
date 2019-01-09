@@ -12,7 +12,7 @@ import org.kodein.di.generic.singleton
  * Author:        oronot
  * Creation date: 17/04/2018
  */
-val repoModule = Kodein.Module("RepositoryModule") {
+val repoModule = Kodein.Module("repositoryModule") {
     bind<UserRepository>() with singleton { UserRepository(instance(), instance(), instance()) }
     bind<DataRepository>() with singleton { DataRepository(instance()) }
 }

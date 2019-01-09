@@ -8,22 +8,21 @@ import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.viewModel.AuthentificationViewModel
 import org.kodein.di.generic.instance
 
-class SignInFragment : BaseFragment() {
+class AccountInformationsFragment : BaseFragment() {
 
     companion object {
-        const val TAG = "SIGNINFRAGMENT"
-        fun newInstance(): SignInFragment = SignInFragment()
+        const val TAG = "ACCOUNTINFORMATIONSFRAGMENT"
+        fun newInstance(): AccountInformationsFragment = AccountInformationsFragment()
     }
 
     private val viewModel: AuthentificationViewModel by instance(arg = this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_sign_in, container, false)
+        return inflater.inflate(R.layout.fragment_account_jnformations, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
-
 }

@@ -63,5 +63,4 @@ class AuthentificationViewModel(private val repository: UserRepository): BaseVie
             return AuthentificationViewModel(repository) as T
         }
     }
-
 }

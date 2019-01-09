@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.aslyon.lpiem.aslyon1.R
-import com.aslyon.lpiem.aslyon1.adapter.ProfileViewPagerAdapter
-import kotlinx.android.synthetic.main.fragment_profile.*
+import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
+import org.kodein.di.generic.instance
 
 class ProfileFragment : BaseFragment() {
 
@@ -14,6 +14,8 @@ class ProfileFragment : BaseFragment() {
         const val TAG = "PROFILEFRAGMENT"
         fun newInstance(): ProfileFragment = ProfileFragment()
     }
+
+    private val viewModel: ProfileViewModel by instance(arg = this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -25,16 +27,15 @@ class ProfileFragment : BaseFragment() {
         setDisplayHomeAsUpEnabled(false)
         setDisplayBotomBarNavigation(true)
 
-        setupViewPager()
-
+        setActiveFragment()
     }
 
-    private fun setupViewPager() {
-        val adapter = ProfileViewPagerAdapter(childFragmentManager)
-        adapter.addFragment(SignInFragment.newInstance(), getString(R.string.ti_signin_profile_fragment))
-        adapter.addFragment(SignUpFragment.newInstance(), getString(R.string.ti_signup_profile_fragment))
-        vp_sign_profile_fragment.adapter = adapter
-        tl_sign_profile_fragment.setupWithViewPager(vp_sign_profile_fragment)
-    }
+    private fun setActiveFragment() {
+        val fragment = if(viewModel.connectedUser()) AccountInformationsFragment() else AuthentificationFragment()
 
+        fragmentManager?.beginTransaction()
+                ?.replace(R.id.container_profile_fragment, fragment, fragment::class.java.name)
+                ?.addToBackStack(null)
+                ?.commit()
+    }
 }
