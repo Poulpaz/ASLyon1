@@ -27,8 +27,6 @@
 
     <!-- Shop Fragment -->
     <string name="ti_sales_shop_fragment">Boutique</string>
-    <string name="ti_fixtures_shop_fragment">Promotions match</string>
-    <string name="ti_sales_shop_activity">Boutique</string>
-    <string name="ti_fixtures_shop_activity">Promotions Matchs</string>
+    <string name="ti_offer_shop_fragment">Offres</string>
 
 </resources>
