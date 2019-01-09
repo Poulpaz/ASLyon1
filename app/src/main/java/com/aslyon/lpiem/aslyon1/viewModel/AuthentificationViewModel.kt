@@ -58,9 +58,9 @@ class AuthentificationViewModel(private val repository: UserRepository): BaseVie
         return true
     }
 
-    class Factory constructor(private val reposotiry: UserRepository) : ViewModelProvider.Factory {
+    class Factory constructor(private val repository: UserRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return AuthentificationViewModel(reposotiry) as T
+            return AuthentificationViewModel(repository) as T
         }
     }
 }
