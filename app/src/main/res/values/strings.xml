@@ -12,8 +12,8 @@
     <string name="ti_actus_home_fragment">Actus</string>
 
     <!-- Profile Fragment -->
-    <string name="ti_signin_profile_fragment">Sign In</string>
-    <string name="ti_signup_profile_fragment">Sign Up</string>
+    <string name="ti_signin_profile_fragment">Connexion</string>
+    <string name="ti_signup_profile_fragment">Inscription</string>
     <string name="tv_sign_profile_fragment">Veuillez vous connecter ou vous inscrire</string>
 
     <!-- Sign In Fragment -->
@@ -31,8 +31,6 @@
 
     <!-- Shop Fragment -->
     <string name="ti_sales_shop_fragment">Boutique</string>
-    <string name="ti_fixtures_shop_fragment">Promotions match</string>
-    <string name="ti_sales_shop_activity">Boutique</string>
-    <string name="ti_fixtures_shop_activity">Promotions Matchs</string>
+    <string name="ti_offer_shop_fragment">Offres</string>
 
 </resources>

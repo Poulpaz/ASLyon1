@@ -47,9 +47,10 @@ class UserRepository(private val service: AsLyonService,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    connectedUser.onNext(it.user)
+                    //connectedUser.onNext(it.user)
                     token = it.token
                 }
+
                 .map<NetworkEvent> { NetworkEvent.Success }
                 .onErrorReturn { NetworkEvent.Error(it) }
                 .startWith(NetworkEvent.InProgress)
