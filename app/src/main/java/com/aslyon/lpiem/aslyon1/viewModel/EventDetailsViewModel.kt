@@ -8,24 +8,24 @@ import com.aslyon.lpiem.aslyon1.utils.disposedBy
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 
-class EventViewModel(dataRepository: DataRepository) : BaseViewModel() {
-
-    val eventList: BehaviorSubject<List<Event>?> = BehaviorSubject.create()
+class EventDetailsViewModel(dataRepository: DataRepository, idEvent: Int) : BaseViewModel() {
+    val event: BehaviorSubject<Event> = BehaviorSubject.create()
 
     init {
-        dataRepository.fetchEvent()
+        dataRepository.loadEvent(idEvent)
                 .subscribe(
                         {
-                            eventList.onNext(it)
+                            event.onNext(it)
                         },
                         { Timber.e(it) }
                 )
                 .disposedBy(disposeBag)
     }
 
-    class Factory constructor(private val repository: DataRepository) : ViewModelProvider.Factory {
-        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return EventViewModel(repository) as T
+    class Factory(private val repository: DataRepository, private val idEvent: Int) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            @Suppress("UNCHECKED_CAST")
+            return EventDetailsViewModel(repository, idEvent) as T
         }
     }
 }

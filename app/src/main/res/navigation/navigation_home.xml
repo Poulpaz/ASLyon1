@@ -10,6 +10,18 @@
         android:name="com.aslyon.lpiem.aslyon1.ui.fragment.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_fragment_to_event_details_fragment"
+            app:destination="@id/event_details_fragment" ></action>
     </fragment>
 
+    <fragment
+        android:id="@+id/event_details_fragment"
+        android:name="com.aslyon.lpiem.aslyon1.ui.fragment.EventDetailsFragment"
+        android:label="EventDetailsFragment"
+        tools:layout="@layout/fragment_event_details" >
+        <argument
+            android:name="event"
+            app:argType="integer" />
+    </fragment>
 </navigation>
