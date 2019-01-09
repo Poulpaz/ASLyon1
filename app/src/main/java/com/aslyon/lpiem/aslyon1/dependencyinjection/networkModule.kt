@@ -7,6 +7,7 @@ import com.aslyon.lpiem.aslyon1.BuildConfig
 import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonDeserializer
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,6 +18,8 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 private object Tag {
     const val TAG_PROD_BASE_URL = "base_url"
@@ -47,7 +50,10 @@ val networkModule = Kodein.Module("Network") {
     }
 
     bind<Gson>() with singleton {
-        GsonBuilder().create()
+        GsonBuilder().registerTypeAdapter(LocalDateTime::class.java, JsonDeserializer<LocalDateTime> { json, _, _ ->
+            return@JsonDeserializer ZonedDateTime.parse(json.asJsonPrimitive.asString).toLocalDateTime()
+        })
+                .create()
     }
 
     bind<Converter.Factory>(tagGsonConverterFactory) with singleton { GsonConverterFactory.create(instance()) }
