@@ -3,11 +3,13 @@ package com.aslyon.lpiem.aslyon1.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.model.Event
+import com.google.android.material.chip.Chip
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.subjects.PublishSubject
@@ -36,7 +38,6 @@ class ListEventAdapter : ListAdapter<Event, ListEventAdapter.EventViewHolder>(Di
             itemView.tv_date_item_event.text = getDateToString(event.date)
             itemView.tv_place_item_event.text = event.place
             itemView.tv_price_item_event.text = event.price
-            itemView.tv_description_item_event.text = event.description
             bindPositionClick(event.idEvent)
         }
 
