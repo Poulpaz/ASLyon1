@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.aslyon.lpiem.aslyon1.R
+import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
+import org.kodein.di.generic.instance
 
 class ProfileFragment : BaseFragment() {
 
@@ -13,6 +15,8 @@ class ProfileFragment : BaseFragment() {
         fun newInstance(): ProfileFragment = ProfileFragment()
     }
 
+    private val viewModel: ProfileViewModel by instance(arg = this)
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
@@ -20,10 +24,18 @@ class ProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setDisplayHomeAsUpEnabled(false)
         setDisplayBotomBarNavigation(true)
 
+        setActiveFragment()
     }
 
+    private fun setActiveFragment() {
+        val fragment = if(viewModel.connectedUser()) AccountInformationsFragment() else AuthentificationFragment()
+
+        fragmentManager?.beginTransaction()
+                ?.replace(R.id.container_profile_fragment, fragment, fragment::class.java.name)
+                ?.addToBackStack(null)
+                ?.commit()
+    }
 }
