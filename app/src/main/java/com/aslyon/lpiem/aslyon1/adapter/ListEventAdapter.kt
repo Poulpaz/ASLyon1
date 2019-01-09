@@ -59,7 +59,7 @@ class ListEventAdapter : ListAdapter<Event, ListEventAdapter.EventViewHolder>(Di
     }
 
     private fun getDateToString(date: Date?): String {
-        val df: DateFormat = SimpleDateFormat("dd' '/' 'MM' '/' 'yyyy' à 'HH:mm", Locale.FRANCE)
+        val df: DateFormat = SimpleDateFormat("dd/MM/yyyy' à 'HH:mm", Locale.FRANCE)
         return df.format(date)
     }
 }
