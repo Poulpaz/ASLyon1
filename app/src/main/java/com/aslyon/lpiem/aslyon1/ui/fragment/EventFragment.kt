@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.R.attr.action
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
@@ -42,6 +43,16 @@ class EventFragment : BaseFragment() {
                         adapter.submitList(it)
                     },
                     { Timber.e(it) }
+                )
+
+        adapter.indexClickPublisher
+                .subscribe(
+                        {
+                            val action = HomeFragmentDirections.actionHomeFragmentToEventDetailsFragment(it)
+
+                            NavHostFragment.findNavController(this).navigate(action)
+                        },
+                        { Timber.e(it) }
                 )
     }
 }
