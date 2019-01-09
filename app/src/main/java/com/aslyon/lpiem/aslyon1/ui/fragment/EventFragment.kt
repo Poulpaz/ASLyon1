@@ -32,7 +32,7 @@ class EventFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = ListEventAdapter()
-        val mLayoutManager = LinearLayoutManager(this.context)
+        val mLayoutManager = LinearLayoutManager(context)
         rv_event_fragment.setLayoutManager(mLayoutManager)
         rv_event_fragment.setItemAnimator(DefaultItemAnimator())
         rv_event_fragment.adapter = adapter

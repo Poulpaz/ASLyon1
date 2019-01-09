@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 class Tournament(
-        @SerializedName("id") var idTournament: Int,
+        @SerializedName("idTournament") var idTournament: Int,
         @SerializedName("title") var title: String,
         @SerializedName("nbTeam") var nbTeam: Int,
         @SerializedName("nbPlayersTeam") var nbPlayersTeam: Int,

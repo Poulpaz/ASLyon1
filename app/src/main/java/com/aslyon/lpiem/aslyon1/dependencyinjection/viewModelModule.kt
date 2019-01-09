@@ -2,12 +2,8 @@ package com.aslyon.lpiem.aslyon1.dependencyinjection
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.aslyon.lpiem.aslyon1.viewModel.AuthentificationViewModel
-import com.aslyon.lpiem.aslyon1.viewModel.EventDetailsViewModel
-import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
-import com.aslyon.lpiem.aslyon1.viewModel.OfferFragmentViewModel
-import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
-import com.aslyon.lpiem.aslyon1.viewModel.TournamentViewModel
+import com.aslyon.lpiem.aslyon1.model.Tournament
+import com.aslyon.lpiem.aslyon1.viewModel.*
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.factory
@@ -52,4 +48,9 @@ val viewModelModule = Kodein.Module("ViewModelModule") {
                 .get(TournamentViewModel::class.java)
     }
 
+    bind<TournamentDetailsViewModel.Factory>() with factory { idTournament : Int -> TournamentDetailsViewModel.Factory(instance(), idTournament) }
+    bind<TournamentDetailsViewModel>() with factory { fragment: Fragment, idTournament : Int ->
+        ViewModelProvider(fragment, instance<Int, TournamentDetailsViewModel.Factory>(arg = idTournament))
+                .get(TournamentDetailsViewModel::class.java)
+    }
 }

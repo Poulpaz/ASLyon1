@@ -39,12 +39,12 @@ class ListTournamentAdapter : ListAdapter<Tournament, ListTournamentAdapter.Tour
             bindPositionClick(tournament.idTournament)
         }
 
-        private fun bindPositionClick(idUser: Int) {
+        private fun bindPositionClick(idTournament: Int) {
             itemView.clicks()
                     .takeUntil(RxView.detaches(itemView))
                     .filter { adapterPosition != RecyclerView.NO_POSITION }
                     .subscribe {
-                        indexClickPublisher.onNext(idUser)
+                        indexClickPublisher.onNext(idTournament)
                     }
         }
     }
