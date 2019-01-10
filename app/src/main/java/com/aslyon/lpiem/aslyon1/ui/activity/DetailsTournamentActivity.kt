@@ -32,6 +32,8 @@ class DetailsTournamentActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_tournament_details)
+        setSupportActionBar(toolbarDetailsTournament)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val tournamentId = intent.getIntExtra(DetailsTournamentActivity.ExtraTournamentId, -1)
         viewModel = kodein.direct.instance(arg = M(this, tournamentId))
@@ -69,5 +71,10 @@ class DetailsTournamentActivity : BaseActivity() {
     private fun getDateToString(date: Date?): String {
         val df: DateFormat = SimpleDateFormat("dd/MM/yyyy' à 'HH:mm", Locale.FRANCE)
         return df.format(date)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

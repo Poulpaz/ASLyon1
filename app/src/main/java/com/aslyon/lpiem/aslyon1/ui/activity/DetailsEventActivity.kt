@@ -31,6 +31,8 @@ class DetailsEventActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
+        setSupportActionBar(toolbarDetailsEvent)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val eventId = intent.getIntExtra(ExtraEventId, -1)
         viewModel = kodein.direct.instance(arg = M(this, eventId))
@@ -67,5 +69,10 @@ class DetailsEventActivity : BaseActivity() {
     private fun getDateToString(date: Date?): String {
         val df: DateFormat = SimpleDateFormat("dd/MM/yyyy' à 'HH:mm", Locale.FRANCE)
         return df.format(date)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
