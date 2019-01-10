@@ -8,7 +8,9 @@ import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.repository.UserRepository
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
+import org.w3c.dom.Text
 import timber.log.Timber
+import java.util.*
 
 class ProfileViewModel(private val repository: UserRepository): BaseViewModel() {
 
@@ -20,11 +22,22 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
 
     //region error
     val errorEmptyEmail: PublishSubject<String> = PublishSubject.create()
-    val errorEmptyPassword: PublishSubject<String> = PublishSubject.create()
+    val errorEmptyText: PublishSubject<String> = PublishSubject.create()
 
     fun connectedUser(): Boolean {
         val token = repository.token
         return !TextUtils.isEmpty(token)
+    }
+
+    fun signup(lastname: String, firstname: String, dateOfBirth: Date?, email: String, password: String, confirmPassword: String, phoneNumber: String) {
+        if (validateSignup(lastname, firstname, dateOfBirth, email, password, confirmPassword, phoneNumber)) {
+            repository.signUp(lastname, firstname, dateOfBirth!!, email, password, phoneNumber)
+                    .subscribe(
+                            { registerState.onNext(it) },
+                            { Timber.e(it) }
+                    )
+            //repository.updateToken()
+        }
     }
 
     fun login(email: String, password: String) {
@@ -42,8 +55,12 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
         repository.logout()
     }
 
+    private fun validateSignup(lastname: String, firstname: String, dateOfBirth: Date?, email: String, password: String, confirmPassword: String, phoneNumber: String): Boolean {
+        return validateText(lastname) && validateText(firstname) && validateDate(dateOfBirth) && validateEmail(email) && validatePassword(password, confirmPassword) && validateText(phoneNumber)
+    }
+
     private fun validateLogin(email: String?, password: String?): Boolean {
-        return validateEmail(email) && validatePassword(password)
+        return validateEmail(email) && validateText(password)
     }
 
 
@@ -59,9 +76,29 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
         return true
     }
 
-    private fun validatePassword(password: String?): Boolean {
-        if (TextUtils.isEmpty(password)) {
-            errorEmptyPassword.onNext("Le mot de passe est vide")
+    private fun validatePassword(password: String, confirmPassword: String): Boolean {
+        if (TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
+            errorEmptyText.onNext("Vous devez remplir tous les champs")
+            return false
+        }
+        else if(!password.equals(confirmPassword)){
+            errorEmptyText.onNext("Les mots de passe ne correspondent pas")
+            return false
+        }
+        return true
+    }
+
+    private fun validateDate(date: Date?): Boolean {
+        if (date == null) {
+            errorEmptyText.onNext("Vous devez sélectionner une date")
+            return false
+        }
+        return true
+    }
+
+    private fun validateText(text: String?): Boolean {
+        if (TextUtils.isEmpty(text)) {
+            errorEmptyText.onNext("Vous devez remplir tous les champs")
             return false
         }
         return true

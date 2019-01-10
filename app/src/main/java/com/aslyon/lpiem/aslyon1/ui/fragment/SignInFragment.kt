@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
+import kotlinx.android.synthetic.main.activity_event_details.*
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import org.kodein.di.generic.instance
 import org.kodein.di.newInstance
@@ -53,6 +54,8 @@ class SignInFragment : BaseFragment() {
                 }, { Timber.e(it) }
         )
     }
+
+
 
     private fun onSignInStateSuccess() {
         val frg = parentFragment?.parentFragment?.childFragmentManager?.findFragmentById(R.id.content_profile)
