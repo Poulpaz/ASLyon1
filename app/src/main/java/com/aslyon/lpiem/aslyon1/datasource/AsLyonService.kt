@@ -33,6 +33,8 @@ interface AsLyonService {
     //region shop
     @GET("offers")
     fun getOffers(): Flowable<List<Offer>>
+    @GET("offer/{idOffer}")
+    fun getOffer(@Path("idOffer") idOffer : Int) : Observable<Offer>
 
     //region FireBase
     @POST("updateFireBaseToken")

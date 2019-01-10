@@ -44,6 +44,9 @@
         <activity
             android:name=".ui.activity.DetailsTournamentActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.activity.DetailsOfferActivity"
+            android:screenOrientation="portrait"></activity>
 
         <service android:name="com.emlyon.makersstories.service.FBMessagingService">
             <intent-filter>
