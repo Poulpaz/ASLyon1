@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ListTournamentAdapter
 import com.aslyon.lpiem.aslyon1.ui.activity.AddTournamentActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsTournamentActivity
 import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
+import com.aslyon.lpiem.aslyon1.viewModel.TournamentViewModel
 import kotlinx.android.synthetic.main.fragment_tournament.*
+import org.kodein.di.generic.instance
 import timber.log.Timber
 
 class TournamentFragment : BaseFragment() {
@@ -19,6 +22,8 @@ class TournamentFragment : BaseFragment() {
         const val TAG = "TOURNAMENTFRAGMENT"
         fun newInstance(): TournamentFragment = TournamentFragment()
     }
+
+    private val viewModel: TournamentViewModel by instance(arg = this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,14 +36,29 @@ class TournamentFragment : BaseFragment() {
         setDisplayBotomBarNavigation(true)
 
         val adapter = ListTournamentAdapter()
-        rv_tournament_fragment.adapter = adapter
-        val layoutManager = LinearLayoutManager(context)
+        val mLayoutManager = LinearLayoutManager(context)
+        rv_tournament_fragment.setLayoutManager(mLayoutManager)
         rv_tournament_fragment.setItemAnimator(DefaultItemAnimator())
-        rv_tournament_fragment.layoutManager = layoutManager
+        rv_tournament_fragment.adapter = adapter
+
+        viewModel.tournamentList
+                .subscribe(
+                        {
+                            adapter.submitList(it)
+                        },
+                        { Timber.e(it) }
+                )
+
+        adapter.indexClickPublisher
+                .subscribe(
+                        {
+                            DetailsTournamentActivity.start(activity as MainActivity, it)
+                        },
+                        { Timber.e(it) }
+                )
 
         fab_tournament_fragment.setOnClickListener {
             AddTournamentActivity.start(activity as MainActivity)
         }
     }
-
 }
