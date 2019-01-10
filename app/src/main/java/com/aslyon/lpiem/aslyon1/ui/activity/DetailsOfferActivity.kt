@@ -54,9 +54,7 @@ class DetailsOfferActivity : BaseActivity() {
         tv_title_offer_details.text = offer.title
         tv_place_offer_details.text = offer.teams
         tv_price_offer_details.text = offer.price
-
-        //Display Chip
-        chipGroup_date_fragment_offer_details.addView(getChip(getDateToString(offer.date)))
+        tv_date_offer_details.text = getDateToString(offer.date)
 
         tv_description_offer_details.text = offer.description
 
@@ -65,15 +63,6 @@ class DetailsOfferActivity : BaseActivity() {
             startActivity(i)
         }
 
-    }
-
-    private fun getChip(textChip : String?): Chip {
-        val chip = Chip(this)
-        chip.chipBackgroundColor = ContextCompat.getColorStateList(chip.context, R.color.colorAccent)
-        chip.isClickable = false
-        chip.text = textChip
-        chip.setTextAppearance(R.style.ChipTextStyle)
-        return chip
     }
 
     private fun getDateToString(date: Date?): String {
