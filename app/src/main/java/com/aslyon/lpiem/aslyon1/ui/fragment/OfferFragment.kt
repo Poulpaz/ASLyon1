@@ -11,6 +11,8 @@ import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ListEventAdapter
 import com.aslyon.lpiem.aslyon1.adapter.ListOfferAdapter
 import com.aslyon.lpiem.aslyon1.ui.activity.AddOfferActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsOfferActivity
 import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
 import com.aslyon.lpiem.aslyon1.viewModel.OfferFragmentViewModel
@@ -62,6 +64,14 @@ class OfferFragment : BaseFragment() {
                         { Timber.e(it) }
                 )
 
+        adapter.indexClickPublisher
+                .subscribe(
+                        {
+                            DetailsOfferActivity.start(activity as MainActivity, it)
+                        },
+                        { Timber.e(it) }
+                )
     }
 
-}
+    }
+
