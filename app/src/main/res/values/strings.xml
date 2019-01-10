@@ -25,6 +25,12 @@
     <string name="tv_description">Description</string>
     <string name="tv_price">Prix</string>
 
+    <!-- Account Informations Fragment -->
+    <string name="tv_title_dialog_logout">Deconnexion</string>
+    <string name="tv_message_dialog_logout">Voulez-vous vraiment vous déconnecter ?</string>
+    <string name="b_cancel_dialog_logout">Non</string>
+    <string name="b_validate_dialog_logout">Oui</string>
+
     <!-- Sign In Fragment -->
     <string name="tv_email">Email</string>
     <string name="tv_password">Mot de passe</string>
@@ -41,5 +47,8 @@
     <!-- Shop Fragment -->
     <string name="ti_sales_shop_fragment">Boutique</string>
     <string name="ti_offer_shop_fragment">Offres</string>
+
+    <!-- Error -->
+    <string name="error_connexion">Un problème est survenu lors de la connexion</string>
 
 </resources>

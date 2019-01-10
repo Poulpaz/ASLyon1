@@ -3,12 +3,15 @@ package com.aslyon.lpiem.aslyon1.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.aslyon.lpiem.aslyon1.R
+import com.aslyon.lpiem.aslyon1.ui.fragment.DisconnectUserInterface
 import com.aslyon.lpiem.aslyon1.utils.or
 import com.facebook.AccessToken
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -24,6 +27,8 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
+
+    private var disconnectProfileButtonMenu : MenuItem? = null
 
     private lateinit var currentController: NavController
     private lateinit var navControllerHome: NavController
@@ -48,6 +53,7 @@ class MainActivity : AppCompatActivity() {
                 tournamentWrapper.visibility = View.INVISIBLE
                 shopWrapper.visibility = View.INVISIBLE
                 app_bar.visibility = View.VISIBLE
+                displayDisconnectProfileButton(false)
                 supportActionBar?.setTitle(R.string.title_home)
 
                 returnValue = true
@@ -61,6 +67,7 @@ class MainActivity : AppCompatActivity() {
                 tournamentWrapper.visibility = View.INVISIBLE
                 shopWrapper.visibility = View.INVISIBLE
                 app_bar.visibility = View.VISIBLE
+                displayDisconnectProfileButton(true)
                 supportActionBar?.setTitle(R.string.title_profile)
 
                 returnValue = true
@@ -74,6 +81,7 @@ class MainActivity : AppCompatActivity() {
                 tournamentWrapper.visibility = View.VISIBLE
                 shopWrapper.visibility = View.INVISIBLE
                 app_bar.visibility = View.VISIBLE
+                displayDisconnectProfileButton(false)
                 supportActionBar?.setTitle(R.string.title_tournament)
 
                 returnValue = true
@@ -87,6 +95,7 @@ class MainActivity : AppCompatActivity() {
                 tournamentWrapper.visibility = View.INVISIBLE
                 shopWrapper.visibility = View.VISIBLE
                 app_bar.visibility = View.VISIBLE
+                displayDisconnectProfileButton(false)
                 supportActionBar?.setTitle(R.string.title_shop)
 
                 returnValue = true
@@ -144,5 +153,30 @@ class MainActivity : AppCompatActivity() {
         currentController
                 .let { if (it.popBackStack().not()) finish() }
                 .or { finish ()}
+    }
+
+    fun displayDisconnectProfileButton(value: Boolean) {
+        disconnectProfileButtonMenu?.isVisible = value
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_profile, menu)
+        disconnectProfileButtonMenu = menu?.findItem(R.id.b_disconnect_profile)
+        displayDisconnectProfileButton(false)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.b_disconnect_profile -> {
+                Log.d("test", "test")
+                val container = supportFragmentManager.findFragmentById(R.id.content_profile)
+                val frg = container?.childFragmentManager?.findFragmentById(R.id.container_profile_fragment)
+                if (frg is DisconnectUserInterface) {
+                    frg.disconnectUser()
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

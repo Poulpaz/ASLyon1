@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/tv_email"
             android:maxLength="100"
-            android:inputType="textMultiLine"/>
+            android:inputType="textEmailAddress"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/tv_password"
             android:maxLength="100"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,5 +57,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_password_signin_fragment"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/b_signin_fragment"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
