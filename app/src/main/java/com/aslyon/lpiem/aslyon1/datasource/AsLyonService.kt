@@ -1,6 +1,8 @@
 package com.aslyon.lpiem.aslyon1.datasource
 
 import com.aslyon.lpiem.aslyon1.datasource.request.LoginData
+import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
+import com.aslyon.lpiem.aslyon1.datasource.response.BaseResponse
 import com.aslyon.lpiem.aslyon1.datasource.response.LoginResponse
 import com.aslyon.lpiem.aslyon1.model.Event
 import com.aslyon.lpiem.aslyon1.model.Offer
@@ -15,6 +17,9 @@ interface AsLyonService {
     //region profile
     @POST("login")
     fun login(@Body loginData: LoginData): Observable<LoginResponse>
+
+    @POST("signup")
+    fun signup(@Header("token") token: String?, @Body user: SignUpData): Observable<BaseResponse>
 
     //region home
     @GET("events")
