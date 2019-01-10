@@ -1,5 +1,6 @@
 package com.aslyon.lpiem.aslyon1.ui.activity
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import com.aslyon.lpiem.aslyon1.utils.RxLifecycleDelegate
 import io.reactivex.Observable
@@ -29,5 +30,9 @@ open class BaseActivity : AppCompatActivity(), KodeinAware {
 
     protected fun lifecycle(event: RxLifecycleDelegate.ActivityEvent): Observable<RxLifecycleDelegate.ActivityEvent> {
         return rxDelegate.lifecycle(event)
+    }
+
+    protected fun setDisplayHomeAsUpEnabled(activity : AppCompatActivity, value : Boolean) {
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(value)
     }
 }
