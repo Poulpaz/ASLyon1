@@ -1,15 +1,14 @@
-package com.aslyon.lpiem.aslyon1.ui.fragment
+package com.aslyon.lpiem.aslyon1.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.model.Event
-import com.aslyon.lpiem.aslyon1.viewModel.EventDetailsViewModel
+import com.aslyon.lpiem.aslyon1.viewModel.DetailsEventViewModel
 import com.google.android.material.chip.Chip
-import kotlinx.android.synthetic.main.fragment_event_details.*
+import kotlinx.android.synthetic.main.activity_event_details.*
 import org.kodein.di.direct
 import org.kodein.di.generic.M
 import org.kodein.di.generic.instance
@@ -18,31 +17,30 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class EventDetailsFragment : BaseFragment() {
+class DetailsEventActivity : BaseActivity() {
 
-    private lateinit var viewModel: EventDetailsViewModel
+    private lateinit var viewModel: DetailsEventViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_event_details, container, false)
+    companion object {
+        const val ExtraEventId = "ExtraEventId"
+        fun start(activity: AppCompatActivity, eventId: Int) = activity.startActivity(Intent(activity, DetailsEventActivity::class.java).apply {
+            putExtra(ExtraEventId, eventId)
+        })
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_event_details)
 
-        setDisplayHomeAsUpEnabled(true)
-        setDisplayBotomBarNavigation(false)
-        arguments?.let {
-            val idEvent = EventDetailsFragmentArgs.fromBundle(it).event
-            viewModel = kodein.direct.instance(arg = M(this, idEvent))
-        }
+        val eventId = intent.getIntExtra(ExtraEventId, -1)
+        viewModel = kodein.direct.instance(arg = M(this, eventId))
 
         viewModel.event
                 .subscribe(
                         {
                             displayEvent(it)
                         },
-                        {Timber.e(it)}
+                        { Timber.e(it)}
                 )
     }
 
@@ -53,10 +51,12 @@ class EventDetailsFragment : BaseFragment() {
 
         //Display Chip
         chipGroup_date_fragment_event_details.addView(getChip(getDateToString(event.date)))
+
+        tv_description_event_details.text = event.description
     }
 
     private fun getChip(textChip : String?): Chip {
-        val chip = Chip(context)
+        val chip = Chip(this)
         chip.chipBackgroundColor = ContextCompat.getColorStateList(chip.context, R.color.colorAccent)
         chip.isClickable = false
         chip.text = textChip
