@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.R.attr.action
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ListEventAdapter
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
 import org.kodein.di.generic.instance
@@ -31,7 +34,7 @@ class EventFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = ListEventAdapter()
-        val mLayoutManager = LinearLayoutManager(this.context)
+        val mLayoutManager = LinearLayoutManager(context)
         rv_event_fragment.setLayoutManager(mLayoutManager)
         rv_event_fragment.setItemAnimator(DefaultItemAnimator())
         rv_event_fragment.adapter = adapter
@@ -42,6 +45,14 @@ class EventFragment : BaseFragment() {
                         adapter.submitList(it)
                     },
                     { Timber.e(it) }
+                )
+
+        adapter.indexClickPublisher
+                .subscribe(
+                        {
+                            DetailsEventActivity.start(activity as MainActivity, it)
+                        },
+                        { Timber.e(it) }
                 )
     }
 }

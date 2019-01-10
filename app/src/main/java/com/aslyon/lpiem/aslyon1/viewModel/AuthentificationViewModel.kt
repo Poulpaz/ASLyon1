@@ -43,6 +43,10 @@ class AuthentificationViewModel(private val repository: UserRepository): BaseVie
             errorEmptyEmail.onNext("L'email est vide")
             return false
         }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            errorEmptyEmail.onNext("L'email est invalide")
+            return false
+        }
         return true
     }
 

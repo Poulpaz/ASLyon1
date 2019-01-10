@@ -33,6 +33,29 @@
             android:name=".ui.activity.AddOfferActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".ui.activity.AddTournamentActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".ui.activity.DetailsEventActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".ui.activity.DetailsTournamentActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <service android:name="com.emlyon.makersstories.service.FBMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service android:name="com.emlyon.makersstories.service.FBInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
 
 
     </application>
