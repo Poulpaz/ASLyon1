@@ -27,10 +27,11 @@
         <intent-filter>
             <action android:name="android.intent.action.DEFAULT" />
             <action android:name="android.intent.action.VIEW" />
-
-
         </intent-filter>
     </activity>
+        <activity
+            android:name=".ui.activity.AddOfferActivity"
+            android:screenOrientation="portrait"></activity>
 
 
 
