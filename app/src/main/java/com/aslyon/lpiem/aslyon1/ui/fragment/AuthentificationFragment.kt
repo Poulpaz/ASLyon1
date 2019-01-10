@@ -37,4 +37,9 @@ class AuthentificationFragment: BaseFragment() {
         tl_sign_authentification_fragment.setupWithViewPager(vp_sign_authentification_fragment)
     }
 
+    override fun onResume() {
+        super.onResume()
+        displayDisconnectProfileButton(false)
+    }
+
 }

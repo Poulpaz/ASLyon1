@@ -1,15 +1,16 @@
 package com.aslyon.lpiem.aslyon1.ui.fragment
 
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
-import com.aslyon.lpiem.aslyon1.viewModel.AuthentificationViewModel
+import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import org.kodein.di.generic.instance
+import org.kodein.di.newInstance
 import timber.log.Timber
 
 class SignInFragment : BaseFragment() {
@@ -19,7 +20,7 @@ class SignInFragment : BaseFragment() {
         fun newInstance(): SignInFragment = SignInFragment()
     }
 
-    private val viewModel: AuthentificationViewModel by instance(arg = this)
+    private val viewModel: ProfileViewModel by instance(arg = this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -54,20 +55,20 @@ class SignInFragment : BaseFragment() {
     }
 
     private fun onSignInStateSuccess() {
-        val fragment = ProfileFragment()
-
-        fragmentManager?.beginTransaction()
-                ?.detach(fragment)
-                ?.attach(fragment)
-                ?.commit()
+        val frg = parentFragment?.parentFragment?.childFragmentManager?.findFragmentById(R.id.content_profile)
+        if (frg is ProfileFragmentInterface) {
+            frg.setActiveFragment()
+            progress_bar_signin.visibility = View.INVISIBLE
+        }
     }
 
     private fun onSignInStateError(error: NetworkEvent.Error) {
-
+        progress_bar_signin.visibility = View.INVISIBLE
+        Toast.makeText(context, getString(R.string.error_connexion), Toast.LENGTH_SHORT).show()
     }
 
     private fun onSignInStateInProgress() {
-
+        progress_bar_signin.visibility = View.VISIBLE
     }
 
     private fun login() {
