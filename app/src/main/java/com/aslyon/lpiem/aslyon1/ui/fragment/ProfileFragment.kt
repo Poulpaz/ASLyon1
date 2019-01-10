@@ -8,7 +8,7 @@ import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
 import org.kodein.di.generic.instance
 
-class ProfileFragment : BaseFragment() {
+class ProfileFragment : BaseFragment(), ProfileFragmentInterface {
 
     companion object {
         const val TAG = "PROFILEFRAGMENT"
@@ -30,12 +30,16 @@ class ProfileFragment : BaseFragment() {
         setActiveFragment()
     }
 
-    private fun setActiveFragment() {
-        val fragment = if(viewModel.connectedUser()) AccountInformationsFragment() else AuthentificationFragment()
-
+    override fun setActiveFragment() {
+        val fragment = if(viewModel.connectedUser()) AccountInformationsFragment.newInstance() else AuthentificationFragment.newInstance()
+        childFragmentManager?.popBackStack()
         fragmentManager?.beginTransaction()
-                ?.replace(R.id.container_profile_fragment, fragment, fragment::class.java.name)
+                ?.replace(R.id.container_profile_fragment, fragment)
                 ?.addToBackStack(null)
                 ?.commit()
     }
+}
+
+interface ProfileFragmentInterface{
+    fun setActiveFragment()
 }
