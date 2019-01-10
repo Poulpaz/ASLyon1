@@ -50,4 +50,11 @@ class DataRepository(private val service: AsLyonService) {
                 .observeOn(AndroidSchedulers.mainThread())
                 .share()
     }
+
+    fun loadOffer(idOffer : Int) : Observable<Offer> {
+        return service.getOffer(idOffer)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .share()
+    }
 }
