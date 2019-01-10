@@ -10,19 +10,5 @@
         android:name="com.aslyon.lpiem.aslyon1.ui.fragment.TournamentFragment"
         android:label="TournamentFragment"
         tools:layout="@layout/fragment_tournament" >
-        <action
-            android:id="@+id/action_tournament_fragment_to_tournament_details_fragment"
-            app:destination="@id/tournament_details_fragment" ></action>
     </fragment>
-
-    <fragment
-        android:id="@+id/tournament_details_fragment"
-        android:name="com.aslyon.lpiem.aslyon1.ui.fragment.TournamentDetailsFragment"
-        android:label="TournamentDetailsFragment"
-        tools:layout="@layout/fragment_tournament_details" >
-        <argument
-            android:name="tournament"
-            app:argType="integer" />
-    </fragment>
-
 </navigation>

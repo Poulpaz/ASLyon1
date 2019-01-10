@@ -36,6 +36,14 @@
             android:name=".ui.activity.AddTournamentActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".ui.activity.DetailsEventActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".ui.activity.DetailsTournamentActivity"
+            android:screenOrientation="portrait"></activity>
+
         <service android:name="com.emlyon.makersstories.service.FBMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

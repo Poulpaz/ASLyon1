@@ -4,17 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ListTournamentAdapter
-import com.aslyon.lpiem.aslyon1.model.Tournament
 import com.aslyon.lpiem.aslyon1.ui.activity.AddTournamentActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsTournamentActivity
 import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
-import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
 import com.aslyon.lpiem.aslyon1.viewModel.TournamentViewModel
-import kotlinx.android.synthetic.main.fragment_event.*
 import kotlinx.android.synthetic.main.fragment_tournament.*
 import org.kodein.di.generic.instance
 import timber.log.Timber
@@ -55,9 +52,7 @@ class TournamentFragment : BaseFragment() {
         adapter.indexClickPublisher
                 .subscribe(
                         {
-                            val action = TournamentFragmentDirections.actionTournamentFragmentToTournamentDetailsFragment(it)
-
-                            NavHostFragment.findNavController(this).navigate(action)
+                            DetailsTournamentActivity.start(activity as MainActivity, it)
                         },
                         { Timber.e(it) }
                 )
@@ -66,5 +61,4 @@ class TournamentFragment : BaseFragment() {
             AddTournamentActivity.start(activity as MainActivity)
         }
     }
-
 }

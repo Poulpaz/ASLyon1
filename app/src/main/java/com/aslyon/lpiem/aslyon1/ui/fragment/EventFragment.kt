@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ListEventAdapter
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
 import org.kodein.di.generic.instance
@@ -48,9 +50,7 @@ class EventFragment : BaseFragment() {
         adapter.indexClickPublisher
                 .subscribe(
                         {
-                            val action = HomeFragmentDirections.actionHomeFragmentToEventDetailsFragment(it)
-
-                            NavHostFragment.findNavController(this).navigate(action)
+                            DetailsEventActivity.start(activity as MainActivity, it)
                         },
                         { Timber.e(it) }
                 )

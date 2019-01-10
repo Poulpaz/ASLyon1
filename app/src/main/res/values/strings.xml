@@ -7,6 +7,8 @@
     <string name="title_shop">Shop</string>
     <string name="title_profile">Profile</string>
     <string name="title_add_tournament">Ajout d\'un tournoi</string>
+    <string name="title_details_tournament">Détails d\'un tournoi</string>
+    <string name="title_details_event">Détails d\'un événement</string>
 
     <!-- Home Fragment -->
     <string name="ti_events_home_fragment">Events</string>
