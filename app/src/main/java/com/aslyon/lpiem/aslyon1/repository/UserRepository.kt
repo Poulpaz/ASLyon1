@@ -5,6 +5,7 @@ import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.datasource.request.LoginData
 import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
+import com.aslyon.lpiem.aslyon1.datasource.response.TokenData
 import com.aslyon.lpiem.aslyon1.manager.KeystoreManager
 import com.aslyon.lpiem.aslyon1.model.User
 import com.gojuno.koptional.None
@@ -36,7 +37,7 @@ class UserRepository(private val service: AsLyonService,
                 field = loadToken()
             }
             return if (!field.isNullOrBlank()) {
-                "Bearer $field"
+                field
             } else {
                 null
             }
@@ -48,6 +49,11 @@ class UserRepository(private val service: AsLyonService,
 
     //region signup
     fun signUp(lastname: String, firstname: String, dateOfBirth: Date, email: String, password: String, phoneNumber: String): Observable<NetworkEvent> {
+        var newToken: String? = null
+        /*FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
+             newToken = it.token
+        }*/
+
         val registerData = SignUpData(lastname, firstname, dateOfBirth.toString(), email, password, phoneNumber)
 
         return service.signup(token, registerData)
@@ -116,21 +122,13 @@ class UserRepository(private val service: AsLyonService,
                 editor.putString(pushToken, newPushToken)
                 editor.apply()
 
-                if (oldPushToken.equals(newPushToken, false)) {
-                    service.updateFireBaseToken(token, newPushToken)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe({}, {
-                                Timber.e(it)
-                            })
-                } else {
-                    service.updateFireBaseToken(token, newPushToken)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe({}, {
-                                Timber.e(it)
-                            })
-                }
+                val tokenData = TokenData(oldPushToken, newPushToken)
+                service.updateFireBaseToken(tokenData)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({}, {
+                            Timber.e(it)
+                        })
             }
         }
     }

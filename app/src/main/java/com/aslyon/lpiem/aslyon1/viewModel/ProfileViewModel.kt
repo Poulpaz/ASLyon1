@@ -36,7 +36,6 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
                             { registerState.onNext(it) },
                             { Timber.e(it) }
                     )
-            //repository.updateToken()
         }
     }
 
@@ -47,7 +46,7 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
                             { loginState.onNext(it) },
                             { Timber.e(it) }
                     )
-            //repository.updateToken()
+            repository.updateToken()
         }
     }
 
