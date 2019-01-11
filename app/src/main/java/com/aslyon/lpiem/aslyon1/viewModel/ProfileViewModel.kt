@@ -5,7 +5,9 @@ import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
+import com.aslyon.lpiem.aslyon1.model.User
 import com.aslyon.lpiem.aslyon1.repository.UserRepository
+import com.gojuno.koptional.Optional
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
@@ -21,6 +23,11 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
     //region error
     val errorEmptyEmail: PublishSubject<String> = PublishSubject.create()
     val errorEmptyPassword: PublishSubject<String> = PublishSubject.create()
+    val connectedUser: BehaviorSubject<Optional<User>>
+        get() {
+            return repository.connectedUser
+        }
+
 
     fun connectedUser(): Boolean {
         val token = repository.token
@@ -37,6 +44,7 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
             //repository.updateToken()
         }
     }
+
 
     fun logout(){
         repository.logout()

@@ -9,12 +9,14 @@ import com.aslyon.lpiem.aslyon1.model.User
 import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.toOptional
+
 import com.google.firebase.iid.FirebaseInstanceId
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
+
 
 class UserRepository(private val service: AsLyonService,
                      private val keystoreManager: KeystoreManager,
