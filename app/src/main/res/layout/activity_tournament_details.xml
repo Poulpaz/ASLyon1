@@ -95,6 +95,7 @@
             <TextView
                 android:id="@+id/tv_date_tournament_details"
                 android:text="18/05/2019"
+                style="@style/DateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -110,6 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Match de basket formidable."
+                style="@style/DescriptionText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_date_tournament_details" />
