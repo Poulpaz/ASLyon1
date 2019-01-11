@@ -9,6 +9,7 @@
     <string name="title_add_tournament">Ajout d\'un tournoi</string>
     <string name="title_details_tournament">Détails d\'un tournoi</string>
     <string name="title_details_event">Détails d\'un événement</string>
+    <string name="title_details_actu">Détails d\'une actualité</string>
 
     <!-- Home Fragment -->
     <string name="ti_events_home_fragment">Events</string>

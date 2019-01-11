@@ -6,9 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.aslyon.lpiem.aslyon1.R
+import com.aslyon.lpiem.aslyon1.R.id.rv_actu_fragment
+import com.aslyon.lpiem.aslyon1.adapter.ListActuAdapter
 import com.aslyon.lpiem.aslyon1.adapter.ListEventAdapter
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
+import com.aslyon.lpiem.aslyon1.viewModel.ActuViewModel
 import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
+import kotlinx.android.synthetic.main.fragment_actu.*
 import kotlinx.android.synthetic.main.fragment_event.*
 import org.kodein.di.generic.instance
 import timber.log.Timber
@@ -18,28 +25,36 @@ class ActuFragment : BaseFragment() {
         const val TAG = "ACTUFRAGMENT"
         fun newInstance(): ActuFragment = ActuFragment()
     }
-/*
-    private val viewModel: EventViewModel by instance(arg = this)
+
+    private val viewModel: ActuViewModel by instance(arg = this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_event, container, false)
+        return inflater.inflate(R.layout.fragment_actu, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = ListEventAdapter()
-        val mLayoutManager = GridLayoutManager(this.context, 2)
-        rv_event_fragment.setLayoutManager(mLayoutManager)
-        rv_event_fragment.setItemAnimator(DefaultItemAnimator())
-        rv_event_fragment.adapter = adapter
+        val adapter = ListActuAdapter()
+        val mLayoutManager = LinearLayoutManager(context)
+        rv_actu_fragment.setLayoutManager(mLayoutManager)
+        rv_actu_fragment.setItemAnimator(DefaultItemAnimator())
+        rv_actu_fragment.adapter = adapter
 
-        viewModel.eventList
+        viewModel.actuList
                 .subscribe(
                         {
                             adapter.submitList(it)
                         },
                         { Timber.e(it) }
                 )
-    }*/
+
+        adapter.indexClickPublisher
+                .subscribe(
+                        {
+                            DetailsActuActivity.start(activity as MainActivity, it)
+                        },
+                        { Timber.e(it) }
+                )
+    }
 }

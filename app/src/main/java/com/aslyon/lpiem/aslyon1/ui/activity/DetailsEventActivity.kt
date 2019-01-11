@@ -3,11 +3,9 @@ package com.aslyon.lpiem.aslyon1.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.model.Event
 import com.aslyon.lpiem.aslyon1.viewModel.DetailsEventViewModel
-import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_event_details.*
 import org.kodein.di.direct
 import org.kodein.di.generic.M
@@ -47,12 +45,12 @@ class DetailsEventActivity : BaseActivity() {
     }
 
     private fun displayEvent(event: Event) {
-        tv_title_event_details.text = event.title
-        tv_place_event_details.text = event.place
+        tv_title_actu_details.text = event.title
+        tv_author_actu_details.text = event.place
         tv_price_event_details.text = event.price
-        tv_date_event_details.text = getDateToString(event.date)
+        tv_date_actu_details.text = getDateToString(event.date)
 
-        tv_description_event_details.text = event.description
+        tv_content_actu_details.text = event.description
     }
 
     private fun getDateToString(date: Date?): String {
