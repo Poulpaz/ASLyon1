@@ -39,12 +39,12 @@
 
             <ImageView
                 android:id="@+id/iv_item_offer_details"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="150dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="150dp"
-                android:src="@drawable/ic_calendar"
+                android:src="@drawable/ic_medal"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -81,15 +81,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_place_offer_details" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup_date_fragment_offer_details"
-                style="@style/Widget.MaterialComponents.Chip.Action"
+            <TextView
+                android:id="@+id/tv_date_offer_details"
+                android:text="18/05/2019"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
-                app:chipSpacingHorizontal="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_price_offer_details" />
@@ -102,7 +101,7 @@
                 android:text="Match de basket formidable."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chipGroup_date_fragment_offer_details" />
+                app:layout_constraintTop_toBottomOf="@id/tv_date_offer_details" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/b_link_fragment_offer_details"

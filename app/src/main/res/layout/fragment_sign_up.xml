@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/tv_phone"
                     android:inputType="number"
-                    android:maxLength="100" />
+                    android:maxLength="10" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tv_email"
-                    android:inputType="textMultiLine"
+                    android:inputType="textEmailAddress"
                     android:maxLength="100" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -156,6 +156,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/b_signup_fragment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.datasource.request.LoginData
+import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
 import com.aslyon.lpiem.aslyon1.manager.KeystoreManager
 import com.aslyon.lpiem.aslyon1.model.User
 import com.gojuno.koptional.None
@@ -16,6 +17,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
+import java.util.*
+import java.text.SimpleDateFormat
+
 
 
 class UserRepository(private val service: AsLyonService,
@@ -43,8 +47,21 @@ class UserRepository(private val service: AsLyonService,
             field = value
             saveToken(field)
         }
-    //region login
 
+    //region signup
+    fun signUp(lastname: String, firstname: String, dateOfBirth: Date, email: String, password: String, phoneNumber: String): Observable<NetworkEvent> {
+        val registerData = SignUpData(lastname, firstname, dateOfBirth.toString(), email, password, phoneNumber)
+
+        return service.signup(token, registerData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<NetworkEvent> { NetworkEvent.Success }
+                .onErrorReturn { NetworkEvent.Error(it) }
+                .startWith(NetworkEvent.InProgress)
+                .share()
+    }
+
+    //region login
     fun login(email: String, password: String): Observable<NetworkEvent> {
         val loginData = LoginData(email, password)
 

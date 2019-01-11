@@ -7,13 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.aslyon.lpiem.aslyon1.R
+import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.utils.DatePickerFragment
+import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
+import kotlinx.android.synthetic.main.activity_event_details.*
+import kotlinx.android.synthetic.main.fragment_authentification.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import org.kodein.di.generic.instance
+import timber.log.Timber
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SignUpFragment : BaseFragment(){
+class SignUpFragment : BaseFragment() {
 
     var birthdayDate: Date? = null
 
@@ -22,6 +28,8 @@ class SignUpFragment : BaseFragment(){
         fun newInstance(): SignUpFragment = SignUpFragment()
         val codeBirthdayPicker = 100
     }
+
+    private val viewModel: ProfileViewModel by instance(arg = this)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -33,6 +41,48 @@ class SignUpFragment : BaseFragment(){
 
         initChipDatePicker()
 
+        b_signup_fragment.setOnClickListener {
+            val lastname = et_lastname_signup_fragment.text.toString()
+            val firstname = et_firstname_signup_fragment.text.toString()
+            val email = et_email_signup_fragment.text.toString()
+            val password = et_password_signup_fragment.text.toString()
+            val confirmPassword = et_confirm_password_signup_fragment.text.toString()
+            val phoneNumber = et_phone_signup_fragment.text.toString()
+
+            viewModel.signup(lastname, firstname, birthdayDate, email, password, confirmPassword, phoneNumber)
+        }
+
+        viewModel.registerState.subscribe(
+                {
+                    when (it) {
+                        NetworkEvent.None -> {
+                            // Nothing
+                        }
+                        NetworkEvent.InProgress -> {
+                            onSignUpStateInProgress()
+                        }
+                        is NetworkEvent.Error -> {
+                            onSignUpStateError(it)
+                        }
+                        is NetworkEvent.Success -> {
+                            onSignUpStateSuccess()
+                        }
+                    }
+                }, { Timber.e(it) }
+        )
+    }
+
+    private fun onSignUpStateSuccess() {
+        parentFragment?.parentFragment?.childFragmentManager?.findFragmentById(R.id.container_profile_fragment)?.vp_sign_authentification_fragment?.currentItem = 0
+        b_signup_fragment.isEnabled = true
+    }
+
+    private fun onSignUpStateError(it: NetworkEvent.Error) {
+        b_signup_fragment.isEnabled = true
+    }
+
+    private fun onSignUpStateInProgress() {
+        b_signup_fragment.isEnabled = false
     }
 
     private fun initChipDatePicker() {
