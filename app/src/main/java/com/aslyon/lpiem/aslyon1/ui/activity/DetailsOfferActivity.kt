@@ -52,23 +52,15 @@ class DetailsOfferActivity : BaseActivity() {
 
     private fun displayOffer(offer: Offer) {
         tv_title_offer_details.text = offer.title
-        tv_place_offer_details.text = offer.teams
-        tv_price_offer_details.text = offer.price
-        tv_date_offer_details.text = getDateToString(offer.date)
-
+        tv_place_offer_details.text = offer.nbParticipants+" places disponibles"
+        tv_price_offer_details.text = offer.price+" euros"
+        tv_date_offer_details.text = offer.date
         tv_description_offer_details.text = offer.description
 
-        b_link_fragment_offer_details.setOnClickListener{
-            val i = Intent(Intent.ACTION_VIEW, Uri.parse(offer.link))
-            startActivity(i)
-        }
+
 
     }
 
-    private fun getDateToString(date: Date?): String {
-        val df: DateFormat = SimpleDateFormat("dd/MM/yyyy' à 'HH:mm", Locale.FRANCE)
-        return df.format(date)
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

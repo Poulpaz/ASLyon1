@@ -1,10 +1,12 @@
 package com.aslyon.lpiem.aslyon1.datasource
 
 import com.aslyon.lpiem.aslyon1.datasource.request.LoginData
+import com.aslyon.lpiem.aslyon1.datasource.request.OfferData
 import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
 import com.aslyon.lpiem.aslyon1.datasource.response.BaseResponse
 import com.aslyon.lpiem.aslyon1.datasource.response.LoginResponse
 import com.aslyon.lpiem.aslyon1.model.*
+import com.aslyon.lpiem.aslyon1.datasource.response.TokenData
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -38,9 +40,14 @@ interface AsLyonService {
     @GET("offer/{idOffer}")
     fun getOffer(@Path("idOffer") idOffer : Int) : Observable<Offer>
 
+
+    @POST("newOffer")
+    fun addoffer( @Body offer: OfferData): Observable<BaseResponse>
+
+
     //region FireBase
-    @POST("updateFireBaseToken")
-    fun updateFireBaseToken(@Header("Authorization") token: String?, @Body newToken: String): Observable<Unit>
+    @PUT("changeToken")
+    fun updateFireBaseToken(@Header("token") token: TokenData): Observable<Unit>
 
     //region actu
     @GET("xml")

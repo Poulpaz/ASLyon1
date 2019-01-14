@@ -34,9 +34,9 @@ class ListOfferAdapter : ListAdapter<Offer, ListOfferAdapter.OfferViewHolder>(Di
 
         fun bind(offer: Offer) {
             itemView.tv_title_item_offer.text = offer.title
-            itemView.tv_date_item_offer.text = getDateToString(offer.date)
-            itemView.tv_number_team_item_offer.text=offer.teams
-            itemView.tv_price_item_offer.text = offer.price
+            itemView.tv_date_item_offer.text = offer.date
+            itemView.tv_number_team_item_offer.text=offer.nbParticipants+" places disponible(s)"
+            itemView.tv_price_item_offer.text = offer.price+" euros"
             bindPositionClick(offer.idOffer)
         }
 

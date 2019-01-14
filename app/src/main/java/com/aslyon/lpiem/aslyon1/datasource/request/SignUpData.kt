@@ -9,5 +9,5 @@ class SignUpData(
         @SerializedName("dateofbirth") var dateOfBirth: String,
         @SerializedName("email") var email: String,
         @SerializedName("password") var password: String,
-        @SerializedName("phoneNumber") var phoneNumber: String
+        @SerializedName("phonenumber") var phoneNumber: String
 )

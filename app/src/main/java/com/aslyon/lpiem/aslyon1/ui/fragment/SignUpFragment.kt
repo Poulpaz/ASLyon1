@@ -66,6 +66,7 @@ class SignUpFragment : BaseFragment() {
                         }
                         is NetworkEvent.Success -> {
                             onSignUpStateSuccess()
+
                         }
                     }
                 }, { Timber.e(it) }

@@ -2,6 +2,7 @@ package com.aslyon.lpiem.aslyon1.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class OfferFragment : BaseFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         return inflater.inflate(R.layout.fragment_offer, container, false)
 
     }
@@ -43,7 +45,8 @@ class OfferFragment : BaseFragment() {
 
         setDisplayHomeAsUpEnabled(false)
         setDisplayBotomBarNavigation(true)
-
+        /*val ft = fragmentManager!!.beginTransaction()
+        ft.detach(this).attach(this).commit()*/
         val adapter = ListOfferAdapter()
         val mLayoutManager = LinearLayoutManager(this.context)
         rv_offer_fragment.setLayoutManager(mLayoutManager)
@@ -55,11 +58,15 @@ class OfferFragment : BaseFragment() {
             AddOfferActivity.start(activity as MainActivity)
 
         }
+        swiperefrsh_fragment_offer.setOnRefreshListener {viewModel.getListOffer()}
+
+
 
         viewModel.offerList
                 .subscribe(
                         {
                             adapter.submitList(it)
+                            swiperefrsh_fragment_offer.isRefreshing = false
                         },
                         { Timber.e(it) }
                 )
@@ -71,6 +78,11 @@ class OfferFragment : BaseFragment() {
                         },
                         { Timber.e(it) }
                 )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getListOffer()
     }
 
     }
