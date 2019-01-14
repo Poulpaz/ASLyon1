@@ -31,7 +31,8 @@ class ListActuAdapter : ListAdapter<ItemsItem, ListActuAdapter.ActuViewHolder>(D
         fun bind(itemsItem: ItemsItem) {
             itemView.tv_title_item_actu.text = itemsItem.title
             itemView.tv_pubDate_item_actu.text = itemsItem.pubDate
-            bindPositionClick(itemsItem.guid)
+            itemView.tv_author_item_actu.text = itemsItem.author
+            bindPositionClick(itemsItem.link)
         }
 
         private fun bindPositionClick(guid: String) {
@@ -44,11 +45,11 @@ class ListActuAdapter : ListAdapter<ItemsItem, ListActuAdapter.ActuViewHolder>(D
 
     class DiffCardCallback : DiffUtil.ItemCallback<ItemsItem>() {
         override fun areItemsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
-            return oldItem.guid == newItem.guid
+            return oldItem.link == newItem.link
         }
 
         override fun areContentsTheSame(oldItem: ItemsItem, newItem: ItemsItem): Boolean {
-            return oldItem.guid == newItem.guid
+            return oldItem.link == newItem.link
         }
     }
 }

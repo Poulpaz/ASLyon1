@@ -4,10 +4,7 @@ import com.aslyon.lpiem.aslyon1.datasource.request.LoginData
 import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
 import com.aslyon.lpiem.aslyon1.datasource.response.BaseResponse
 import com.aslyon.lpiem.aslyon1.datasource.response.LoginResponse
-import com.aslyon.lpiem.aslyon1.model.Event
-import com.aslyon.lpiem.aslyon1.model.Offer
-import com.aslyon.lpiem.aslyon1.model.Tournament
-import com.aslyon.lpiem.aslyon1.model.User
+import com.aslyon.lpiem.aslyon1.model.*
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -45,4 +42,7 @@ interface AsLyonService {
     @POST("updateFireBaseToken")
     fun updateFireBaseToken(@Header("Authorization") token: String?, @Body newToken: String): Observable<Unit>
 
+    //region actu
+    @GET("xml")
+    fun getRSSActus(): Flowable<List<ItemsItem>>
 }

@@ -1,22 +1,17 @@
 package com.aslyon.lpiem.aslyon1.ui.fragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aslyon.lpiem.aslyon1.R
-import com.aslyon.lpiem.aslyon1.R.id.rv_actu_fragment
 import com.aslyon.lpiem.aslyon1.adapter.ListActuAdapter
-import com.aslyon.lpiem.aslyon1.adapter.ListEventAdapter
-import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity
-import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.aslyon.lpiem.aslyon1.viewModel.ActuViewModel
-import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
 import kotlinx.android.synthetic.main.fragment_actu.*
-import kotlinx.android.synthetic.main.fragment_event.*
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
@@ -52,7 +47,8 @@ class ActuFragment : BaseFragment() {
         adapter.indexClickPublisher
                 .subscribe(
                         {
-                            DetailsActuActivity.start(activity as MainActivity, it)
+                            val i = Intent(Intent.ACTION_VIEW, Uri.parse(it))
+                            startActivity(i)
                         },
                         { Timber.e(it) }
                 )

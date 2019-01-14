@@ -2,6 +2,7 @@ package com.aslyon.lpiem.aslyon1.repository
 
 import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
 import com.aslyon.lpiem.aslyon1.model.Event
+import com.aslyon.lpiem.aslyon1.model.ItemsItem
 import com.aslyon.lpiem.aslyon1.model.Offer
 import com.aslyon.lpiem.aslyon1.model.Tournament
 import io.reactivex.Flowable
@@ -15,6 +16,7 @@ class DataRepository(private val service: AsLyonService) {
     val eventList: BehaviorSubject<List<Event>> = BehaviorSubject.create()
     val tournamentList: BehaviorSubject<List<Tournament>> = BehaviorSubject.create()
     val offerList: BehaviorSubject<List<Offer>> = BehaviorSubject.create()
+    val actuList: BehaviorSubject<List<ItemsItem>> = BehaviorSubject.create()
 
     fun fetchEvent(): Flowable<List<Event>> {
         return service.getEvents()
@@ -53,6 +55,13 @@ class DataRepository(private val service: AsLyonService) {
 
     fun loadOffer(idOffer : Int) : Observable<Offer> {
         return service.getOffer(idOffer)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .share()
+    }
+
+    fun fetchActus(): Flowable<List<ItemsItem>> {
+        return service.getRSSActus()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .share()
