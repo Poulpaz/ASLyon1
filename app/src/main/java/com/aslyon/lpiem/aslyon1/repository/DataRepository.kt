@@ -12,6 +12,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DataRepository(private val service: AsLyonService) {
@@ -62,8 +63,8 @@ class DataRepository(private val service: AsLyonService) {
                 .share()
     }
 
-    fun addOffer(title: String, dateOffer: String, teams:String, discount: String, link:String,description: String): Observable<NetworkEvent> {
-        val offerData = OfferData(title, dateOffer,"", discount, "",description)
+    fun addOffer(title: String, dateOffer: Date, nbParticipants:String, discount: String,description: String): Observable<NetworkEvent> {
+        val offerData = OfferData(title, getDateToString(dateOffer),nbParticipants, discount, description)
 
         return service.addoffer(offerData)
                 .subscribeOn(Schedulers.io())
@@ -72,5 +73,15 @@ class DataRepository(private val service: AsLyonService) {
                 .onErrorReturn { NetworkEvent.Error(it) }
                 .startWith(NetworkEvent.InProgress)
                 .share()
+    }
+
+    private fun getDateToString(date : Date): String{
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
+        return sdf.format(date)
+    }
+
+    private fun getStringToDate(date : String): Date{
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.getDefault())
+        return sdf.parse(date)
     }
 }

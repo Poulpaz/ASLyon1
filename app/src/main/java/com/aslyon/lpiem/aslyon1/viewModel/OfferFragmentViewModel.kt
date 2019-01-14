@@ -16,6 +16,10 @@ class OfferFragmentViewModel(private val dataRepository: DataRepository): BaseVi
     val offerList: BehaviorSubject<List<Offer>?> = BehaviorSubject.create()
 
     init {
+        getListOffer()
+    }
+
+    fun getListOffer(){
         dataRepository.fetchOffers()
                 .subscribe(
                         {

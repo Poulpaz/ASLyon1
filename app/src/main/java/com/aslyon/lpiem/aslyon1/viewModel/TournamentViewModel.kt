@@ -8,11 +8,16 @@ import com.aslyon.lpiem.aslyon1.utils.disposedBy
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 
-class TournamentViewModel(dataRepository: DataRepository): BaseViewModel() {
+class TournamentViewModel(private val dataRepository: DataRepository): BaseViewModel() {
 
     val tournamentList: BehaviorSubject<List<Tournament>?> = BehaviorSubject.create()
 
     init {
+        getListTournament()
+    }
+
+    fun getListTournament(){
+
         dataRepository.fetchTournament()
                 .subscribe(
                         {
@@ -21,6 +26,8 @@ class TournamentViewModel(dataRepository: DataRepository): BaseViewModel() {
                         { Timber.e(it) }
                 )
                 .disposedBy(disposeBag)
+
+
     }
 
     class Factory constructor(private val dataRepository: DataRepository) : ViewModelProvider.Factory {

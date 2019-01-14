@@ -53,8 +53,7 @@
     <!-- Add Offer Activity-->
     <string name="title_add_offer">Ajouter une offre</string>
     <string name="c_date_offer_activity_add_offer">Veuillez choisir la date de l\'offre</string>
-    <string name="et_hint_discount_price_activity_add_offer">Réduction en euros</string>
-    <string name="et_hint_discount_percentage_activity_add_offer">Pourcentage de réduction</string>
+    <string name="et_hint_discount_price_activity_add_offer">Prix en euros</string>
     <string name="et_hint_description_activity_add_offer">Description</string>
 
     <!-- Error -->

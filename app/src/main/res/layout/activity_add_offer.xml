@@ -124,14 +124,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_discount_price_activity_add_offer">
 
-        <EditText
-            android:id="@+id/et_discount_percentage_activity_add_offer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/et_hint_discount_percentage_activity_add_offer"
-            android:inputType="textMultiLine"
-            android:maxLength="100" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
       <com.google.android.material.textfield.TextInputLayout
@@ -143,7 +135,7 @@
       android:layout_marginEnd="16dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/til_discount_percentage_activity_add_offer">
+      app:layout_constraintTop_toBottomOf="@id/til_discount_price_activity_add_offer">
 
       <EditText
           android:id="@+id/et_participants_activity_add_offer"
@@ -166,15 +158,7 @@
              app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_participants_activity_add_offer">
 
-                <EditText
-                    android:id="@+id/et_link_activity_add_offer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/et_link_activity_add_offer"
-                    android:inputType="textMultiLine"
-                    android:maxLength="100" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+         </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -186,7 +170,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_link_activity_add_offer">
+        app:layout_constraintTop_toBottomOf="@id/til_participants_activity_add_offer">
 
     <EditText
         android:id="@+id/et_description_activity_add_offer"

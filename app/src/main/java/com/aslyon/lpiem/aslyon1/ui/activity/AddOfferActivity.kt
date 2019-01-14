@@ -9,8 +9,10 @@ import android.view.MenuItem
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
+import com.aslyon.lpiem.aslyon1.ui.fragment.OfferFragment
 import com.aslyon.lpiem.aslyon1.viewModel.AddOfferViewModel
 
 
@@ -22,6 +24,7 @@ import timber.log.Timber
 import java.text.DateFormat
 
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
 
 
@@ -31,7 +34,7 @@ class AddOfferActivity : BaseActivity(){
     private val viewModel: AddOfferViewModel by instance(arg = this)
     var formate = SimpleDateFormat("dd/MM/yyyy",Locale.US)
 
-    var offerDate: Date? = null
+    var offerDate: Date=Date(2018/12/12)
     companion object {
         const val ExtraOfferId = "ExtraOfferId"
         fun start(fromActivity: AppCompatActivity) {
@@ -61,12 +64,13 @@ class AddOfferActivity : BaseActivity(){
 
             R.id.button_validate_new_item -> {
                 val title=et_title_activity_add_offer.text.toString()
-                val reduction=et_discount_price_activity_add_offer.text.toString()+" "+
-                              et_discount_percentage_activity_add_offer.text.toString()
+
                 val description=et_description_activity_add_offer.text.toString()
-                val teams =et_participants_activity_add_offer.text.toString()
-                val link=et_link_activity_add_offer.text.toString()
-                viewModel.addoffer(title, getDateToString(offerDate),teams,reduction,link, description)
+                val nbParticipants =et_participants_activity_add_offer.text.toString()
+
+                val reduction=et_discount_price_activity_add_offer.text.toString()
+
+                viewModel.addoffer(title, offerDate,nbParticipants,reduction, description)
 
                 viewModel.registerState.subscribe(
                         {
@@ -84,7 +88,10 @@ class AddOfferActivity : BaseActivity(){
                                 }
                                 is NetworkEvent.Success -> {
                                     Toast.makeText(this@AddOfferActivity, "Fonctionne!", Toast.LENGTH_SHORT).show()
-                                 //   onSignUpStateSuccess()
+                                    finish()
+
+
+                                    //   onSignUpStateSuccess()
                                 }
                             }
                         }, { Timber.e(it) }
@@ -124,10 +131,8 @@ class AddOfferActivity : BaseActivity(){
 
         }
     }
-    private fun getDateToString(date: Date?): String {
-        val df: DateFormat = SimpleDateFormat("dd/MM/yyyy' à 'HH:mm", Locale.FRANCE)
-        return df.format(date)
-    }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
