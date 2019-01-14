@@ -1,6 +1,7 @@
 package com.aslyon.lpiem.aslyon1.datasource
 
 import com.aslyon.lpiem.aslyon1.datasource.request.LoginData
+import com.aslyon.lpiem.aslyon1.datasource.request.OfferData
 import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
 import com.aslyon.lpiem.aslyon1.datasource.response.BaseResponse
 import com.aslyon.lpiem.aslyon1.datasource.response.LoginResponse
@@ -41,6 +42,11 @@ interface AsLyonService {
     fun getOffers(): Flowable<List<Offer>>
     @GET("offer/{idOffer}")
     fun getOffer(@Path("idOffer") idOffer : Int) : Observable<Offer>
+
+
+    @POST("newOffer")
+    fun addoffer( @Body offer: OfferData): Observable<BaseResponse>
+
 
     //region FireBase
     @PUT("changeToken")

@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiperefrsh_fragment_offer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_offer_fragment"
@@ -17,6 +23,10 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/item_offer"/>
 
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_offer_fragment"
         android:layout_width="wrap_content"
@@ -28,4 +38,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
