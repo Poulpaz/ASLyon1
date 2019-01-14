@@ -5,6 +5,7 @@ import com.aslyon.lpiem.aslyon1.datasource.request.OfferData
 import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
 import com.aslyon.lpiem.aslyon1.datasource.response.BaseResponse
 import com.aslyon.lpiem.aslyon1.datasource.response.LoginResponse
+import com.aslyon.lpiem.aslyon1.datasource.response.TokenData
 import com.aslyon.lpiem.aslyon1.model.Event
 import com.aslyon.lpiem.aslyon1.model.Offer
 import com.aslyon.lpiem.aslyon1.model.Tournament
@@ -48,7 +49,7 @@ interface AsLyonService {
 
 
     //region FireBase
-    @POST("updateFireBaseToken")
-    fun updateFireBaseToken(@Header("Authorization") token: String?, @Body newToken: String): Observable<Unit>
+    @PUT("changeToken")
+    fun updateFireBaseToken(@Header("token") token: TokenData): Observable<Unit>
 
 }

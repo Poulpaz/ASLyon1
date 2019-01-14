@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "39431129094",
+    "firebase_url": "https://aslyon1-80c44.firebaseio.com",
+    "project_id": "aslyon1-80c44",
+    "storage_bucket": "aslyon1-80c44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39431129094:android:731fbc9886d6923f",
+        "android_client_info": {
+          "package_name": "com.aslyon.lpiem.aslyoni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39431129094-g7itdjveogu8hr8a0n0ghqunbnrd9778.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aslyon.lpiem.aslyoni",
+            "certificate_hash": "e91bf976e410db77b65239545db655f34e9815b5"
+          }
+        },
+        {
+          "client_id": "39431129094-vtp5af3nc224qqltbrlad2ipjfuvfh6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2DrqzMYozKE0xF3Qqh-0OSOpd6Sc4jA4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39431129094-vtp5af3nc224qqltbrlad2ipjfuvfh6p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
