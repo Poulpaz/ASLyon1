@@ -48,7 +48,8 @@
     <string name="b_signup">S\'inscrire</string>
 
     <!-- Shop Fragment -->
-    <string name="ti_sales_shop_fragment">Boutique</string>
+    <string name="ti_sales_shop_fragment">Lyon 1</string>
+    <string name="ti_offer_shop_lyon_fragment">UDL</string>
     <string name="ti_offer_shop_fragment">Offres</string>
 
     <!-- Add Offer Activity-->
@@ -56,10 +57,11 @@
     <string name="c_date_offer_activity_add_offer">Veuillez choisir la date de l\'offre</string>
     <string name="et_hint_discount_price_activity_add_offer">Prix en euros</string>
     <string name="et_hint_description_activity_add_offer">Description</string>
+    <string name="et_participants_activity_add_offer">Nombre de participants</string>
 
     <!-- Error -->
     <string name="error_connexion">Un problème est survenu lors de la connexion</string>
-    <string name="et_link_activity_add_offer">Lien de l\'offre</string>
-    <string name="et_participants_activity_add_offer">Nombre de participants</string>
+
+
 
 </resources>
