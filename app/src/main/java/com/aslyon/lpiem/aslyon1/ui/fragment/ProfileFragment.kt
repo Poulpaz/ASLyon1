@@ -32,6 +32,7 @@ class ProfileFragment : BaseFragment(), ProfileFragmentInterface {
 
     override fun setActiveFragment() {
         val fragment = if(viewModel.connectedUser()) AccountInformationsFragment.newInstance() else AuthentificationFragment.newInstance()
+        if(fragment == AccountInformationsFragment()) displayDisconnectProfileButton(true) else displayDisconnectProfileButton(false)
         childFragmentManager?.popBackStack()
         fragmentManager?.beginTransaction()
                 ?.replace(R.id.container_profile_fragment, fragment)
