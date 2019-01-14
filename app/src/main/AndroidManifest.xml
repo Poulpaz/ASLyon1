@@ -48,18 +48,12 @@
             android:name=".ui.activity.DetailsOfferActivity"
             android:screenOrientation="portrait"></activity>
 
-        <service android:name="com.emlyon.makersstories.service.FBMessagingService">
+        <service android:name="com.emlyon.makersstories.service.FBMessagingService"
+            android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
-        <service android:name="com.emlyon.makersstories.service.FBInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
-
 
     </application>
 
