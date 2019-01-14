@@ -55,8 +55,8 @@ class DetailsOfferActivity : BaseActivity() {
         tv_place_offer_details.text = offer.teams
         tv_price_offer_details.text = offer.price
         tv_date_offer_details.text = getDateToString(offer.date)
-
         tv_description_offer_details.text = offer.description
+
 
         b_link_fragment_offer_details.setOnClickListener{
             val i = Intent(Intent.ACTION_VIEW, Uri.parse(offer.link))

@@ -2,6 +2,7 @@ package com.aslyon.lpiem.aslyon1.dependencyinjection
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import com.aslyon.lpiem.aslyon1.viewModel.*
 import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
@@ -57,4 +58,13 @@ val viewModelModule = Kodein.Module("ViewModelModule") {
         ViewModelProvider(activity, instance<Int, DetailsTournamentViewModel.Factory>(arg = idTournament))
                 .get(DetailsTournamentViewModel::class.java)
     }
+
+
+
+    bind<AddOfferViewModel.Factory>() with provider { AddOfferViewModel.Factory(instance()) }
+    bind<AddOfferViewModel>() with factory { activity: FragmentActivity ->
+        ViewModelProvider(activity, instance<AddOfferViewModel.Factory>())
+                .get(AddOfferViewModel::class.java)
+    }
+
 }

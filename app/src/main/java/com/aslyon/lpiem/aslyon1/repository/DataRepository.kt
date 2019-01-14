@@ -1,6 +1,9 @@
 package com.aslyon.lpiem.aslyon1.repository
 
 import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
+import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
+import com.aslyon.lpiem.aslyon1.datasource.request.OfferData
+import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
 import com.aslyon.lpiem.aslyon1.model.Event
 import com.aslyon.lpiem.aslyon1.model.Offer
 import com.aslyon.lpiem.aslyon1.model.Tournament
@@ -9,6 +12,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
+import java.util.*
 
 class DataRepository(private val service: AsLyonService) {
 
@@ -55,6 +59,18 @@ class DataRepository(private val service: AsLyonService) {
         return service.getOffer(idOffer)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .share()
+    }
+
+    fun addOffer(title: String, dateOffer: String, teams:String, discount: String, link:String,description: String): Observable<NetworkEvent> {
+        val offerData = OfferData(title, dateOffer,"", discount, "",description)
+
+        return service.addoffer(offerData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<NetworkEvent> { NetworkEvent.Success }
+                .onErrorReturn { NetworkEvent.Error(it) }
+                .startWith(NetworkEvent.InProgress)
                 .share()
     }
 }

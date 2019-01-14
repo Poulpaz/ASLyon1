@@ -59,5 +59,7 @@
 
     <!-- Error -->
     <string name="error_connexion">Un problème est survenu lors de la connexion</string>
+    <string name="et_link_activity_add_offer">Lien de l\'offre</string>
+    <string name="et_participants_activity_add_offer">Nombre de participants</string>
 
 </resources>
