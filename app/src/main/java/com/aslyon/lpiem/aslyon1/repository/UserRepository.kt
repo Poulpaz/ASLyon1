@@ -23,6 +23,8 @@ import java.text.SimpleDateFormat
 
 
 
+
+
 class UserRepository(private val service: AsLyonService,
                      private val keystoreManager: KeystoreManager,
                      private val sharedPref: SharedPreferences) {
@@ -56,7 +58,7 @@ class UserRepository(private val service: AsLyonService,
              newToken = it.token
         }*/
 
-        val registerData = SignUpData(lastname, firstname, dateOfBirth.toString(), email, password, phoneNumber)
+        val registerData = SignUpData(lastname, firstname, getDateToString(dateOfBirth), email, password, phoneNumber)
 
         return service.signup(token, registerData)
                 .subscribeOn(Schedulers.io())
@@ -75,9 +77,10 @@ class UserRepository(private val service: AsLyonService,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    val user = User(it.id, it.lastname, it.firstname, it.dateOfBirth, it.email,it.password, it.phoneNumber)
+                    val user = User(it.id, it.lastname, it.firstname, getStringToDate(it.dateOfBirth), it.email,it.password, it.phoneNumber)
                     connectedUser.onNext(user.toOptional())
-                    token = it.token
+                    //token = it.token à faire quand le token sera mis en place
+                    token = "token1"
                 }
 
                 .map<NetworkEvent> { NetworkEvent.Success }
@@ -85,6 +88,16 @@ class UserRepository(private val service: AsLyonService,
                 .startWith(NetworkEvent.InProgress)
                 .share()
         return obs
+    }
+
+    private fun getDateToString(date : Date): String{
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
+        return sdf.format(date)
+    }
+
+    private fun getStringToDate(date : String): Date{
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.getDefault())
+        return sdf.parse(date)
     }
 
     fun logout() {
