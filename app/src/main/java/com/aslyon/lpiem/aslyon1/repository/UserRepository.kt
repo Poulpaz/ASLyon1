@@ -54,9 +54,9 @@ class UserRepository(private val service: AsLyonService,
     //region signup
     fun signUp(lastname: String, firstname: String, dateOfBirth: Date, email: String, password: String, phoneNumber: String): Observable<NetworkEvent> {
         var newToken: String? = null
-        /*FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
              newToken = it.token
-        }*/
+        }
 
         val registerData = SignUpData(lastname, firstname, getDateToString(dateOfBirth), email, password, phoneNumber)
 

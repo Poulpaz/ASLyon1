@@ -70,10 +70,6 @@ class AccountInformationsFragment : BaseFragment(), DisconnectUserInterface {
                 }.show()
     }
 
-    override fun onResume() {
-        super.onResume()
-        displayDisconnectProfileButton(true)
-    }
 }
 
 interface DisconnectUserInterface {

@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -28,7 +29,8 @@ import org.kodein.di.generic.M
 import org.kodein.di.generic.instance
 import com.google.firebase.iid.InstanceIdResult
 import com.google.android.gms.tasks.OnSuccessListener
-
+import com.google.firebase.messaging.FirebaseMessaging
+import com.pusher.pushnotifications.PushNotifications
 
 
 class MainActivity : BaseActivity() {
@@ -126,13 +128,17 @@ class MainActivity : BaseActivity() {
             return@OnNavigationItemSelectedListener returnValue
         }
 
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true
         FirebaseApp.initializeApp(this)
         initView()
 
-        /*FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this){ instanceIdResult ->
-            val newToken = instanceIdResult.token
-            Log.e("newToken", newToken)
-        }*/
+        FirebaseInstanceId.getInstance().instanceId
+                .addOnSuccessListener { result ->
+                    Log.d("IID_TOKEN", result.token)
+                }
+
+        PushNotifications.start(getApplicationContext(), "2458b480-c832-4306-bc88-b3db22a099a9");
+        PushNotifications.subscribe("aslyon");
 
         currentController = navControllerHome
 

@@ -60,4 +60,8 @@
     <!-- Error -->
     <string name="error_connexion">Un problème est survenu lors de la connexion</string>
 
+    <!-- Firebase -->
+    <string name="default_notification_channel_id">Channel ID</string>
+    <string name="channelName">News</string>
+
 </resources>

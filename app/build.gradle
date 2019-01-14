@@ -91,6 +91,7 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.pusher:push-notifications-android:1.0.2'
 
     //multidex
     implementation 'com.android.support:multidex:1.0.3'
