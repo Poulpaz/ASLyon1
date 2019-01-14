@@ -5,11 +5,8 @@ import com.aslyon.lpiem.aslyon1.datasource.request.OfferData
 import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
 import com.aslyon.lpiem.aslyon1.datasource.response.BaseResponse
 import com.aslyon.lpiem.aslyon1.datasource.response.LoginResponse
+import com.aslyon.lpiem.aslyon1.model.*
 import com.aslyon.lpiem.aslyon1.datasource.response.TokenData
-import com.aslyon.lpiem.aslyon1.model.Event
-import com.aslyon.lpiem.aslyon1.model.Offer
-import com.aslyon.lpiem.aslyon1.model.Tournament
-import com.aslyon.lpiem.aslyon1.model.User
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -52,4 +49,7 @@ interface AsLyonService {
     @PUT("changeToken")
     fun updateFireBaseToken(@Header("token") token: TokenData): Observable<Unit>
 
+    //region actu
+    @GET("xml")
+    fun getRSSActus(): Flowable<List<ItemsItem>>
 }
