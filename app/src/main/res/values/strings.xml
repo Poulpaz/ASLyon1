@@ -58,8 +58,16 @@
     <string name="et_hint_description_activity_add_offer">Description</string>
     <string name="et_participants_activity_add_offer">Nombre de participants</string>
 
+    <!--Add Event Activity-->
+    <string name="et_title_activity_add_event">Titre de l\'évenement</string>
+    <string name="c_date_event_activity_add_event">Veuillez choisir la date de l\'évenement</string>
+    <string name="et_hint_discount_price_activity_add_event">Prix en euros</string>
+    <string name="et_place_activity_add_event">Adresse de l\'évenement</string>
+    <string name="et_hint_description_activity_add_event">Description</string>
+
     <!-- Error -->
     <string name="error_connexion">Un problème est survenu lors de la connexion</string>
+    <string name="title_add_event">Ajouter un évenement</string>
 
     <!-- Firebase -->
     <string name="default_notification_channel_id">Channel ID</string>

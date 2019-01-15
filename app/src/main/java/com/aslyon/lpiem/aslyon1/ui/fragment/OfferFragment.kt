@@ -54,9 +54,7 @@ class OfferFragment : BaseFragment() {
         rv_offer_fragment.adapter = adapter
 
         fab_offer_fragment.setOnClickListener{
-
             AddOfferActivity.start(activity as MainActivity)
-
         }
         swiperefrsh_fragment_offer.setOnRefreshListener {viewModel.getListOffer()}
 

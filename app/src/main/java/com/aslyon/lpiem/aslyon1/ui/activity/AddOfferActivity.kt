@@ -36,7 +36,6 @@ class AddOfferActivity : BaseActivity(){
 
     var offerDate: Date=Date(2018/12/12)
     companion object {
-        const val ExtraOfferId = "ExtraOfferId"
         fun start(fromActivity: AppCompatActivity) {
             fromActivity.startActivity(Intent(fromActivity, AddOfferActivity::class.java))
 
@@ -49,7 +48,6 @@ class AddOfferActivity : BaseActivity(){
         setContentView(R.layout.activity_add_offer)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-      //  val offerId = intent.getIntExtra(AddOfferActivity.ExtraOfferId, -1)
         initChipDatePicker()
         setSupportActionBar(toolbar)
         setDisplayHomeAsUpEnabled(this,true)
