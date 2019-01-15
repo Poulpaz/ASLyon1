@@ -38,6 +38,7 @@ class AccountInformationsFragment : BaseFragment(), DisconnectUserInterface {
                 .subscribe({
                     onConnectedUserChange(it.toNullable())
                 }, { Timber.e(it) })
+        viewModel.loadConnectedUser()
     }
 
     private fun onConnectedUserChange(user: User?) {
@@ -68,11 +69,6 @@ class AccountInformationsFragment : BaseFragment(), DisconnectUserInterface {
                         frg.setActiveFragment()
                     }
                 }.show()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        displayDisconnectProfileButton(true)
     }
 }
 
