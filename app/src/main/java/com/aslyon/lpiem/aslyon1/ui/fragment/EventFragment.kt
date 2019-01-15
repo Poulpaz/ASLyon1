@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ListEventAdapter
+import com.aslyon.lpiem.aslyon1.ui.activity.AddEventActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.AddOfferActivity
 import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity
 import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
+import kotlinx.android.synthetic.main.fragment_offer.*
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
@@ -38,6 +41,11 @@ class EventFragment : BaseFragment() {
         rv_event_fragment.setLayoutManager(mLayoutManager)
         rv_event_fragment.setItemAnimator(DefaultItemAnimator())
         rv_event_fragment.adapter = adapter
+
+        fab_event_fragment.setOnClickListener{
+            AddEventActivity.start(activity as MainActivity)
+        }
+
         swiperefrsh_fragment_event.setOnRefreshListener { viewModel.getListEvent()}
         viewModel.eventList
                 .subscribe(
