@@ -38,12 +38,12 @@ class EventFragment : BaseFragment() {
         rv_event_fragment.setLayoutManager(mLayoutManager)
         rv_event_fragment.setItemAnimator(DefaultItemAnimator())
         rv_event_fragment.adapter = adapter
-
+        swiperefrsh_fragment_event.setOnRefreshListener { viewModel.getListEvent()}
         viewModel.eventList
                 .subscribe(
                     {
                         adapter.submitList(it)
-                    },
+                        swiperefrsh_fragment_event.isRefreshing=false                    },
                     { Timber.e(it) }
                 )
 
@@ -54,5 +54,10 @@ class EventFragment : BaseFragment() {
                         },
                         { Timber.e(it) }
                 )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getListEvent()
     }
 }

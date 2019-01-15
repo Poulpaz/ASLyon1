@@ -33,7 +33,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
-                    app:title="@string/title_details_event"
+                    app:title="@string/title_details_actu"
                     app:titleTextColor="@color/colorAccent" />
             </com.google.android.material.appbar.AppBarLayout>
 
@@ -44,7 +44,6 @@
                 android:layout_marginStart="150dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="150dp"
-                android:src="@drawable/ic_calendar"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Event"
+                android:text="Article"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_item_actu_details" />
@@ -67,20 +66,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Lyon 7ème"
+                android:text="Ambre"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title_actu_details" />
-
-            <TextView
-                android:id="@+id/tv_price_event_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="9.50 euros"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_author_actu_details" />
 
             <TextView
                 android:id="@+id/tv_date_actu_details"
@@ -93,28 +82,18 @@
                 android:layout_marginRight="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_price_event_details" />
+                app:layout_constraintTop_toBottomOf="@id/tv_author_actu_details" />
 
             <TextView
                 android:id="@+id/tv_content_actu_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Match de basket formidable."
+                android:text="Texte d'exemple d'article."
                 style="@style/DescriptionText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_date_actu_details" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/b_subscribe_fragment_event_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="S'INSCRIRE"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

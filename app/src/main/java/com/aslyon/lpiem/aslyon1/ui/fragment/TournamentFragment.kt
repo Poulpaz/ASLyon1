@@ -40,11 +40,14 @@ class TournamentFragment : BaseFragment() {
         rv_tournament_fragment.setLayoutManager(mLayoutManager)
         rv_tournament_fragment.setItemAnimator(DefaultItemAnimator())
         rv_tournament_fragment.adapter = adapter
+       /* swiperefrsh_fragment_tournament.setOnRefreshListener {
 
+        }*/
         viewModel.tournamentList
                 .subscribe(
                         {
                             adapter.submitList(it)
+                            swiperefrsh_fragment_tournament.isRefreshing=false
                         },
                         { Timber.e(it) }
                 )
@@ -57,8 +60,17 @@ class TournamentFragment : BaseFragment() {
                         { Timber.e(it) }
                 )
 
+
         fab_tournament_fragment.setOnClickListener {
             AddTournamentActivity.start(activity as MainActivity)
         }
+
+        swiperefrsh_fragment_tournament.setOnRefreshListener {viewModel.getListTournament()}
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getListTournament()
+    }
+
 }

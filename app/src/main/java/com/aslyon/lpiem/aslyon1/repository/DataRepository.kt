@@ -1,7 +1,11 @@
 package com.aslyon.lpiem.aslyon1.repository
 
 import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
+import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
+import com.aslyon.lpiem.aslyon1.datasource.request.OfferData
+import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
 import com.aslyon.lpiem.aslyon1.model.Event
+import com.aslyon.lpiem.aslyon1.model.ItemsItem
 import com.aslyon.lpiem.aslyon1.model.Offer
 import com.aslyon.lpiem.aslyon1.model.Tournament
 import io.reactivex.Flowable
@@ -9,12 +13,15 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DataRepository(private val service: AsLyonService) {
 
     val eventList: BehaviorSubject<List<Event>> = BehaviorSubject.create()
     val tournamentList: BehaviorSubject<List<Tournament>> = BehaviorSubject.create()
     val offerList: BehaviorSubject<List<Offer>> = BehaviorSubject.create()
+    val actuList: BehaviorSubject<List<ItemsItem>> = BehaviorSubject.create()
 
     fun fetchEvent(): Flowable<List<Event>> {
         return service.getEvents()
@@ -56,5 +63,34 @@ class DataRepository(private val service: AsLyonService) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .share()
+    }
+
+    fun fetchActus(): Flowable<List<ItemsItem>> {
+        return service.getRSSActus()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .share()
+    }
+
+    fun addOffer(title: String, dateOffer: Date, nbParticipants:String, discount: String,description: String): Observable<NetworkEvent> {
+        val offerData = OfferData(title, getDateToString(dateOffer),nbParticipants, discount, description)
+
+        return service.addoffer(offerData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<NetworkEvent> { NetworkEvent.Success }
+                .onErrorReturn { NetworkEvent.Error(it) }
+                .startWith(NetworkEvent.InProgress)
+                .share()
+    }
+
+    private fun getDateToString(date : Date): String{
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
+        return sdf.format(date)
+    }
+
+    private fun getStringToDate(date : String): Date{
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.getDefault())
+        return sdf.parse(date)
     }
 }
