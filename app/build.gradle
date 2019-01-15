@@ -6,10 +6,28 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: "androidx.navigation.safeargs"
 
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.12.1'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
+
 android {
     useLibrary 'org.apache.http.legacy'
     compileSdkVersion 28
     defaultConfig {
+        manifestPlaceholders = [
+                onesignal_app_id: '7b69462c-f37a-4124-b0e8-adb6d330a26b',
+                onesignal_google_project_number: 'REMOTE'
+        ]
         applicationId "com.aslyon.lpiem.aslyoni"
         minSdkVersion 19
         targetSdkVersion 28
@@ -92,6 +110,7 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-core:16.0.6'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
+    implementation 'com.onesignal:OneSignal:3.10.5'
 
     //multidex
     implementation 'com.android.support:multidex:1.0.3'

@@ -9,7 +9,6 @@
     <string name="title_add_tournament">Ajout d\'un tournoi</string>
     <string name="title_details_tournament">Détails d\'un tournoi</string>
     <string name="title_details_event">Détails d\'un événement</string>
-    <string name="title_details_actu">Détails d\'une actualité</string>
 
     <!-- Home Fragment -->
     <string name="ti_events_home_fragment">Events</string>
@@ -62,6 +61,8 @@
     <!-- Error -->
     <string name="error_connexion">Un problème est survenu lors de la connexion</string>
 
-
+    <!-- Firebase -->
+    <string name="default_notification_channel_id">Channel ID</string>
+    <string name="channelName">News</string>
 
 </resources>

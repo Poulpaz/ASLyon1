@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -28,7 +29,8 @@ import org.kodein.di.generic.M
 import org.kodein.di.generic.instance
 import com.google.firebase.iid.InstanceIdResult
 import com.google.android.gms.tasks.OnSuccessListener
-
+import com.google.firebase.messaging.FirebaseMessaging
+import com.onesignal.OneSignal
 
 
 class MainActivity : BaseActivity() {
@@ -126,13 +128,24 @@ class MainActivity : BaseActivity() {
             return@OnNavigationItemSelectedListener returnValue
         }
 
+        FirebaseMessaging.getInstance().subscribeToTopic("aslyon")
+                .addOnCompleteListener { task ->
+                    var msg = "Vous êtes abonnés à AS Lyon"
+                    if (!task.isSuccessful) {
+                        msg = "Vous n'êtes pas abonnés à AS Lyon"
+                    }
+                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                }
+
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true
         FirebaseApp.initializeApp(this)
         initView()
 
-        /*FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this){ instanceIdResult ->
-            val newToken = instanceIdResult.token
-            Log.e("newToken", newToken)
-        }*/
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init()
+
 
         currentController = navControllerHome
 
