@@ -38,6 +38,7 @@ class AccountInformationsFragment : BaseFragment(), DisconnectUserInterface {
                 .subscribe({
                     onConnectedUserChange(it.toNullable())
                 }, { Timber.e(it) })
+        viewModel.loadConnectedUser()
     }
 
     private fun onConnectedUserChange(user: User?) {
@@ -69,7 +70,6 @@ class AccountInformationsFragment : BaseFragment(), DisconnectUserInterface {
                     }
                 }.show()
     }
-
 }
 
 interface DisconnectUserInterface {

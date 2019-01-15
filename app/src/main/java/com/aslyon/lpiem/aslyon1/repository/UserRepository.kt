@@ -1,6 +1,7 @@
 package com.aslyon.lpiem.aslyon1.repository
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.datasource.request.LoginData
@@ -34,6 +35,7 @@ class UserRepository(private val service: AsLyonService,
     private val tokenKey = "TOKEN"
     private val tokenAlias = "TOKEN"
     private val pushToken = "PUSHTOKEN"
+    private var tokenSignUp: String? = null
 
     var token: String? = null
         get() {
@@ -51,16 +53,15 @@ class UserRepository(private val service: AsLyonService,
             saveToken(field)
         }
 
+    init {
+        initToken()
+    }
+
     //region signup
     fun signUp(lastname: String, firstname: String, dateOfBirth: Date, email: String, password: String, phoneNumber: String): Observable<NetworkEvent> {
-        var newToken: String? = null
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
-             newToken = it.token
-        }
-
         val registerData = SignUpData(lastname, firstname, getDateToString(dateOfBirth), email, password, phoneNumber)
 
-        return service.signup(token, registerData)
+        return service.signup(tokenSignUp, registerData)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map<NetworkEvent> { NetworkEvent.Success }
@@ -79,8 +80,7 @@ class UserRepository(private val service: AsLyonService,
                 .doOnNext {
                     val user = User(it.id, it.lastname, it.firstname, getStringToDate(it.dateOfBirth), it.email,it.password, it.phoneNumber)
                     connectedUser.onNext(user.toOptional())
-                    //token = it.token à faire quand le token sera mis en place
-                    token = "token1"
+                    token = it.token
                 }
 
                 .map<NetworkEvent> { NetworkEvent.Success }
@@ -89,6 +89,21 @@ class UserRepository(private val service: AsLyonService,
                 .share()
         return obs
     }
+
+    //region load User
+
+    fun loadUser(): Observable<User> {
+        return  service.getConnectedUser(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { User(it.id, it.lastname, it.firstname, getStringToDate(it.dateOfBirth), it.email,it.password, it.phoneNumber) }
+                .doOnNext {
+                    val user = User(it.id, it.lastname, it.firstname, it.dateOfBirth, it.email,it.password, it.phoneNumber)
+                    connectedUser.onNext(user.toOptional())
+                }
+                .share()
+    }
+
 
     private fun getDateToString(date : Date): String{
         val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
@@ -118,8 +133,15 @@ class UserRepository(private val service: AsLyonService,
         return if (passwordEncrypt != null) {
             keystoreManager.decryptString(tokenAlias, passwordEncrypt)
         } else {
-            null
+            return null
         }
+    }
+
+    fun initToken(){
+        FirebaseInstanceId.getInstance().instanceId
+                .addOnSuccessListener { result ->
+                    tokenSignUp = result.token
+                }
     }
 
     private fun deleteToken() {

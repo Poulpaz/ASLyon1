@@ -30,7 +30,7 @@ import org.kodein.di.generic.instance
 import com.google.firebase.iid.InstanceIdResult
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.pusher.pushnotifications.PushNotifications
+import com.onesignal.OneSignal
 
 
 class MainActivity : BaseActivity() {
@@ -128,17 +128,24 @@ class MainActivity : BaseActivity() {
             return@OnNavigationItemSelectedListener returnValue
         }
 
+        FirebaseMessaging.getInstance().subscribeToTopic("aslyon")
+                .addOnCompleteListener { task ->
+                    var msg = "Vous êtes abonnés à AS Lyon"
+                    if (!task.isSuccessful) {
+                        msg = "Vous n'êtes pas abonnés à AS Lyon"
+                    }
+                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                }
+
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
         FirebaseApp.initializeApp(this)
         initView()
 
-        FirebaseInstanceId.getInstance().instanceId
-                .addOnSuccessListener { result ->
-                    Log.d("IID_TOKEN", result.token)
-                }
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init()
 
-        PushNotifications.start(getApplicationContext(), "2458b480-c832-4306-bc88-b3db22a099a9");
-        PushNotifications.subscribe("aslyon");
 
         currentController = navControllerHome
 

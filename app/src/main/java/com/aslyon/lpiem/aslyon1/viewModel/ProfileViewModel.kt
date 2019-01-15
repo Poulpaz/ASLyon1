@@ -8,6 +8,7 @@ import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.model.User
 import com.aslyon.lpiem.aslyon1.repository.UserRepository
 import com.gojuno.koptional.Optional
+import com.gojuno.koptional.toOptional
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import org.w3c.dom.Text
@@ -30,6 +31,13 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
         get() {
             return repository.connectedUser
         }
+
+    fun loadConnectedUser(){
+        repository.loadUser().subscribe(
+                { connectedUser.onNext(it.toOptional()) },
+                { Timber.e(it) }
+        )
+    }
 
 
     fun connectedUser(): Boolean {
@@ -54,7 +62,6 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
                             { loginState.onNext(it) },
                             { Timber.e(it) }
                     )
-            //repository.updateToken()
         }
     }
 

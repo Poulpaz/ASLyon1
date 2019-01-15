@@ -22,6 +22,9 @@ interface AsLyonService {
     @POST("signup")
     fun signup(@Header("token") token: String?, @Body user: SignUpData): Observable<BaseResponse>
 
+    @GET("connectedUser")
+    fun getConnectedUser(@Header("token") token: String?): Observable<LoginResponse>
+
     //region home
     @GET("events")
     fun getEvents(): Flowable<List<Event>>
