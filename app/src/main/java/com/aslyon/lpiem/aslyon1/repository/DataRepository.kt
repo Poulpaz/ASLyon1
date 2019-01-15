@@ -2,6 +2,7 @@ package com.aslyon.lpiem.aslyon1.repository
 
 import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
+import com.aslyon.lpiem.aslyon1.datasource.request.EventData
 import com.aslyon.lpiem.aslyon1.datasource.request.OfferData
 import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
 import com.aslyon.lpiem.aslyon1.model.Event
@@ -27,6 +28,11 @@ class DataRepository(private val service: AsLyonService) {
         return service.getEvents()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map { list ->
+                    list.map {
+                        Event(it.idEvent, it.title, getStringToDate(it.date), it.place, it.price,it.description)
+                    }
+                }
                 .share()
     }
 
@@ -34,8 +40,22 @@ class DataRepository(private val service: AsLyonService) {
         return service.getEvent(idEvent)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map { Event(it.idEvent, it.title, getStringToDate(it.date), it.place, it.price,it.description) }
                 .share()
     }
+
+    fun addEvent(title: String, date: Date, place:String, price: String,description: String): Observable<NetworkEvent> {
+        val eventData = EventData(title, getDateToString(date),place, price, description)
+
+        return service.addevent(eventData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<NetworkEvent> { NetworkEvent.Success }
+                .onErrorReturn { NetworkEvent.Error(it) }
+                .startWith(NetworkEvent.InProgress)
+                .share()
+    }
+
 
     fun fetchTournament(): Flowable<List<Tournament>> {
         return service.getTournaments()
