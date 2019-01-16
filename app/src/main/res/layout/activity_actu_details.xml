@@ -20,13 +20,13 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:titleTextColor="@color/colorAccent"
-            app:title="@string/title_add_event" />
+            app:title="@string/title_details_actu" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <WebView
         android:id="@+id/wv_activity_actu_details"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_bar"

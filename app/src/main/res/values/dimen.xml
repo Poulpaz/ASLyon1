@@ -7,5 +7,5 @@
     <dimen name="title">20sp</dimen>
     <dimen name="dateTime">16sp</dimen>
     <dimen name="subtitle">15sp</dimen>
-    <dimen name= "body">12sp</dimen>
+    <dimen name= "body">14sp</dimen>
 </resources>

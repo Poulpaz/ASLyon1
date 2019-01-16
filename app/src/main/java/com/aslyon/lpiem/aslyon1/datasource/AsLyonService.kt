@@ -25,7 +25,14 @@ interface AsLyonService {
     fun getEvent(@Path("idEvent") idEvent : Int) : Observable<EventResponse>
     @POST("newEvent")
     fun addevent(@Body event:EventData): Observable<BaseResponse>
-
+    @POST("newSubscribe_event")
+    fun subscribeUserEvent(@Body subscribeEvent:SubscribeEventData): Observable<BaseResponse>
+    @POST("removeSubscribe_event")
+    fun unsubscribeUserEvent(@Body subscribeEvent:SubscribeEventData): Observable<BaseResponse>
+    @POST("isSubscribeEvent")
+    fun isSubscribeEvent(@Body subscribeEvent:SubscribeEventData): Observable<IsSubscribeEventResponse>
+    @GET("subscribe_event")
+    fun getListSubscribersEvent(@Path("idEvent") idEvent : Int): Observable<IsSubscribeEventResponse>
 
     //region tournament
     @GET("tournaments")

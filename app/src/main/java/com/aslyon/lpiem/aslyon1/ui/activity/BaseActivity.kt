@@ -31,8 +31,4 @@ open class BaseActivity : AppCompatActivity(), KodeinAware {
     protected fun lifecycle(event: RxLifecycleDelegate.ActivityEvent): Observable<RxLifecycleDelegate.ActivityEvent> {
         return rxDelegate.lifecycle(event)
     }
-
-    protected fun setDisplayHomeAsUpEnabled(activity : AppCompatActivity, value : Boolean) {
-        activity.supportActionBar?.setDisplayHomeAsUpEnabled(value)
-    }
 }

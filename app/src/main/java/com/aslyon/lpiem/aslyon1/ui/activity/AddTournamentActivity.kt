@@ -35,10 +35,8 @@ class AddTournamentActivity: BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_tournament)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         initChipDatePicker()
         setSupportActionBar(toolbar_add_tournament)
-        setDisplayHomeAsUpEnabled(this, true)
     }
 
 
@@ -115,7 +113,5 @@ class AddTournamentActivity: BaseActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
-
-
     }
 }

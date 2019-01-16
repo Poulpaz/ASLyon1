@@ -12,6 +12,10 @@ import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_actu.view.*
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class ListActuAdapter : ListAdapter<ItemsItem, ListActuAdapter.ActuViewHolder>(DiffCardCallback()) {
 
@@ -41,6 +45,11 @@ class ListActuAdapter : ListAdapter<ItemsItem, ListActuAdapter.ActuViewHolder>(D
                     .filter { adapterPosition != RecyclerView.NO_POSITION }
                     .subscribe { indexClickPublisher.onNext(guid) }
         }
+    }
+
+    private fun getStringToDate(date : String): String {
+        val simpleDateFormatInput = SimpleDateFormat("dd/MM/yyyy à HH:mm")
+        return simpleDateFormatInput.parse(date).toString()
     }
 
     class DiffCardCallback : DiffUtil.ItemCallback<ItemsItem>() {

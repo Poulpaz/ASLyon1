@@ -21,7 +21,8 @@ class DetailsActuActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actu_details)
         setSupportActionBar(toolbarDetailsActu)
-        setDisplayHomeAsUpEnabled(this,true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         val actuUrl = intent.getStringExtra(DetailsActuActivity.ExtraActuUrl)
 
@@ -30,5 +31,10 @@ class DetailsActuActivity : BaseActivity() {
         } else {
             wv_activity_actu_details.loadUrl(actuUrl)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

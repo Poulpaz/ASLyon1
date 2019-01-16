@@ -29,7 +29,7 @@ val viewModelModule = Kodein.Module("ViewModelModule") {
                 .get(EventViewModel::class.java)
     }
 
-    bind<DetailsEventViewModel.Factory>() with factory { idEvent : Int -> DetailsEventViewModel.Factory(instance(), idEvent) }
+    bind<DetailsEventViewModel.Factory>() with factory { idEvent : Int -> DetailsEventViewModel.Factory(instance(), instance(), idEvent) }
     bind<DetailsEventViewModel>() with factory { activity: AppCompatActivity, idEvent : Int ->
         ViewModelProvider(activity, instance<Int, DetailsEventViewModel.Factory>(arg = idEvent))
                 .get(DetailsEventViewModel::class.java)
