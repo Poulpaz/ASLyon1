@@ -105,7 +105,7 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun getDateToString(date: Date?): String {
-        val df: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+        val df: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
         return if (date != null) df.format(date) else getString(R.string.tv_pick_birthday)
     }
 

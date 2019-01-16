@@ -5,7 +5,8 @@ import java.util.*
 
 class OfferData (
         @SerializedName("title") var title: String,
-        @SerializedName("date") var date: String?,
+        @SerializedName("startDate") var startDate: String?,
+        @SerializedName("endDate") var endDate: String?,
         @SerializedName("nbParticipants") var nbParticipants: String?,
         @SerializedName("price") var price: String?,
         @SerializedName("description") var description: String?)

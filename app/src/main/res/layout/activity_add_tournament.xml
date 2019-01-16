@@ -82,7 +82,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chip_activity_add_tournament">
+                app:layout_constraintTop_toBottomOf="@id/chip_hour_tournament_activity_add_tournament">
 
                 <EditText
                     android:id="@+id/et_nb_team_activity_add_tournament"
@@ -110,7 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/et_place_activity_add_tournament"
-                    android:inputType="number"
+                    android:inputType="textMultiLine"
                     android:maxLength="100" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -149,6 +149,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_title_activity_add_tournament" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_hour_tournament_activity_add_tournament"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/chip_hour_tournament_activity_add_tournament"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorAccent"
+                app:chipIcon="@drawable/ic_calendar"
+                app:chipStartPadding="16dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chip_activity_add_tournament" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_description_activity_add_tournament"

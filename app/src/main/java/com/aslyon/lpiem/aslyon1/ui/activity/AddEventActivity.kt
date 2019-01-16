@@ -1,6 +1,7 @@
 package com.aslyon.lpiem.aslyon1.ui.activity
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -23,9 +24,12 @@ import java.util.*
 class AddEventActivity : BaseActivity(){
 
     private val viewModel : AddEventViewModel by instance(arg=this)
-    var formate = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+    var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
+    var timeFormat = SimpleDateFormat("HH:mm ", Locale.FRANCE)
 
     lateinit var eventDate: Date
+    lateinit var eventHour: Date
+
 
     companion object {
         fun start(fromActivity: AppCompatActivity) {
@@ -40,6 +44,7 @@ class AddEventActivity : BaseActivity(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initChipDatePicker()
+        initChipHourPicker()
         setSupportActionBar(toolbarAddEvent)
         setDisplayHomeAsUpEnabled(this,true)
 
@@ -56,7 +61,7 @@ class AddEventActivity : BaseActivity(){
                 val price =et_discount_price_activity_add_event.text.toString()
                 val description=et_description_activity_add_event.text.toString()
 
-                viewModel.addevent(title, eventDate,place,price, description)
+                viewModel.addevent(title, eventDate,eventHour ,place,price, description)
 
                 viewModel.registerState.subscribe(
                         {
@@ -94,29 +99,54 @@ class AddEventActivity : BaseActivity(){
         menuInflater.inflate(R.menu.menu_add_new_item, menu)
         return super.onCreateOptionsMenu(menu)
     }
+    val now = Calendar.getInstance()
 
     private fun initChipDatePicker() {
-       chip_date_event_activity_add_event.setOnClickListener {
+        chip_date_event_activity_add_event.setOnClickListener {
 
-            val now = Calendar.getInstance()
+
             val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 val selectedDate = Calendar.getInstance()
-                selectedDate.set(Calendar.YEAR,year)
-                selectedDate.set(Calendar.MONTH,month)
-                selectedDate.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+                selectedDate.set(Calendar.YEAR, year)
+                selectedDate.set(Calendar.MONTH, month)
+                selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
                 val date = formate.format(selectedDate.time)
                 eventDate = selectedDate.time
                 chip_date_event_activity_add_event.text = date
             },
-                    now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
+                    now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH))
             datePicker.show()
-
-
 
 
         }
     }
+
+        private fun initChipHourPicker() {
+            chip_hour_event_activity_add_event.setOnClickListener {
+
+
+                val timePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { time, hourOfDay, minute ->
+                    val selectedTime = Calendar.getInstance()
+                    selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
+                    selectedTime.set(Calendar.MINUTE,minute)
+                    eventHour=selectedTime.time
+                    eventHour.toString()
+                    chip_hour_event_activity_add_event.text = timeFormat.format(selectedTime.time)
+                },
+
+                        now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),true)
+
+                timePicker.show()
+
+
+
+
+            }
+    }
+
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

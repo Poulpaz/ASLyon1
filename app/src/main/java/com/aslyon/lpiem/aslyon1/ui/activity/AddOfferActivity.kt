@@ -32,9 +32,10 @@ import java.util.*
 class AddOfferActivity : BaseActivity(){
 
     private val viewModel: AddOfferViewModel by instance(arg = this)
-    var formate = SimpleDateFormat("dd/MM/yyyy",Locale.US)
+    var formate = SimpleDateFormat("dd/MM/yyyy",Locale.FRANCE)
 
-   lateinit var offerDate: Date
+   lateinit var offerStartDate: Date
+   lateinit var offerEndDate: Date
     companion object {
         fun start(fromActivity: AppCompatActivity) {
             fromActivity.startActivity(Intent(fromActivity, AddOfferActivity::class.java))
@@ -49,6 +50,7 @@ class AddOfferActivity : BaseActivity(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initChipDatePicker()
+        initChipDateEndPicker()
         setSupportActionBar(toolbar)
         setDisplayHomeAsUpEnabled(this,true)
 
@@ -68,7 +70,7 @@ class AddOfferActivity : BaseActivity(){
 
                 val reduction=et_discount_price_activity_add_offer.text.toString()
 
-                viewModel.addoffer(title, offerDate,nbParticipants,reduction, description)
+                viewModel.addoffer(title,offerStartDate,offerEndDate,nbParticipants,reduction, description)
 
                 viewModel.registerState.subscribe(
                         {
@@ -118,11 +120,34 @@ class AddOfferActivity : BaseActivity(){
              selectedDate.set(Calendar.DAY_OF_MONTH,dayOfMonth)
 
              val date = formate.format(selectedDate.time)
-             offerDate = selectedDate.time
+             offerStartDate = selectedDate.time
              chip_date_offer_activity_add_offer.text = date
          },
                  now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
          datePicker.show()
+
+
+
+
+        }
+    }
+
+    private fun initChipDateEndPicker() {
+        chip_date_end_offer_activity_add_offer.setOnClickListener {
+
+            val now = Calendar.getInstance()
+            val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(Calendar.YEAR,year)
+                selectedDate.set(Calendar.MONTH,month)
+                selectedDate.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+
+                val date = formate.format(selectedDate.time)
+                offerEndDate = selectedDate.time
+                chip_date_end_offer_activity_add_offer.text = date
+            },
+                    now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
+            datePicker.show()
 
 
 

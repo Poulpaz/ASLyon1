@@ -92,6 +92,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_title_activity_add_event" />
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_hour_event_activity_add_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/chip_hour_event_activity_add_event"
+                android:textColor="@color/white"
+                app:chipBackgroundColor="@color/colorAccent"
+                app:chipIcon="@drawable/ic_calendar"
+                app:chipStartPadding="16dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chip_date_event_activity_add_event" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_discount_price_activity_add_event"
                 android:layout_width="match_parent"
@@ -101,7 +116,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chip_date_event_activity_add_event">
+                app:layout_constraintTop_toBottomOf="@+id/chip_hour_event_activity_add_event">
 
                 <EditText
                     android:id="@+id/et_discount_price_activity_add_event"

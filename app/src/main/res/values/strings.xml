@@ -27,6 +27,7 @@
     <string name="tv_description">Description</string>
     <string name="tv_price">Prix</string>
 
+
     <!-- Account Informations Fragment -->
     <string name="tv_title_dialog_logout">Deconnexion</string>
     <string name="tv_message_dialog_logout">Voulez-vous vraiment vous déconnecter ?</string>
@@ -56,7 +57,8 @@
 
     <!-- Add Offer Activity-->
     <string name="title_add_offer">Ajouter une offre</string>
-    <string name="c_date_offer_activity_add_offer">Veuillez choisir la date de l\'offre</string>
+    <string name="c_date_offer_activity_add_offer">Veuillez choisir la date de début de l\'offre</string>
+    <string name="c_date_end_offer_activity_add_offer">Veuillez choisir la date de fin de l\'offre</string>
     <string name="et_hint_discount_price_activity_add_offer">Prix en euros</string>
     <string name="et_hint_description_activity_add_offer">Description</string>
     <string name="et_participants_activity_add_offer">Nombre de participants</string>
@@ -67,15 +69,16 @@
     <string name="et_hint_discount_price_activity_add_event">Prix en euros</string>
     <string name="et_place_activity_add_event">Adresse de l\'évenement</string>
     <string name="et_hint_description_activity_add_event">Description</string>
+    <string name="chip_hour_event_activity_add_event">Veuillez choisir l\'heure de l\'évenement</string>
 
     <!-- Error -->
     <string name="error_connexion">Un problème est survenu lors de la connexion</string>
     <string name="title_add_event">Ajouter un évenement</string>
 
     <!-- Firebase -->
+    <string name="chip_hour_tournament_activity_add_tournament">Veuillez choisir l\'heure du tournoi</string>
     <string name="default_notification_channel_id">Channel ID</string>
     <string name="channelName">News</string>
     <string name="et_place_tournament_fragment">Adresse</string>
     <string name="et_place_activity_add_tournament">Adresse</string>
-
 </resources>

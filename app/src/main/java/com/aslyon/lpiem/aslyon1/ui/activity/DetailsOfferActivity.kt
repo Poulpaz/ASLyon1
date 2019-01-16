@@ -54,7 +54,7 @@ class DetailsOfferActivity : BaseActivity() {
         tv_title_offer_details.text = offer.title
         tv_place_offer_details.text = offer.nbParticipants+" places disponibles"
         tv_price_offer_details.text = offer.price+" euros"
-        tv_date_offer_details.text = offer.date
+        tv_date_offer_details.text = "Du "+ offer.startDate+" au "+offer.endDate
         tv_description_offer_details.text = offer.description
 
 

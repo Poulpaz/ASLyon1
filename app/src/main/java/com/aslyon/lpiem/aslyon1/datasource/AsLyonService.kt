@@ -37,9 +37,9 @@ interface AsLyonService {
 
     //region shop
     @GET("offers")
-    fun getOffers(): Flowable<List<Offer>>
+    fun getOffers(): Flowable<List<OfferResponse>>
     @GET("offer/{idOffer}")
-    fun getOffer(@Path("idOffer") idOffer : Int) : Observable<Offer>
+    fun getOffer(@Path("idOffer") idOffer : Int) : Observable<OfferResponse>
     @POST("newOffer")
     fun addoffer( @Body offer: OfferData): Observable<BaseResponse>
 

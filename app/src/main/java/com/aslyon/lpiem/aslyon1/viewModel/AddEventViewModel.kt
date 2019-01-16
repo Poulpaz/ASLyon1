@@ -8,6 +8,8 @@ import com.aslyon.lpiem.aslyon1.repository.DataRepository
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
 
 class AddEventViewModel (private val dataRepository: DataRepository): BaseViewModel() {
@@ -15,11 +17,11 @@ class AddEventViewModel (private val dataRepository: DataRepository): BaseViewMo
     val errorEmptyText: PublishSubject<String> = PublishSubject.create()
     val registerState: BehaviorSubject<NetworkEvent> = BehaviorSubject.createDefault(NetworkEvent.None)
 
-    fun addevent(title: String,date: Date,place: String, price: String, description: String){
+    fun addevent(title: String,date: Date, hour: Date, place: String, price: String, description: String){
 
-        if (validateEvent(title,date,place,price,description)){
+        if (validateEvent(title,date,hour,place,price,description)){
 
-            dataRepository.addEvent(title,date,place,price,description)
+            dataRepository.addEvent(title,getDateHour(date, hour),place,price,description)
                     .subscribe(
                             {registerState.onNext(it)},
                             { Timber.e(it)}
@@ -29,9 +31,20 @@ class AddEventViewModel (private val dataRepository: DataRepository): BaseViewMo
 
     }
 
+    private fun getDateHour(date: Date, hour: Date): Date {
+        date.hours = hour.hours
+        date.minutes = hour.minutes
 
-    private fun validateEvent(title: String?,date: Date?,place: String?, price: String?, description: String?) : Boolean {
-        return validateText(title) && validateDate(date)&& validateText(place) && validateText(price) && validateText(description)
+        val sdfDateHour = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        val concatDateHour =  sdfDateHour.format(date)
+
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        return sdf.parse(concatDateHour)
+    }
+
+
+    private fun validateEvent(title: String?,date: Date?,hour :Date? ,place: String?, price: String?, description: String?) : Boolean {
+        return validateText(title) && validateDate(date)&& validateDate(hour) && validateText(place) && validateText(price) && validateText(description)
     }
 
     private fun validateDate(date: Date?): Boolean {

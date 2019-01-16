@@ -16,9 +16,9 @@ class AddOfferViewModel (private val dataRepository: DataRepository): BaseViewMo
     val errorEmptyText: PublishSubject<String> = PublishSubject.create()
     val registerState: BehaviorSubject<NetworkEvent> = BehaviorSubject.createDefault(NetworkEvent.None)
 
-    fun addoffer(title: String, dateOffer: Date, nbParticipants: String, discount: String, description: String) {
-        if (validateOffer(title, dateOffer, nbParticipants ,discount, description)) {
-            dataRepository.addOffer(title, dateOffer, nbParticipants, discount,description)
+    fun addoffer(title: String, startDate: Date,endDate: Date, nbParticipants: String, discount: String, description: String) {
+        if (validateOffer(title, startDate, endDate, nbParticipants ,discount, description)) {
+            dataRepository.addOffer(title, startDate,endDate, nbParticipants, discount,description)
                     .subscribe(
                             { registerState.onNext(it) },
                             { Timber.e(it) }
@@ -26,8 +26,8 @@ class AddOfferViewModel (private val dataRepository: DataRepository): BaseViewMo
             //repository.updateToken()
         }
     }
-    private fun validateOffer(title: String?, dateOffer: Date?, discount: String?, description: String?, nbParticipants:String?) : Boolean {
-        return validateText(title) && validateDate(dateOffer)&& validateText(nbParticipants) && validateText(discount) && validateText(description)
+    private fun validateOffer(title: String?, startDate: Date?,endDate: Date?, discount: String?, description: String?, nbParticipants:String?) : Boolean {
+        return validateText(title) && validateDate(startDate)&& validateDate(endDate)&& validateText(nbParticipants) && validateText(discount) && validateText(description)
     }
 
     private fun validateDate(dateOffer: Date?): Boolean {
