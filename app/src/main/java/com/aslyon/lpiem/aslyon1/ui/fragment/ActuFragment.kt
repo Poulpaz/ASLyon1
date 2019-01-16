@@ -37,11 +37,12 @@ class ActuFragment : BaseFragment() {
         rv_actu_fragment.setLayoutManager(mLayoutManager)
         rv_actu_fragment.setItemAnimator(DefaultItemAnimator())
         rv_actu_fragment.adapter = adapter
-
+        swiperefrsh_fragment_actu.setOnRefreshListener {viewModel.getListActu()}
         viewModel.actuList
                 .subscribe(
                         {
                             adapter.submitList(it)
+                            swiperefrsh_fragment_actu.isRefreshing=false
                         },
                         { Timber.e(it) }
                 )
@@ -53,5 +54,11 @@ class ActuFragment : BaseFragment() {
                         },
                         { Timber.e(it) }
                 )
+    }
+
+
+    override fun onResume(){
+        super.onResume()
+        viewModel.getListActu()
     }
 }

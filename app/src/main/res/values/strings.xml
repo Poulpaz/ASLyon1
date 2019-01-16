@@ -85,5 +85,7 @@
     <!-- Firebase -->
     <string name="default_notification_channel_id">Channel ID</string>
     <string name="channelName">News</string>
+    <string name="et_place_tournament_fragment">Adresse</string>
+    <string name="et_place_activity_add_tournament">Adresse</string>
 
 </resources>

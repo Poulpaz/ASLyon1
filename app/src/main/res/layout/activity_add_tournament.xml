@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
+                    android:id="@+id/toolbar_add_tournament"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
@@ -40,7 +40,7 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <ImageView
-                android:id="@+id/iv_logo_add_tournament_fragment"
+                android:id="@+id/iv_logo_add_activity_add_tournament"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="120dp"
@@ -53,7 +53,7 @@
                 app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_title_tournament_fragment"
+                android:id="@+id/til_title_activity_add_tournament"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -61,10 +61,10 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_logo_add_tournament_fragment">
+                app:layout_constraintTop_toBottomOf="@id/iv_logo_add_activity_add_tournament">
 
                 <EditText
-                    android:id="@+id/et_title_tournament_fragment"
+                    android:id="@+id/et_title_activity_add_tournament"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tv_title"
@@ -74,7 +74,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_nb_team_tournament_fragment"
+                android:id="@+id/til_nb_team_activity_add_tournament"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -82,10 +82,10 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_title_tournament_fragment">
+                app:layout_constraintTop_toBottomOf="@id/chip_activity_add_tournament">
 
                 <EditText
-                    android:id="@+id/et_nb_team_tournament_fragment"
+                    android:id="@+id/et_nb_team_activity_add_tournament"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tv_nb_team_tournament"
@@ -95,7 +95,28 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_nb_players_team_tournament_fragment"
+                android:id="@+id/til_place_activity_add_tournament"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/til_nb_players_team_activity_add_tournament">
+
+                <EditText
+                    android:id="@+id/et_place_activity_add_tournament"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/et_place_activity_add_tournament"
+                    android:inputType="number"
+                    android:maxLength="100" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_nb_players_team_activity_add_tournament"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -103,10 +124,10 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_nb_team_tournament_fragment">
+                app:layout_constraintTop_toBottomOf="@id/til_nb_team_activity_add_tournament">
 
                 <EditText
-                    android:id="@+id/et_nb_players_team_tournament_fragment"
+                    android:id="@+id/et_nb_players_team_activity_add_tournament"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tv_nb_players_team_tournament"
@@ -116,7 +137,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_birthday_signup_fragment"
+                android:id="@+id/chip_activity_add_tournament"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -127,10 +148,10 @@
                 app:chipStartPadding="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_nb_players_team_tournament_fragment" />
+                app:layout_constraintTop_toBottomOf="@id/til_title_activity_add_tournament" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_description_tournament_fragment"
+                android:id="@+id/til_description_activity_add_tournament"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -138,10 +159,10 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chip_birthday_signup_fragment">
+                app:layout_constraintTop_toBottomOf="@id/til_place_activity_add_tournament">
 
                 <EditText
-                    android:id="@+id/et_description_tournament_fragment"
+                    android:id="@+id/et_description_activity_add_tournament"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tv_description"
@@ -150,7 +171,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_price_tournament_fragment"
+                android:id="@+id/til_price_activity_add_tournament"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -158,10 +179,10 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_description_tournament_fragment">
+                app:layout_constraintTop_toBottomOf="@id/til_description_activity_add_tournament">
 
                 <EditText
-                    android:id="@+id/et_price_tournament_fragment"
+                    android:id="@+id/et_price_activity_add_tournament"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/tv_price"

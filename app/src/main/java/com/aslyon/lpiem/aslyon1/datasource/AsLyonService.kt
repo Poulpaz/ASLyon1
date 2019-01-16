@@ -1,14 +1,8 @@
 package com.aslyon.lpiem.aslyon1.datasource
 
-import com.aslyon.lpiem.aslyon1.datasource.request.EventData
-import com.aslyon.lpiem.aslyon1.datasource.request.LoginData
-import com.aslyon.lpiem.aslyon1.datasource.request.OfferData
-import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
-import com.aslyon.lpiem.aslyon1.datasource.response.BaseResponse
-import com.aslyon.lpiem.aslyon1.datasource.response.EventResponse
-import com.aslyon.lpiem.aslyon1.datasource.response.LoginResponse
+import com.aslyon.lpiem.aslyon1.datasource.request.*
+import com.aslyon.lpiem.aslyon1.datasource.response.*
 import com.aslyon.lpiem.aslyon1.model.*
-import com.aslyon.lpiem.aslyon1.datasource.response.TokenData
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -35,10 +29,11 @@ interface AsLyonService {
 
     //region tournament
     @GET("tournaments")
-    fun getTournaments(): Flowable<List<Tournament>>
+    fun getTournaments(): Flowable<List<TournamentResponse>>
     @GET("tournament/{idTournament}")
-    fun getTournament(@Path("idTournament") idTournament : Int) : Observable<Tournament>
-
+    fun getTournament(@Path("idTournament") idTournament : Int) : Observable<TournamentResponse>
+    @POST("newTournament")
+    fun addtournament(@Body tournament: TournamentData): Observable<BaseResponse>
 
     //region shop
     @GET("offers")
