@@ -2,9 +2,11 @@ package com.aslyon.lpiem.aslyon1.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.model.Event
+import com.aslyon.lpiem.aslyon1.ui.fragment.ProfileFragmentInterface
 import com.aslyon.lpiem.aslyon1.viewModel.DetailsEventViewModel
 import kotlinx.android.synthetic.main.activity_event_details.*
 import org.kodein.di.direct
@@ -42,6 +44,20 @@ class DetailsEventActivity : BaseActivity() {
                         },
                         { Timber.e(it)}
                 )
+
+        b_subscribe_fragment_event_details.setOnClickListener {
+            subscribeEvent()
+        }
+    }
+
+    private fun subscribeEvent() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle(R.string.tv_title_dialog_logout)
+                .setMessage(R.string.tv_message_dialog_logout)
+                .setNegativeButton(R.string.b_cancel_dialog_logout, { dialoginterface, i -> })
+                .setPositiveButton(R.string.b_validate_dialog_logout) { dialoginterface, i ->
+
+                }.show()
     }
 
     private fun displayEvent(event: Event) {

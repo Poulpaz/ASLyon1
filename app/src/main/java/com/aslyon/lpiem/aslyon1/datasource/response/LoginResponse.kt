@@ -12,5 +12,6 @@ class LoginResponse(
         @SerializedName("email") var email: String,
         @SerializedName("password") var password: String,
         @SerializedName("phoneNumber") var phoneNumber: String,
+        @SerializedName("isAdmin") var isAdmin: Int,
         @SerializedName("token") var token: String?
 )

@@ -53,6 +53,12 @@ class SignInFragment : BaseFragment() {
                     }
                 }, { Timber.e(it) }
         )
+
+        viewModel.errorEditTextSignIn.subscribe(
+                {
+                    Toast.makeText(context, getString(it), Toast.LENGTH_SHORT).show()
+                }, { Timber.e(it) }
+        )
     }
 
 
@@ -61,17 +67,22 @@ class SignInFragment : BaseFragment() {
         val frg = parentFragment?.parentFragment?.childFragmentManager?.findFragmentById(R.id.content_profile)
         if (frg is ProfileFragmentInterface) {
             frg.setActiveFragment()
-            progress_bar_signin.visibility = View.INVISIBLE
+            progress_bar_signin.visibility = View.GONE
+            b_signin_fragment.isEnabled = true
+            displayDisconnectProfileButton(true)
+            Toast.makeText(context, getString(R.string.tv_signin_success), Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun onSignInStateError(error: NetworkEvent.Error) {
-        progress_bar_signin.visibility = View.INVISIBLE
-        Toast.makeText(context, getString(R.string.error_connexion), Toast.LENGTH_SHORT).show()
+        progress_bar_signin.visibility = View.GONE
+        b_signin_fragment.isEnabled = true
+        Toast.makeText(context, getString(R.string.error_login), Toast.LENGTH_SHORT).show()
     }
 
     private fun onSignInStateInProgress() {
         progress_bar_signin.visibility = View.VISIBLE
+        b_signin_fragment.isEnabled = false
     }
 
     private fun login() {
