@@ -10,6 +10,6 @@ class Tournament(
         @SerializedName("nbPlayersTeam") var nbPlayersTeam: String,
         @SerializedName("date") var date: Date,
         @SerializedName("place") var place: String,
-        @SerializedName("price") var price: String,
-        @SerializedName("description") var description: String
+        @SerializedName("description") var description: String,
+        @SerializedName("price") var price: String
 )

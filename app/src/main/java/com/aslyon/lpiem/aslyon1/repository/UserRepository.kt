@@ -105,12 +105,12 @@ class UserRepository(private val service: AsLyonService,
 
 
     private fun getDateToString(date : Date): String{
-        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm")
         return sdf.format(date)
     }
 
     private fun getStringToDate(date : String): Date{
-        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.getDefault())
         return sdf.parse(date)
     }
 

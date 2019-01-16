@@ -125,7 +125,7 @@ class DetailsEventActivity : BaseActivity() {
     private fun displayEvent(event: Event) {
         tv_title_actu_details.text = event.title
         tv_author_actu_details.text = event.place
-        tv_price_event_details.text = event.price
+        tv_price_event_details.text = event.price+" €"
         tv_date_actu_details.text = getDateToString(event.date)
         tv_content_actu_details.text = event.description
     }
