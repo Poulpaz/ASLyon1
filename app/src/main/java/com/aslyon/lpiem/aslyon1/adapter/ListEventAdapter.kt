@@ -37,7 +37,7 @@ class ListEventAdapter : ListAdapter<Event, ListEventAdapter.EventViewHolder>(Di
             itemView.tv_title_item_event.text = event.title
             itemView.tv_date_item_event.text = getDateToString(event.date)
             itemView.tv_place_item_event.text = event.place
-            itemView.tv_price_item_event.text = event.price
+            itemView.tv_price_item_event.text = event.price+" euro(s)"
             bindPositionClick(event.idEvent)
         }
 

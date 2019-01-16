@@ -34,7 +34,7 @@ class AddOfferActivity : BaseActivity(){
     private val viewModel: AddOfferViewModel by instance(arg = this)
     var formate = SimpleDateFormat("dd/MM/yyyy",Locale.US)
 
-    var offerDate: Date=Date(2018/12/12)
+   lateinit var offerDate: Date
     companion object {
         fun start(fromActivity: AppCompatActivity) {
             fromActivity.startActivity(Intent(fromActivity, AddOfferActivity::class.java))
