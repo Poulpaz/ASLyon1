@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.utils.DatePickerFragment
@@ -71,19 +72,30 @@ class SignUpFragment : BaseFragment() {
                     }
                 }, { Timber.e(it) }
         )
+
+        viewModel.errorEditTextSignUp.subscribe(
+                {
+                    Toast.makeText(context, getString(it), Toast.LENGTH_SHORT).show()
+                }, { Timber.e(it) }
+        )
     }
 
     private fun onSignUpStateSuccess() {
         parentFragment?.parentFragment?.childFragmentManager?.findFragmentById(R.id.container_profile_fragment)?.vp_sign_authentification_fragment?.currentItem = 0
         b_signup_fragment.isEnabled = true
+        progress_bar_signup.visibility = View.GONE
+        Toast.makeText(context, getString(R.string.tv_signup_success), Toast.LENGTH_SHORT).show()
     }
 
     private fun onSignUpStateError(it: NetworkEvent.Error) {
         b_signup_fragment.isEnabled = true
+        progress_bar_signup.visibility = View.GONE
+        Toast.makeText(context, getString(R.string.error_signup), Toast.LENGTH_SHORT).show()
     }
 
     private fun onSignUpStateInProgress() {
         b_signup_fragment.isEnabled = false
+        progress_bar_signup.visibility = View.VISIBLE
     }
 
     private fun initChipDatePicker() {

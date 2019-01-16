@@ -9,6 +9,8 @@
     <string name="title_add_tournament">Ajout d\'un tournoi</string>
     <string name="title_details_tournament">Détails d\'un tournoi</string>
     <string name="title_details_event">Détails d\'un événement</string>
+    <string name="title_add_event">Ajouter un évenement</string>
+    <string name="title_details_actu">Details d\'une actualité</string>
 
     <!-- Home Fragment -->
     <string name="ti_events_home_fragment">Events</string>
@@ -37,6 +39,7 @@
     <string name="tv_email">Email</string>
     <string name="tv_password">Mot de passe</string>
     <string name="b_signin">Se connecter</string>
+    <string name="tv_signin_success">Vous êtes connectés</string>
 
     <!-- Sign Up Fragment -->
     <string name="tv_lastname">Nom</string>
@@ -45,6 +48,8 @@
     <string name="tv_phone">Téléphone</string>
     <string name="tv_confirm_password">Confirmation du mot de passe</string>
     <string name="b_signup">S\'inscrire</string>
+    <string name="tv_signup_success">Vous êtes bien inscrits</string>
+
 
     <!-- Shop Fragment -->
     <string name="ti_sales_shop_fragment">Lyon 1</string>
@@ -52,7 +57,7 @@
     <string name="ti_offer_shop_fragment">Offres</string>
 
     <!-- Actu Fragment -->
-    <string name="title_details_actu">Actualité</string>
+    <string name="error_display_actu">Une erreur a eu lieu lors de l\'affichage de l\'actualité</string>
 
     <!-- Add Offer Activity-->
     <string name="title_add_offer">Ajouter une offre</string>
@@ -68,14 +73,29 @@
     <string name="et_place_activity_add_event">Adresse de l\'évenement</string>
     <string name="et_hint_description_activity_add_event">Description</string>
 
+    <!--Details Event Activity-->
+    <string name="tv_dialog_susbscribe_title_event">Inscription à l\'évènement</string>
+    <string name="tv_dialog_susbscribe_message_event">Voulez-vous vraiment vous inscrire à cet évènement</string>
+    <string name="tv_dialog_subscribe_validate">Oui</string>
+    <string name="tv_dialog_susbscribe_cancel">Non</string>
+    <string name="b_subscribe_event">S\'inscrire</string>
+    <string name="b_logout_event">Se désinscrire</string>
+
     <!-- Error -->
-    <string name="error_connexion">Un problème est survenu lors de la connexion</string>
-    <string name="title_add_event">Ajouter un évenement</string>
+    <string name="error">Une erreur est survenue</string>
+    <string name="error_login">Un problème est survenu lors de la connexion</string>
+    <string name="error_signup">Un problème est survenu lors de l\'inscription</string>
+    <string name="error_invalidate_email">L\'email est invalide</string>
+    <string name="error_empty_edit_text">Vous devez remplir tous les champs</string>
+    <string name="error_same_password">Les deux mots de passe ne sont pas similaires"</string>
+    <string name="error_selected_date">Vous devez sélectionner une date</string>
+
 
     <!-- Firebase -->
     <string name="default_notification_channel_id">Channel ID</string>
     <string name="channelName">News</string>
     <string name="et_place_tournament_fragment">Adresse</string>
     <string name="et_place_activity_add_tournament">Adresse</string>
+    <string name="error_subscribe_event_connected">Vous devez être connecté pour vous inscrire</string>
 
 </resources>

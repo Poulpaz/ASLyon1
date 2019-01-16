@@ -50,12 +50,6 @@ class AddOfferActivity : BaseActivity(){
 
         initChipDatePicker()
         setSupportActionBar(toolbar)
-        setDisplayHomeAsUpEnabled(this,true)
-
-
-
-
-
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

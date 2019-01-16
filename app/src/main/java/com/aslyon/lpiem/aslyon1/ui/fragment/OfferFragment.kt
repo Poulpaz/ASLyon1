@@ -58,7 +58,17 @@ class OfferFragment : BaseFragment() {
         }
         swiperefrsh_fragment_offer.setOnRefreshListener {viewModel.getListOffer()}
 
-
+        viewModel.connectedUser.subscribe(
+                {
+                    if(it.toNullable()?.isAdmin == 1){
+                        fab_offer_fragment.show()
+                    }
+                    else{
+                        fab_offer_fragment.hide()
+                    }
+                },
+                { Timber.e(it) }
+        )
 
         viewModel.offerList
                 .subscribe(

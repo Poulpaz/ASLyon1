@@ -23,19 +23,19 @@ val viewModelModule = Kodein.Module("ViewModelModule") {
                 .get(ProfileViewModel::class.java)
     }
 
-    bind<EventViewModel.Factory>() with provider { EventViewModel.Factory(instance()) }
+    bind<EventViewModel.Factory>() with provider { EventViewModel.Factory(instance(), instance()) }
     bind<EventViewModel>() with factory { fragment: Fragment ->
         ViewModelProvider(fragment, instance<EventViewModel.Factory>())
                 .get(EventViewModel::class.java)
     }
 
-    bind<DetailsEventViewModel.Factory>() with factory { idEvent : Int -> DetailsEventViewModel.Factory(instance(), idEvent) }
+    bind<DetailsEventViewModel.Factory>() with factory { idEvent : Int -> DetailsEventViewModel.Factory(instance(), instance(), idEvent) }
     bind<DetailsEventViewModel>() with factory { activity: AppCompatActivity, idEvent : Int ->
         ViewModelProvider(activity, instance<Int, DetailsEventViewModel.Factory>(arg = idEvent))
                 .get(DetailsEventViewModel::class.java)
     }
 
-    bind<OfferFragmentViewModel.Factory>() with provider { OfferFragmentViewModel.Factory(instance()) }
+    bind<OfferFragmentViewModel.Factory>() with provider { OfferFragmentViewModel.Factory(instance(), instance()) }
     bind<OfferFragmentViewModel>() with factory { fragment: Fragment ->
         ViewModelProvider(fragment, instance<OfferFragmentViewModel.Factory>())
                 .get(OfferFragmentViewModel::class.java)
@@ -47,7 +47,7 @@ val viewModelModule = Kodein.Module("ViewModelModule") {
                 .get(DetailsOfferViewModel::class.java)
     }
 
-    bind<TournamentViewModel.Factory>() with provider { TournamentViewModel.Factory(instance()) }
+    bind<TournamentViewModel.Factory>() with provider { TournamentViewModel.Factory(instance(), instance()) }
     bind<TournamentViewModel>() with factory { fragment: Fragment ->
         ViewModelProvider(fragment, instance<TournamentViewModel.Factory>())
                 .get(TournamentViewModel::class.java)

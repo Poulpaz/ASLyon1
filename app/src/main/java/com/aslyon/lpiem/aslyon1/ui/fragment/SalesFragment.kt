@@ -31,21 +31,7 @@ class SalesFragment : BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        wv_sales_fragment.webViewClient=MyWebViewClient()
         wv_sales_fragment.loadUrl("https://as.univ-lyon1.fr/boutique/")
-
-
-    }
-
-    class MyWebViewClient : WebViewClient(){
-
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-            view?.loadUrl("https://as.univ-lyon1.fr/boutique/")
-            return true
-        }
-
-
 
     }
 }

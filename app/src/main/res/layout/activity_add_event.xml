@@ -24,9 +24,6 @@
             app:titleTextColor="@color/colorAccent"
             app:title="@string/title_add_event"
             />
-
-
-
     </com.google.android.material.appbar.AppBarLayout>
 
 

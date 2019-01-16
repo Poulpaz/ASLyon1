@@ -25,12 +25,7 @@
             app:title="@string/title_add_offer"
             />
 
-
-
     </com.google.android.material.appbar.AppBarLayout>
-
-
-
 
     <ScrollView
         android:layout_width="match_parent"
