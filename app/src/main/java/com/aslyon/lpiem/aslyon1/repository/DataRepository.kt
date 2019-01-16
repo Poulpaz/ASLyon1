@@ -5,6 +5,7 @@ import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.datasource.request.EventData
 import com.aslyon.lpiem.aslyon1.datasource.request.OfferData
 import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
+import com.aslyon.lpiem.aslyon1.datasource.request.TournamentData
 import com.aslyon.lpiem.aslyon1.model.Event
 import com.aslyon.lpiem.aslyon1.model.ItemsItem
 import com.aslyon.lpiem.aslyon1.model.Offer
@@ -61,6 +62,11 @@ class DataRepository(private val service: AsLyonService) {
         return service.getTournaments()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map { list ->
+                    list.map {
+                        Tournament(it.idTournament, it.title,it.nbTeam,it.nbPlayersTeam,getStringToDate(it.date), it.place,it.description, it.price)
+                    }
+                }
                 .share()
     }
 
@@ -68,6 +74,19 @@ class DataRepository(private val service: AsLyonService) {
         return service.getTournament(idTournament)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map { Tournament(it.idTournament, it.title,it.nbTeam,it.nbPlayersTeam,getStringToDate(it.date), it.place,it.description, it.price) }
+                .share()
+    }
+
+    fun addTournament(title: String, nbTeam: String, nbPlayersTeam: String, date: Date, place:String,description: String, price: String): Observable<NetworkEvent> {
+        val tournamentData = TournamentData(title, nbTeam,nbPlayersTeam, getDateToString(date),place, description, price)
+
+        return service.addtournament(tournamentData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<NetworkEvent> { NetworkEvent.Success }
+                .onErrorReturn { NetworkEvent.Error(it) }
+                .startWith(NetworkEvent.InProgress)
                 .share()
     }
 
@@ -105,12 +124,12 @@ class DataRepository(private val service: AsLyonService) {
     }
 
     private fun getDateToString(date : Date): String{
-        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss")
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
         return sdf.format(date)
     }
 
     private fun getStringToDate(date : String): Date{
-        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm:ss", Locale.getDefault())
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
         return sdf.parse(date)
     }
 }

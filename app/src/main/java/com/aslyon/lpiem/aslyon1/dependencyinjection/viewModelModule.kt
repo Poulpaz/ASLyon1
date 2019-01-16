@@ -79,4 +79,10 @@ val viewModelModule = Kodein.Module("ViewModelModule") {
         ViewModelProvider(activity, instance<AddEventViewModel.Factory>())
                 .get(AddEventViewModel::class.java)
     }
+
+    bind<AddTournamentViewModel.Factory>() with provider { AddTournamentViewModel.Factory(instance()) }
+    bind<AddTournamentViewModel>() with factory { activity: FragmentActivity ->
+        ViewModelProvider(activity, instance<AddTournamentViewModel.Factory>())
+                .get(AddTournamentViewModel::class.java)
+    }
 }

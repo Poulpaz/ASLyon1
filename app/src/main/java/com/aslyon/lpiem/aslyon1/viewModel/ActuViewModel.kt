@@ -8,10 +8,15 @@ import com.aslyon.lpiem.aslyon1.utils.disposedBy
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
 
-class ActuViewModel(dataRepository: DataRepository) : BaseViewModel() {
+class ActuViewModel(private val dataRepository: DataRepository) : BaseViewModel() {
     val actuList: BehaviorSubject<List<ItemsItem>?> = BehaviorSubject.create()
 
     init {
+        getListActu()
+    }
+
+    fun getListActu(){
+
         dataRepository.fetchActus()
                 .subscribe(
                         {

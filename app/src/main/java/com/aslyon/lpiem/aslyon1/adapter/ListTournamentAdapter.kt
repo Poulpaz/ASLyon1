@@ -34,8 +34,8 @@ class ListTournamentAdapter : ListAdapter<Tournament, ListTournamentAdapter.Tour
         fun bind(tournament: Tournament) {
             itemView.tv_title_item_tournament.text = tournament.title
             itemView.tv_date_item_tournament.text = getDateToString(tournament.date)
-            itemView.tv_number_team_item_tournament.text = tournament.nbTeam.toString() + " équipes de " + tournament.nbPlayersTeam.toString() + " joueurs"
-            itemView.tv_price_item_tournament.text = tournament.price
+            itemView.tv_number_team_item_tournament.text = tournament.nbTeam.toString() + " équipe(s) de " + tournament.nbPlayersTeam.toString() + " joueur(s)"
+            itemView.tv_price_item_tournament.text = tournament.price+" euro(s)"
             bindPositionClick(tournament.idTournament)
         }
 

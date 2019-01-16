@@ -22,10 +22,10 @@ import java.util.*
 
 class AddEventActivity : BaseActivity(){
 
-    private val viewModel : AddEventViewModel by instance (arg=this)
+    private val viewModel : AddEventViewModel by instance(arg=this)
     var formate = SimpleDateFormat("dd/MM/yyyy", Locale.US)
 
-    var eventDate: Date = Date(2018/12/12)
+    lateinit var eventDate: Date
 
     companion object {
         fun start(fromActivity: AppCompatActivity) {
@@ -66,14 +66,14 @@ class AddEventActivity : BaseActivity(){
                                 }
                                 NetworkEvent.InProgress -> {
                                     //onSignUpStateInProgress()
-                                    Toast.makeText(this@AddEventActivity, "Its toast!", Toast.LENGTH_SHORT).show()
+
                                 }
                                 is NetworkEvent.Error -> {
                                     Toast.makeText(this@AddEventActivity, "Erreur!", Toast.LENGTH_SHORT).show()
                                     //   onSignUpStateError(it)
                                 }
                                 is NetworkEvent.Success -> {
-                                    Toast.makeText(this@AddEventActivity, "Fonctionne!", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this@AddEventActivity, "Votre évenement à été ajouté !", Toast.LENGTH_SHORT).show()
                                     finish()
 
 
