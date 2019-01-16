@@ -1,6 +1,7 @@
 package com.aslyon.lpiem.aslyon1.ui.activity
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -9,9 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
-import com.aslyon.lpiem.aslyon1.viewModel.AddEventViewModel
+
 import com.aslyon.lpiem.aslyon1.viewModel.AddTournamentViewModel
-import kotlinx.android.synthetic.main.activity_add_event.*
+import kotlinx.android.synthetic.main.activity_add_tournament.*
 import kotlinx.android.synthetic.main.activity_add_tournament.*
 import org.kodein.di.generic.instance
 import timber.log.Timber
@@ -21,9 +22,11 @@ import java.util.*
 class AddTournamentActivity: BaseActivity() {
 
     private val viewModel: AddTournamentViewModel by instance(arg = this)
-    var formate = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+    var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
+    var timeFormat = SimpleDateFormat("HH:mm ", Locale.FRANCE)
 
     lateinit var tournamentDate: Date
+    lateinit var tournamentHour: Date
 
     companion object {
         fun start(fromActivity: AppCompatActivity) {
@@ -36,6 +39,7 @@ class AddTournamentActivity: BaseActivity() {
         setContentView(R.layout.activity_add_tournament)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         initChipDatePicker()
+        initChipHourPicker()
         setSupportActionBar(toolbar_add_tournament)
     }
 
@@ -52,7 +56,7 @@ class AddTournamentActivity: BaseActivity() {
                 val price = et_price_activity_add_tournament.text.toString()
                 val description = et_description_activity_add_tournament.text.toString()
 
-                viewModel.addtournament(title, nbTeam, nbPlayersTeams, tournamentDate, place, description, price)
+                viewModel.addtournament(title, nbTeam, nbPlayersTeams, tournamentDate,tournamentHour, place, description, price)
                 viewModel.registerState.subscribe(
                         {
                             when (it) {
@@ -88,6 +92,7 @@ class AddTournamentActivity: BaseActivity() {
         menuInflater.inflate(R.menu.menu_add_new_item, menu)
         return super.onCreateOptionsMenu(menu)
     }
+    val now = Calendar.getInstance()
 
     private fun initChipDatePicker() {
         chip_activity_add_tournament.setOnClickListener {
@@ -109,9 +114,32 @@ class AddTournamentActivity: BaseActivity() {
 
         }
     }
+    private fun initChipHourPicker() {
+        chip_hour_tournament_activity_add_tournament.setOnClickListener {
+
+
+            val timePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                val selectedTime = Calendar.getInstance()
+                selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                selectedTime.set(Calendar.MINUTE, minute)
+                tournamentHour = selectedTime.time
+                tournamentHour.toString()
+                chip_hour_tournament_activity_add_tournament.text = timeFormat.format(selectedTime.time)
+            },
+
+                    now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), true)
+
+            timePicker.show()
+
+        }
+    }
+
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+
+
     }
 }

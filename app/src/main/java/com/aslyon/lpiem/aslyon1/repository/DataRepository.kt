@@ -118,17 +118,25 @@ class DataRepository(private val service: AsLyonService) {
                 .share()
     }
 
+
+
     fun fetchOffers(): Flowable<List<Offer>> {
         return service.getOffers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map { list ->
+                    list.map {
+                        Offer(it.idOffer, it.title,getStringToDateOffer(it.startDate),getStringToDateOffer(it.endDate),it.nbParticipants, it.price,it.description)
+                    }
+                }
+
                 .share()
     }
 
     fun loadOffer(idOffer : Int) : Observable<Offer> {
         return service.getOffer(idOffer)
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map { Offer(it.idOffer, it.title,getStringToDateOffer(it.startDate),getStringToDate(it.endDate),it.nbParticipants, it.price,it.description) }
                 .share()
     }
 
@@ -139,8 +147,8 @@ class DataRepository(private val service: AsLyonService) {
                 .share()
     }
 
-    fun addOffer(title: String, dateOffer: Date, nbParticipants:String, discount: String,description: String): Observable<NetworkEvent> {
-        val offerData = OfferData(title, getDateToString(dateOffer),nbParticipants, discount, description)
+    fun addOffer(title: String, startDate: Date,endDate: Date, nbParticipants:String, discount: String,description: String): Observable<NetworkEvent> {
+        val offerData = OfferData(title, getDateToStringOffer(startDate), getDateToStringOffer(endDate),nbParticipants, discount, description)
 
         return service.addoffer(offerData)
                 .subscribeOn(Schedulers.io())
@@ -152,12 +160,22 @@ class DataRepository(private val service: AsLyonService) {
     }
 
     private fun getDateToString(date : Date): String{
-        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        return sdf.format(date)
+    }
+
+    private fun getDateToStringOffer(date : Date): String{
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
         return sdf.format(date)
     }
 
     private fun getStringToDate(date : String): Date{
-        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        return sdf.parse(date)
+    }
+
+    private fun getStringToDateOffer(date : String): Date{
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         return sdf.parse(date)
     }
 }

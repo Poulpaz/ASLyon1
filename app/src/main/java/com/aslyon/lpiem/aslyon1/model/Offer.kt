@@ -6,10 +6,11 @@ import java.util.*
 class Offer (
         @SerializedName("idOffer") var idOffer: Int,
         @SerializedName("title") var title: String,
-        @SerializedName("date") var date: String?,
-        @SerializedName("nbParticipants") var nbParticipants: String?,
-        @SerializedName("price") var price: String?,
+        @SerializedName("startDate") var startDate: Date,
+        @SerializedName("endDate") var endDate: Date,
+        @SerializedName("nbParticipants") var nbParticipants: String,
+        @SerializedName("price") var price: String,
      //   @SerializedName("link") var link: String?,
-        @SerializedName("description") var description: String?
+        @SerializedName("description") var description: String
 
 )
