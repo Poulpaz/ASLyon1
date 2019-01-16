@@ -46,8 +46,6 @@ class AddEventActivity : BaseActivity(){
         initChipDatePicker()
         initChipHourPicker()
         setSupportActionBar(toolbarAddEvent)
-        setDisplayHomeAsUpEnabled(this,true)
-
     }
 
 

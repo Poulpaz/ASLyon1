@@ -27,21 +27,7 @@ class SalesLyonFragment : BaseFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        wv_sales_fragment.webViewClient=MyWebViewClient()
         wv_sales_fragment.loadUrl("https://asudl.universite-lyon.fr/boutique-66434.kjsp?RH=1749694146834577&RF=1543530668610")
-
-
-    }
-
-    class MyWebViewClient : WebViewClient(){
-
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-            view?.loadUrl("https://asudl.universite-lyon.fr/boutique-66434.kjsp?RH=1749694146834577&RF=1543530668610")
-            return true
-        }
-
-
 
     }
 }

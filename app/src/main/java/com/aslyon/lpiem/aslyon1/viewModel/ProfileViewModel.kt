@@ -4,6 +4,7 @@ import android.text.TextUtils
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.model.User
 import com.aslyon.lpiem.aslyon1.repository.UserRepository
@@ -11,7 +12,6 @@ import com.gojuno.koptional.Optional
 import com.gojuno.koptional.toOptional
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
-import org.w3c.dom.Text
 import timber.log.Timber
 import java.util.*
 
@@ -24,9 +24,9 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
     val loginState: BehaviorSubject<NetworkEvent> = BehaviorSubject.createDefault(NetworkEvent.None)
 
     //region error
-    val errorEmptyEmail: PublishSubject<String> = PublishSubject.create()
-    val errorEmptyText: PublishSubject<String> = PublishSubject.create()
-    val errorEmptyPassword: PublishSubject<String> = PublishSubject.create()
+    val errorEditTextSignUp: PublishSubject<Int> = PublishSubject.create()
+    val errorEditTextSignIn: PublishSubject<Int> = PublishSubject.create()
+
     val connectedUser: BehaviorSubject<Optional<User>>
         get() {
             return repository.connectedUser
@@ -74,17 +74,17 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
     }
 
     private fun validateLogin(email: String?, password: String?): Boolean {
-        return validateEmail(email) && validateText(password)
+        return validateEmailLogIn(email) && validateTextLogIn(password)
     }
 
 
     private fun validateEmail(email: String?): Boolean {
         if (TextUtils.isEmpty(email)) {
-            errorEmptyEmail.onNext("L'email est vide")
+            errorEditTextSignUp.onNext(R.string.error_empty_edit_text)
             return false
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            errorEmptyEmail.onNext("L'email est invalide")
+            errorEditTextSignUp.onNext(R.string.error_invalidate_email)
             return false
         }
         return true
@@ -92,11 +92,11 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
 
     private fun validatePassword(password: String, confirmPassword: String): Boolean {
         if (TextUtils.isEmpty(password) || TextUtils.isEmpty(confirmPassword)) {
-            errorEmptyText.onNext("Vous devez remplir tous les champs")
+            errorEditTextSignUp.onNext(R.string.error_empty_edit_text)
             return false
         }
         else if(!password.equals(confirmPassword)){
-            errorEmptyText.onNext("Les mots de passe ne correspondent pas")
+            errorEditTextSignUp.onNext(R.string.error_same_password)
             return false
         }
         return true
@@ -104,7 +104,7 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
 
     private fun validateDate(date: Date?): Boolean {
         if (date == null) {
-            errorEmptyText.onNext("Vous devez sélectionner une date")
+            errorEditTextSignUp.onNext(R.string.error_selected_date)
             return false
         }
         return true
@@ -112,11 +112,32 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
 
     private fun validateText(text: String?): Boolean {
         if (TextUtils.isEmpty(text)) {
-            errorEmptyText.onNext("Vous devez remplir tous les champs")
+            errorEditTextSignUp.onNext(R.string.error_empty_edit_text)
             return false
         }
         return true
     }
+
+    private fun validateTextLogIn(text: String?): Boolean {
+        if (TextUtils.isEmpty(text)) {
+            errorEditTextSignIn.onNext(R.string.error_empty_edit_text)
+            return false
+        }
+        return true
+    }
+
+    private fun validateEmailLogIn(email: String?): Boolean {
+        if (TextUtils.isEmpty(email)) {
+            errorEditTextSignIn.onNext(R.string.error_empty_edit_text)
+            return false
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            errorEditTextSignIn.onNext(R.string.error_invalidate_email)
+            return false
+        }
+        return true
+    }
+
 
     class Factory constructor(private val repository: UserRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

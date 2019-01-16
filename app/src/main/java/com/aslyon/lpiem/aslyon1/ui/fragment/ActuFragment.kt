@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ListActuAdapter
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsActuActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.aslyon.lpiem.aslyon1.viewModel.ActuViewModel
 import kotlinx.android.synthetic.main.fragment_actu.*
 import org.kodein.di.generic.instance
@@ -48,8 +50,7 @@ class ActuFragment : BaseFragment() {
         adapter.indexClickPublisher
                 .subscribe(
                         {
-                            val i = Intent(Intent.ACTION_VIEW, Uri.parse(it))
-                            startActivity(i)
+                            DetailsActuActivity.start(activity as MainActivity, it)
                         },
                         { Timber.e(it) }
                 )

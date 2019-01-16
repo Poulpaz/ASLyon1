@@ -78,7 +78,7 @@ class UserRepository(private val service: AsLyonService,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    val user = User(it.id, it.lastname, it.firstname, getStringToDate(it.dateOfBirth), it.email,it.password, it.phoneNumber)
+                    val user = User(it.id, it.lastname, it.firstname, getStringToDate(it.dateOfBirth), it.email,it.password, it.phoneNumber, it.isAdmin)
                     connectedUser.onNext(user.toOptional())
                     token = it.token
                 }
@@ -96,10 +96,9 @@ class UserRepository(private val service: AsLyonService,
         return  service.getConnectedUser(token)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map { User(it.id, it.lastname, it.firstname, getStringToDate(it.dateOfBirth), it.email,it.password, it.phoneNumber) }
+                .map { User(it.id, it.lastname, it.firstname, getStringToDate(it.dateOfBirth), it.email,it.password, it.phoneNumber, it.isAdmin) }
                 .doOnNext {
-                    val user = User(it.id, it.lastname, it.firstname, it.dateOfBirth, it.email,it.password, it.phoneNumber)
-                    connectedUser.onNext(user.toOptional())
+                    connectedUser.onNext(it.toOptional())
                 }
                 .share()
     }

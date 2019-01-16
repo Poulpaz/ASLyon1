@@ -2,10 +2,8 @@ package com.aslyon.lpiem.aslyon1.repository
 
 import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
-import com.aslyon.lpiem.aslyon1.datasource.request.EventData
-import com.aslyon.lpiem.aslyon1.datasource.request.OfferData
-import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
-import com.aslyon.lpiem.aslyon1.datasource.request.TournamentData
+import com.aslyon.lpiem.aslyon1.datasource.request.*
+import com.aslyon.lpiem.aslyon1.datasource.response.IsSubscribeEventResponse
 import com.aslyon.lpiem.aslyon1.model.Event
 import com.aslyon.lpiem.aslyon1.model.ItemsItem
 import com.aslyon.lpiem.aslyon1.model.Offer
@@ -42,6 +40,36 @@ class DataRepository(private val service: AsLyonService) {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map { Event(it.idEvent, it.title, getStringToDate(it.date), it.place, it.price,it.description) }
+                .share()
+    }
+
+    fun isSubscribeEvent(idUser: Int, idEvent: Int) : Observable<IsSubscribeEventResponse> {
+        val subscribeEvent = SubscribeEventData(idUser, idEvent)
+        return service.isSubscribeEvent(subscribeEvent)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .share()
+    }
+
+    fun subscribeEvent(idUser: Int, idEvent: Int): Observable<NetworkEvent> {
+        val subscribeEvent = SubscribeEventData(idUser, idEvent)
+        return service.subscribeUserEvent(subscribeEvent)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<NetworkEvent> { NetworkEvent.Success }
+                .onErrorReturn { NetworkEvent.Error(it) }
+                .startWith(NetworkEvent.InProgress)
+                .share()
+    }
+
+    fun unsubscribeEvent(idUser: Int, idEvent: Int): Observable<NetworkEvent> {
+        val subscribeEvent = SubscribeEventData(idUser, idEvent)
+        return service.unsubscribeUserEvent(subscribeEvent)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<NetworkEvent> { NetworkEvent.Success }
+                .onErrorReturn { NetworkEvent.Error(it) }
+                .startWith(NetworkEvent.InProgress)
                 .share()
     }
 

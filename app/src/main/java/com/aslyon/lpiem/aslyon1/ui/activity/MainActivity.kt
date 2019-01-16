@@ -30,7 +30,6 @@ import org.kodein.di.generic.instance
 import com.google.firebase.iid.InstanceIdResult
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.onesignal.OneSignal
 
 
 class MainActivity : BaseActivity() {
@@ -130,21 +129,11 @@ class MainActivity : BaseActivity() {
 
         FirebaseMessaging.getInstance().subscribeToTopic("aslyon")
                 .addOnCompleteListener { task ->
-                    var msg = "Vous êtes abonnés à AS Lyon"
-                    if (!task.isSuccessful) {
-                        msg = "Vous n'êtes pas abonnés à AS Lyon"
-                    }
-                    Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                 }
 
         FirebaseMessaging.getInstance().isAutoInitEnabled = true
         FirebaseApp.initializeApp(this)
         initView()
-
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init()
 
 
         currentController = navControllerHome

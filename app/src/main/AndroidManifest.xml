@@ -23,7 +23,8 @@
 
     <activity
         android:name=".ui.activity.MainActivity"
-        android:label="@string/app_name">
+        android:label="@string/app_name"
+        android:screenOrientation="portrait">
         <intent-filter>
             <action android:name="android.intent.action.DEFAULT" />
             <action android:name="android.intent.action.VIEW" />
@@ -31,26 +32,30 @@
     </activity>
         <activity
             android:name=".ui.activity.AddOfferActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.activity.AddTournamentActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.activity.DetailsEventActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.activity.AddEventActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.activity.DetailsTournamentActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.DetailsOfferActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.activity.DetailsActuActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name="com.emlyon.makersstories.service.FBMessagingService"
             android:stopWithTask="false">

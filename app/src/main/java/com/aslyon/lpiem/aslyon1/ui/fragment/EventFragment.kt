@@ -18,6 +18,7 @@ import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
 import kotlinx.android.synthetic.main.fragment_offer.*
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
@@ -42,17 +43,30 @@ class EventFragment : BaseFragment() {
         rv_event_fragment.setItemAnimator(DefaultItemAnimator())
         rv_event_fragment.adapter = adapter
 
-        fab_event_fragment.setOnClickListener{
+        viewModel.connectedUser.subscribe(
+                {
+                    if(it.toNullable()?.isAdmin == 1){
+                        fab_event_fragment.show()
+                    }
+                    else{
+                        fab_event_fragment.hide()
+                    }
+                },
+                { Timber.e(it) }
+        )
+
+        fab_event_fragment.setOnClickListener {
             AddEventActivity.start(activity as MainActivity)
         }
 
-        swiperefrsh_fragment_event.setOnRefreshListener { viewModel.getListEvent()}
+        swiperefrsh_fragment_event.setOnRefreshListener { viewModel.getListEvent() }
         viewModel.eventList
                 .subscribe(
-                    {
-                        adapter.submitList(it)
-                        swiperefrsh_fragment_event.isRefreshing=false                    },
-                    { Timber.e(it) }
+                        {
+                            adapter.submitList(it)
+                            swiperefrsh_fragment_event.isRefreshing = false
+                        },
+                        { Timber.e(it) }
                 )
 
         adapter.indexClickPublisher
