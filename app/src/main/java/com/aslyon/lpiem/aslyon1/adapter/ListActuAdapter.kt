@@ -48,8 +48,11 @@ class ListActuAdapter : ListAdapter<ItemsItem, ListActuAdapter.ActuViewHolder>(D
     }
 
     private fun getStringToDate(date : String): String {
-        val simpleDateFormatInput = SimpleDateFormat("dd/MM/yyyy à HH:mm")
-        return simpleDateFormatInput.parse(date).toString()
+        val sdf = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z")
+        val date = sdf.parse(date)
+
+        val sdf2 = SimpleDateFormat("dd/MM/yyyy à HH:mm")
+        return sdf2.format(date)
     }
 
     class DiffCardCallback : DiffUtil.ItemCallback<ItemsItem>() {

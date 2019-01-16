@@ -53,7 +53,7 @@ interface AsLyonService {
 
     //region FireBase
     @PUT("changeToken")
-    fun updateFireBaseToken(@Header("token") token: TokenData): Observable<Unit>
+    fun updateFireBaseToken(@Body token: TokenData): Observable<BaseResponse>
 
     //region actu
     @GET("xml")

@@ -151,18 +151,16 @@ class UserRepository(private val service: AsLyonService,
     fun updateToken() {
         FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
             val newPushToken = it.token
-            val oldPushToken = sharedPref.getString(pushToken, null)
+            val oldPushToken = sharedPref.getString(tokenKey, null)
 
-            if (newPushToken != null) {
-                val editor = sharedPref.edit()
-                editor.putString(pushToken, newPushToken)
-                editor.apply()
-
+            if (newPushToken != null && oldPushToken != null) {
                 val tokenData = TokenData(oldPushToken, newPushToken)
                 service.updateFireBaseToken(tokenData)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({}, {
+                        .subscribe({
+                            saveToken(newPushToken)
+                        }, {
                             Timber.e(it)
                         })
             }

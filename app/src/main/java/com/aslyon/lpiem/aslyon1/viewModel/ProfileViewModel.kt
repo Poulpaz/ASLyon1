@@ -59,7 +59,8 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
         if (validateLogin(email, password)) {
             repository.login(email, password)
                     .subscribe(
-                            { loginState.onNext(it) },
+                            { loginState.onNext(it)
+                            repository.updateToken()},
                             { Timber.e(it) }
                     )
         }
