@@ -28,8 +28,8 @@ class AddEventActivity : BaseActivity(){
     var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
     var timeFormat = SimpleDateFormat("HH:mm ", Locale.FRANCE)
 
-    lateinit var eventDate: Date
-    lateinit var eventHour: Date
+     var eventDate: Date? = null
+     var eventHour: Date? = null
 
 
     companion object {
@@ -84,6 +84,12 @@ class AddEventActivity : BaseActivity(){
                             }
                         }, { Timber.e(it) }
                 )
+                viewModel.errorEditIntAddEvent.subscribe(
+                        {
+                            Toast.makeText(this@AddEventActivity, getString(it), Toast.LENGTH_SHORT).show()
+                        }, { Timber.e(it)}
+                )
+
 
             }
         }

@@ -1,8 +1,10 @@
 package com.aslyon.lpiem.aslyon1.viewModel
 
 import android.text.TextUtils
+import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.repository.DataRepository
 import com.aslyon.lpiem.aslyon1.ui.activity.BaseActivity
@@ -17,12 +19,16 @@ class AddTournamentViewModel (private val dataRepository: DataRepository): BaseV
     val errorEmptyText: PublishSubject<String> = PublishSubject.create()
     val registerState: BehaviorSubject<NetworkEvent> = BehaviorSubject.createDefault(NetworkEvent.None)
 
-    fun addtournament(title: String, nbTeam: String, nbPlayersTeam: String, date: Date, hour:Date, place:String,description: String, price: String)
+
+    val errorEditTextAddTournament: PublishSubject<Int> = PublishSubject.create()
+    val errorEditTextSignIn: PublishSubject<Int> = PublishSubject.create()
+
+    fun addtournament(title: String, nbTeam: String, nbPlayersTeam: String, date: Date?, hour:Date?, place:String,description: String, price: String)
         {
 
         if (validateTournament(title,nbTeam,nbPlayersTeam,date,hour,place,description,price)){
 
-            dataRepository.addTournament(title,nbTeam,nbPlayersTeam,getDateHour(date, hour),place,description,price)
+            dataRepository.addTournament(title,nbTeam,nbPlayersTeam,getDateHour(date!!, hour!!),place,description,price)
                     .subscribe(
                             {registerState.onNext(it)},
                             { Timber.e(it)}
@@ -43,14 +49,66 @@ class AddTournamentViewModel (private val dataRepository: DataRepository): BaseV
     }
 
     private fun validateTournament(title: String?, nbTeam: String?, nbPlayersTeam: String?, date: Date?, hour: Date?, place:String?,description: String?, price: String?) : Boolean {
-        return validateText(title) && validateText(nbTeam) && validateText(nbPlayersTeam) && validateDate(date)&& validateDate(hour)&& validateText(place) && validateText(price) && validateText(description)
+        return validateTitle(title) && validateTeams(nbTeam) && validatePlayers(nbPlayersTeam) && validateDate(date)&& validateHour(hour)&& validateAddress(place) && validatePrice(price) && validateDescription(description)
     }
 
     private fun validateDate(date: Date?): Boolean {
-
-        return date!= null
+        if (date == null) {
+            errorEditTextAddTournament.onNext(R.string.error_selected_date)
+            return false
+        }
+        return true
+    }
+    private fun validateHour(date: Date?): Boolean {
+        if (date == null) {
+            errorEditTextAddTournament.onNext(R.string.error_selected_date)
+            return false
+        }
+        return true
     }
 
+    private fun validateTitle(email: String?): Boolean {
+        if (TextUtils.isEmpty(email)) {
+            errorEditTextAddTournament.onNext(R.string.error_empty_edit_text)
+            return false
+        }
+        return true
+    }
+    private fun validateTeams(email: String?): Boolean {
+        if (TextUtils.isEmpty(email)) {
+            errorEditTextAddTournament.onNext(R.string.error_empty_edit_text)
+            return false
+        }
+        return true
+    }
+    private fun validatePlayers(email: String?): Boolean {
+        if (TextUtils.isEmpty(email)) {
+            errorEditTextAddTournament.onNext(R.string.error_empty_edit_text)
+            return false
+        }
+        return true
+    }
+    private fun validateAddress(email: String?): Boolean {
+        if (TextUtils.isEmpty(email)) {
+            errorEditTextAddTournament.onNext(R.string.error_empty_edit_text)
+            return false
+        }
+        return true
+    }
+    private fun validateDescription(email: String?): Boolean {
+        if (TextUtils.isEmpty(email)) {
+            errorEditTextAddTournament.onNext(R.string.error_empty_edit_text)
+            return false
+        }
+        return true
+    }
+    private fun validatePrice(email: String?): Boolean {
+        if (TextUtils.isEmpty(email)) {
+            errorEditTextAddTournament.onNext(R.string.error_empty_edit_text)
+            return false
+        }
+        return true
+    }
     private fun validateText(text: String?): Boolean {
         if (TextUtils.isEmpty(text)) {
             errorEmptyText.onNext("Vous devez remplir tous les champs")
@@ -58,6 +116,19 @@ class AddTournamentViewModel (private val dataRepository: DataRepository): BaseV
         }
         return true
     }
+
+    private fun validateTournamentBool(title: String, nbTeam: String, nbPlayersTeam: String, date: Date, hour:Date, place:String,description: String, price: String)
+            : Boolean {
+        if (validateTournament(title,nbTeam,nbPlayersTeam,date,hour,place,description,price)) {
+
+            return true
+        }
+        else{
+            errorEditTextSignIn.onNext(R.string.error_empty_edit_text)
+            return false
+        }
+    }
+
 
     class Factory(private val dataRepository: DataRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {

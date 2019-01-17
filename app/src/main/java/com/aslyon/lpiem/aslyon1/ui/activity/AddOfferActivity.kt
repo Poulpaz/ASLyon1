@@ -37,8 +37,9 @@ class AddOfferActivity : BaseActivity(){
     var formate = SimpleDateFormat("dd/MM/yyyy",Locale.FRANCE)
     private var addOfferButtonMenu : MenuItem? = null
 
-    lateinit var offerStartDate: Date
-   lateinit var offerEndDate: Date
+     var offerStartDate : Date?=null
+     var offerEndDate    : Date?=null
+
     companion object {
         fun start(fromActivity: AppCompatActivity) {
             fromActivity.startActivity(Intent(fromActivity, AddOfferActivity::class.java))
@@ -89,6 +90,12 @@ class AddOfferActivity : BaseActivity(){
                                     onOfferStateSuccess()
                                 }
                             }
+                        }, { Timber.e(it) }
+                )
+
+                viewModel.errorEditTextAddOffer.subscribe(
+                        {
+                            Toast.makeText(this@AddOfferActivity, getString(it), Toast.LENGTH_SHORT).show()
                         }, { Timber.e(it) }
                 )
 
