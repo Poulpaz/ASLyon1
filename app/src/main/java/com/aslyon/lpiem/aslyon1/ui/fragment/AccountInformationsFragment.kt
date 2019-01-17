@@ -46,8 +46,8 @@ class AccountInformationsFragment : BaseFragment(), DisconnectUserInterface {
             tv_name_fragment_account_informations.text = it.lastname + " " + it.firstname
             tv_birthdate_fragment_account_informations.text = getDateToString(it.dateOfBirth)
             tv_mail_fragment_account_informations.text = it.email
-
             tv_phone_fragment_account_informations.text = it.phoneNumber
+            if(it.isAdmin == 1){ tv_admin_fragment_account_informations.visibility = View.VISIBLE } else { tv_admin_fragment_account_informations.visibility = View.GONE }
         }
 
     }
