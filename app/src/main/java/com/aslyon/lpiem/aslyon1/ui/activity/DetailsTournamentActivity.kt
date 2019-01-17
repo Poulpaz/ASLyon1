@@ -30,7 +30,6 @@ class DetailsTournamentActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_tournament_details)
         setSupportActionBar(toolbarDetailsTournament)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

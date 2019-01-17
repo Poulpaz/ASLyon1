@@ -13,6 +13,7 @@ import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.viewModel.AddEventViewModel
 import kotlinx.android.synthetic.main.activity_add_event.*
+import kotlinx.android.synthetic.main.activity_event_details.*
 import org.kodein.di.generic.instance
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -42,6 +43,7 @@ class AddEventActivity : BaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_event)
+        setSupportActionBar(toolbarAddEvent)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initChipDatePicker()

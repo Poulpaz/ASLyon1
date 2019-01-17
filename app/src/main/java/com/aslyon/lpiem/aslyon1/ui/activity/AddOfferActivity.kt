@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_add_event.*
 
 
 import kotlinx.android.synthetic.main.activity_add_offer.*
+import kotlinx.android.synthetic.main.activity_event_details.*
 import org.kodein.di.direct
 import org.kodein.di.generic.M
 import org.kodein.di.generic.instance
@@ -50,6 +51,7 @@ class AddOfferActivity : BaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_offer)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initChipDatePicker()

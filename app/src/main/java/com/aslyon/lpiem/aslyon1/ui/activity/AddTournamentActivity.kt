@@ -15,6 +15,7 @@ import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.viewModel.AddTournamentViewModel
 import kotlinx.android.synthetic.main.activity_add_tournament.*
 import kotlinx.android.synthetic.main.activity_add_tournament.*
+import kotlinx.android.synthetic.main.activity_event_details.*
 import org.kodein.di.generic.instance
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -39,7 +40,9 @@ class AddTournamentActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_tournament)
+        setSupportActionBar(toolbar_add_tournament)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         initChipDatePicker()
         initChipHourPicker()
         setSupportActionBar(toolbar_add_tournament)
