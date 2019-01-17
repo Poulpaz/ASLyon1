@@ -44,10 +44,9 @@ class TournamentFragment : BaseFragment() {
 
         viewModel.connectedUser.subscribe(
                 {
-                    if(it.toNullable()?.isAdmin == 1){
+                    if (it.toNullable()?.isAdmin == 1) {
                         fab_tournament_fragment.show()
-                    }
-                    else{
+                    } else {
                         fab_tournament_fragment.hide()
                     }
                 },
@@ -57,8 +56,17 @@ class TournamentFragment : BaseFragment() {
         viewModel.tournamentList
                 .subscribe(
                         {
-                            adapter.submitList(it)
-                            swiperefrsh_fragment_tournament.isRefreshing=false
+                            if (it.isNullOrEmpty()) {
+                                tv_tournament_fragment.visibility = View.VISIBLE
+                                swiperefrsh_fragment_tournament.visibility = View.GONE
+                                swiperefrsh_fragment_tournament.isRefreshing = false
+
+                            } else {
+                                tv_tournament_fragment.visibility = View.GONE
+                                adapter.submitList(it)
+                                swiperefrsh_fragment_tournament.visibility = View.VISIBLE
+                                swiperefrsh_fragment_tournament.isRefreshing = false
+                            }
                         },
                         { Timber.e(it) }
                 )
@@ -76,7 +84,7 @@ class TournamentFragment : BaseFragment() {
             AddTournamentActivity.start(activity as MainActivity)
         }
 
-        swiperefrsh_fragment_tournament.setOnRefreshListener {viewModel.getListTournament()}
+        swiperefrsh_fragment_tournament.setOnRefreshListener { viewModel.getListTournament() }
     }
 
     override fun onResume() {
@@ -85,3 +93,4 @@ class TournamentFragment : BaseFragment() {
     }
 
 }
+

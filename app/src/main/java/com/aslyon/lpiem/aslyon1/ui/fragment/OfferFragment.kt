@@ -73,8 +73,17 @@ class OfferFragment : BaseFragment() {
         viewModel.offerList
                 .subscribe(
                         {
-                            adapter.submitList(it)
-                            swiperefrsh_fragment_offer.isRefreshing = false
+                            if (it.isNullOrEmpty()) {
+                                tv_offer_fragment.visibility = View.VISIBLE
+                                swiperefrsh_fragment_offer.visibility = View.GONE
+                                swiperefrsh_fragment_offer.isRefreshing = false
+
+                            } else {
+                                tv_offer_fragment.visibility = View.GONE
+                                adapter.submitList(it)
+                                swiperefrsh_fragment_offer.visibility = View.VISIBLE
+                                swiperefrsh_fragment_offer.isRefreshing = false
+                            }
                         },
                         { Timber.e(it) }
                 )

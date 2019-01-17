@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aslyon.lpiem.aslyon1.R
@@ -22,6 +23,7 @@ import java.util.*
 class AddTournamentActivity: BaseActivity() {
 
     private val viewModel: AddTournamentViewModel by instance(arg = this)
+    private var addTournamentButtonMenu : MenuItem? = null
     var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
     var timeFormat = SimpleDateFormat("HH:mm ", Locale.FRANCE)
 
@@ -43,10 +45,8 @@ class AddTournamentActivity: BaseActivity() {
         setSupportActionBar(toolbar_add_tournament)
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-
             R.id.button_validate_new_item -> {
 
                 val title = et_title_activity_add_tournament.text.toString()
@@ -64,19 +64,17 @@ class AddTournamentActivity: BaseActivity() {
                                     // Nothing
                                 }
                                 NetworkEvent.InProgress -> {
-                                    //onSignUpStateInProgress()
+                                    onTournamentStateInProgress()
 
                                 }
                                 is NetworkEvent.Error -> {
-                                    Toast.makeText(this@AddTournamentActivity, "Erreur!", Toast.LENGTH_SHORT).show()
-                                    //   onSignUpStateError(it)
+                                    onTournamentStateError(it)
                                 }
                                 is NetworkEvent.Success -> {
-                                    Toast.makeText(this@AddTournamentActivity, "Votre tournoi à été ajouté !", Toast.LENGTH_SHORT).show()
-                                    finish()
 
 
-                                    //   onSignUpStateSuccess()
+
+                                    onTournamentStateSuccess()
                                 }
                             }
                         }, { Timber.e(it) }
@@ -87,9 +85,27 @@ class AddTournamentActivity: BaseActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun onTournamentStateSuccess() {
+        Toast.makeText(this@AddTournamentActivity, getString(R.string.tv_add_tournament_success), Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
+    private fun onTournamentStateError(it: NetworkEvent.Error) {
+        Toast.makeText(this@AddTournamentActivity, getString(R.string.tv_add_tournament_error), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onTournamentStateInProgress() {
+        progress_bar_add_tournament.visibility = View.VISIBLE
+        addTournamentButtonMenu?.isVisible = false
+
+
+
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_add_new_item, menu)
+        addTournamentButtonMenu = menu?.findItem(R.id.button_validate_new_item)
+
         return super.onCreateOptionsMenu(menu)
     }
     val now = Calendar.getInstance()

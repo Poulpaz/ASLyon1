@@ -65,7 +65,14 @@
     <string name="c_date_end_offer_activity_add_offer">Veuillez choisir la date de fin de l\'offre</string>
     <string name="et_hint_discount_price_activity_add_offer">Prix en euros</string>
     <string name="et_hint_description_activity_add_offer">Description</string>
-    <string name="et_participants_activity_add_offer">Nombre de participants</string>
+    <string name="et_participants_activity_add_offer">Nombre de places disponibles</string>
+    <string name="tv_add_offer_success">Votre offre a été ajoutée</string>
+    <string name="tv_add_offer_error">Un problème est survenu lors de l\'ajout d\'une offre</string>
+
+    <!--Add Tournament Activity-->
+    <string name="tv_add_tournament_success">Votre tournoi a été ajouté</string>
+    <string name="tv_add_tournament_error">Un problème est survenu lors de l\'ajout d\'un tournoi</string>
+
 
     <!--Add Event Activity-->
     <string name="et_title_activity_add_event">Titre de l\'évenement</string>
@@ -74,6 +81,9 @@
     <string name="et_place_activity_add_event">Adresse de l\'évenement</string>
     <string name="et_hint_description_activity_add_event">Description</string>
     <string name="chip_hour_event_activity_add_event">Veuillez choisir l\'heure de l\'évenement</string>
+    <string name="tv_add_event_succes">Votre évenement à été ajouté !</string>
+    <string name="tv_add_event_error">Un problème est survenu lors de l\'ajout d\'un évènement</string>
+    <string name="tv_event_fragment">Il n\'y a pas d\'évènements en cours</string>
 
     <!--Details Event Activity-->
     <string name="tv_dialog_susbscribe_title_event">Inscription à l\'évènement</string>
@@ -100,5 +110,11 @@
     <string name="et_place_tournament_fragment">Adresse</string>
     <string name="et_place_activity_add_tournament">Adresse</string>
     <string name="error_subscribe_event_connected">Vous devez être connecté pour vous inscrire</string>
+    <string name="tv_tournament_fragment">Il n\'y a pas de tournois en cours</string>
+    <string name="tv_offer_fragment">Il n\'y a pas d\'offres en cours</string>
+    <string name="tv_actu_fragment">Il n\'y a pas d\'actualités en cours</string>
+
+
+
 
 </resources>
