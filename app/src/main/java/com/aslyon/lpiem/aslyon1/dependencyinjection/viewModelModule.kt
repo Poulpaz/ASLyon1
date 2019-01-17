@@ -9,6 +9,8 @@ import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
 import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
 import com.aslyon.lpiem.aslyon1.viewModel.OfferFragmentViewModel
 import com.aslyon.lpiem.aslyon1.viewModel.TournamentViewModel
+import com.aslyon.lpiem.aslyon1.viewModel.DetailsTournamentViewModel
+import com.aslyon.lpiem.aslyon1.viewModel.DetailsOfferViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.factory

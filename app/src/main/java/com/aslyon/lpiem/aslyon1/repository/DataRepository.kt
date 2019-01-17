@@ -135,10 +135,19 @@ class DataRepository(private val service: AsLyonService) {
 
     fun loadOffer(idOffer : Int) : Observable<Offer> {
         return service.getOffer(idOffer)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map { Offer(it.idOffer, it.title,getStringToDateOffer(it.startDate),getStringToDate(it.endDate),it.nbParticipants, it.price,it.description) }
+                .map { Offer(it.idOffer, it.title,getStringToDateOffer(it.startDate),getStringToDateOffer(it.endDate),it.nbParticipants, it.price,it.description) }
                 .share()
     }
+
+    /*fun loadTournament(idTournament : Int) : Observable<Tournament> {
+        return service.getTournament(idTournament)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { Tournament(it.idTournament, it.title,it.nbTeam,it.nbPlayersTeam,getStringToDate(it.date), it.place,it.description, it.price) }
+                .share()
+    }*/
 
     fun fetchActus(): Flowable<List<ItemsItem>> {
         return service.getRSSActus()
