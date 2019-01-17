@@ -8,8 +8,8 @@
     <string name="title_profile">Profil</string>
     <string name="title_add_tournament">Ajout d\'un tournoi</string>
     <string name="title_details_tournament">Détails d\'un tournoi</string>
-    <string name="title_details_event">Détails d\'un événement</string>
-    <string name="title_add_event">Ajouter un évenement</string>
+    <string name="title_details_event">Détails d\'un évènement</string>
+    <string name="title_add_event">Ajouter un évènement</string>
     <string name="title_details_actu">Details d\'une actualité</string>
     <string name="title_subscribers_event">Inscrits à l\'évènement</string>
 
@@ -76,13 +76,13 @@
 
 
     <!--Add Event Activity-->
-    <string name="et_title_activity_add_event">Titre de l\'évenement</string>
-    <string name="c_date_event_activity_add_event">Veuillez choisir la date de l\'évenement</string>
+    <string name="et_title_activity_add_event">Titre de l\'évènement</string>
+    <string name="c_date_event_activity_add_event">Veuillez choisir la date de l\'évènement</string>
     <string name="et_hint_discount_price_activity_add_event">Prix en euros</string>
-    <string name="et_place_activity_add_event">Adresse de l\'évenement</string>
+    <string name="et_place_activity_add_event">Adresse de l\'évènement</string>
     <string name="et_hint_description_activity_add_event">Description</string>
-    <string name="chip_hour_event_activity_add_event">Veuillez choisir l\'heure de l\'évenement</string>
-    <string name="tv_add_event_succes">Votre évenement à été ajouté !</string>
+    <string name="chip_hour_event_activity_add_event">Veuillez choisir l\'heure de l\'évènement</string>
+    <string name="tv_add_event_succes">Votre évènement à été ajouté !</string>
     <string name="tv_add_event_error">Un problème est survenu lors de l\'ajout d\'un évènement</string>
     <string name="tv_event_fragment">Il n\'y a pas d\'évènements en cours</string>
 
