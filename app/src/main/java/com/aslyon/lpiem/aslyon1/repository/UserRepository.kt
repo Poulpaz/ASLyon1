@@ -148,23 +148,4 @@ class UserRepository(private val service: AsLyonService,
         keystoreManager.deleteAlias(tokenAlias)
     }
 
-    fun updateToken() {
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
-            val newPushToken = it.token
-            val oldPushToken = sharedPref.getString(tokenKey, null)
-
-            if (newPushToken != null && oldPushToken != null) {
-                val tokenData = TokenData(oldPushToken, newPushToken)
-                service.updateFireBaseToken(tokenData)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            saveToken(newPushToken)
-                        }, {
-                            Timber.e(it)
-                        })
-            }
-        }
-    }
-
 }

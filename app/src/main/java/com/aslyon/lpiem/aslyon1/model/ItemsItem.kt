@@ -1,8 +1,10 @@
 package com.aslyon.lpiem.aslyon1.model
 
+import com.google.gson.annotations.SerializedName
+
 class ItemsItem(
-	val author: String,
-	val link: String,
-	val title: String,
-	val pubDate: String
+		@SerializedName("creator") val author: String,
+		@SerializedName("link") val link: String,
+		@SerializedName("title") val title: String,
+		@SerializedName("pubDate") val pubDate: String
 )
