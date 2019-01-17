@@ -2,6 +2,8 @@ package com.aslyon.lpiem.aslyon1.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +12,7 @@ import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.model.Event
 import com.aslyon.lpiem.aslyon1.ui.fragment.ProfileFragmentInterface
 import com.aslyon.lpiem.aslyon1.viewModel.DetailsEventViewModel
+import kotlinx.android.synthetic.main.activity_add_event.*
 import kotlinx.android.synthetic.main.activity_event_details.*
 import org.kodein.di.direct
 import org.kodein.di.generic.M
@@ -22,6 +25,7 @@ import java.util.*
 class DetailsEventActivity : BaseActivity() {
 
     private lateinit var viewModel: DetailsEventViewModel
+    private var idEvent = -1
 
     companion object {
         const val ExtraEventId = "ExtraEventId"
@@ -36,8 +40,8 @@ class DetailsEventActivity : BaseActivity() {
         setSupportActionBar(toolbarDetailsEvent)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val eventId = intent.getIntExtra(ExtraEventId, -1)
-        viewModel = kodein.direct.instance(arg = M(this, eventId))
+        idEvent = intent.getIntExtra(ExtraEventId, -1)
+        viewModel = kodein.direct.instance(arg = M(this, idEvent))
 
         viewModel.isSubscribeEvent
                 .subscribe(
@@ -133,6 +137,23 @@ class DetailsEventActivity : BaseActivity() {
     private fun getDateToString(date: Date?): String {
         val df: DateFormat = SimpleDateFormat("dd/MM/yyyy' à 'HH:mm", Locale.FRANCE)
         return df.format(date)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_detail_event, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+
+            R.id.button_list_subscribers_event -> {
+                if(idEvent != -1){
+                    ListSubscribersEventActvity.start(this, idEvent)
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {

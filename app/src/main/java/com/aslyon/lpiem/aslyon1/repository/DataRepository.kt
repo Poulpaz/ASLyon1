@@ -4,6 +4,7 @@ import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.datasource.request.*
 import com.aslyon.lpiem.aslyon1.datasource.response.IsSubscribeEventResponse
+import com.aslyon.lpiem.aslyon1.datasource.response.SubscribersEventResponse
 import com.aslyon.lpiem.aslyon1.model.Event
 import com.aslyon.lpiem.aslyon1.model.ItemsItem
 import com.aslyon.lpiem.aslyon1.model.Offer
@@ -63,13 +64,19 @@ class DataRepository(private val service: AsLyonService) {
     }
 
     fun unsubscribeEvent(idUser: Int, idEvent: Int): Observable<NetworkEvent> {
-        val subscribeEvent = SubscribeEventData(idUser, idEvent)
-        return service.unsubscribeUserEvent(subscribeEvent)
+        return service.unsubscribeUserEvent(idUser, idEvent)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map<NetworkEvent> { NetworkEvent.Success }
                 .onErrorReturn { NetworkEvent.Error(it) }
                 .startWith(NetworkEvent.InProgress)
+                .share()
+    }
+
+    fun getListSubscribersEvent(idEvent: Int): Observable<List<SubscribersEventResponse>> {
+        return service.getListSubscribersEvent(idEvent)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .share()
     }
 

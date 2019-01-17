@@ -4,8 +4,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="title">20sp</dimen>
+    <dimen name="title">22sp</dimen>
     <dimen name="dateTime">16sp</dimen>
-    <dimen name="subtitle">15sp</dimen>
+    <dimen name="subtitle">18sp</dimen>
     <dimen name= "body">14sp</dimen>
 </resources>

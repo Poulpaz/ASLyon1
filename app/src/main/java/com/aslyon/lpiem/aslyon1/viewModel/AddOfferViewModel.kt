@@ -23,7 +23,6 @@ class AddOfferViewModel (private val dataRepository: DataRepository): BaseViewMo
                             { registerState.onNext(it) },
                             { Timber.e(it) }
                     )
-            //repository.updateToken()
         }
     }
     private fun validateOffer(title: String?, startDate: Date?,endDate: Date?, discount: String?, description: String?, nbParticipants:String?) : Boolean {

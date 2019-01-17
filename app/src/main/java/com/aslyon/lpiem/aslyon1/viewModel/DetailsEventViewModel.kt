@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
+import com.aslyon.lpiem.aslyon1.datasource.response.SubscribersEventResponse
 import com.aslyon.lpiem.aslyon1.model.Event
 import com.aslyon.lpiem.aslyon1.repository.DataRepository
 import com.aslyon.lpiem.aslyon1.repository.UserRepository
@@ -16,6 +17,7 @@ import timber.log.Timber
 class DetailsEventViewModel(private val userRepository: UserRepository, private val dataRepository: DataRepository, private val idEvent: Int) : BaseViewModel() {
 
     val event: BehaviorSubject<Event> = BehaviorSubject.create()
+    val listSubscribersEvent: BehaviorSubject<List<SubscribersEventResponse>> = BehaviorSubject.create()
     val errorSubscribeEvent: BehaviorSubject<Int> = BehaviorSubject.create()
     val subscribeEventState: BehaviorSubject<NetworkEvent> = BehaviorSubject.createDefault(NetworkEvent.None)
     val isSubscribeEvent: BehaviorSubject<Int> = BehaviorSubject.create()
@@ -76,6 +78,15 @@ class DetailsEventViewModel(private val userRepository: UserRepository, private 
         else{
             errorSubscribeEvent.onNext(R.string.error_subscribe_event_connected)
         }
+    }
+
+    fun getListSubscribersEvent(){
+        dataRepository.getListSubscribersEvent(idEvent).subscribe(
+                {
+                    listSubscribersEvent.onNext(it)
+                },
+                { Timber.e(it) }
+        )
     }
 
     class Factory(private val userRepository: UserRepository, private val dataRepository: DataRepository, private val idEvent: Int) : ViewModelProvider.Factory {

@@ -2,15 +2,16 @@
     <string name="app_name">AS Lyon 1</string>
 
     <!-- Title -->
-    <string name="title_home">Home</string>
-    <string name="title_tournament">Tournament</string>
-    <string name="title_shop">Shop</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_home">Accueil</string>
+    <string name="title_tournament">Tournoi</string>
+    <string name="title_shop">Boutique</string>
+    <string name="title_profile">Profil</string>
     <string name="title_add_tournament">Ajout d\'un tournoi</string>
     <string name="title_details_tournament">Détails d\'un tournoi</string>
     <string name="title_details_event">Détails d\'un événement</string>
     <string name="title_add_event">Ajouter un évenement</string>
     <string name="title_details_actu">Details d\'une actualité</string>
+    <string name="title_subscribers_event">Inscrits à l\'évènement</string>
 
     <!-- Home Fragment -->
     <string name="ti_events_home_fragment">Events</string>
@@ -84,6 +85,9 @@
     <string name="tv_add_event_succes">Votre évenement à été ajouté !</string>
     <string name="tv_add_event_error">Un problème est survenu lors de l\'ajout d\'un évènement</string>
     <string name="tv_event_fragment">Il n\'y a pas d\'évènements en cours</string>
+
+    <!-- Home Fragment -->
+    <string name="tv_no_subscribers_event">Il n\'y a pas d\'inscrits à cet évènement</string>
 
     <!--Details Event Activity-->
     <string name="tv_dialog_susbscribe_title_event">Inscription à l\'évènement</string>
