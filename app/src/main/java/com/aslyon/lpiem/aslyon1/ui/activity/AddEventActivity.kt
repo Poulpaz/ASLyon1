@@ -12,7 +12,6 @@ import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.viewModel.AddEventViewModel
 import kotlinx.android.synthetic.main.activity_add_event.*
-import org.kodein.di.generic.M
 import org.kodein.di.generic.instance
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -61,7 +60,7 @@ class AddEventActivity : BaseActivity(){
 
                 viewModel.addevent(title, eventDate,eventHour ,place,price, description)
 
-                viewModel.registerState.subscribe(
+                viewModel.saveEventState.subscribe(
                         {
                             when (it) {
                                 NetworkEvent.None -> {

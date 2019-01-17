@@ -9,13 +9,12 @@ import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import timber.log.Timber
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
 
 class AddEventViewModel (private val dataRepository: DataRepository): BaseViewModel() {
 
     val errorEmptyText: PublishSubject<String> = PublishSubject.create()
-    val registerState: BehaviorSubject<NetworkEvent> = BehaviorSubject.createDefault(NetworkEvent.None)
+    val saveEventState: BehaviorSubject<NetworkEvent> = BehaviorSubject.createDefault(NetworkEvent.None)
 
     fun addevent(title: String,date: Date, hour: Date, place: String, price: String, description: String){
 
@@ -23,7 +22,7 @@ class AddEventViewModel (private val dataRepository: DataRepository): BaseViewMo
 
             dataRepository.addEvent(title,getDateHour(date, hour),place,price,description)
                     .subscribe(
-                            {registerState.onNext(it)},
+                            {saveEventState.onNext(it)},
                             { Timber.e(it)}
 
                     )

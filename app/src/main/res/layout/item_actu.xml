@@ -15,6 +15,7 @@
             android:id="@+id/iv_item_actu"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:src="@drawable/ic_actu"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -23,10 +24,10 @@
         <TextView
             android:id="@+id/tv_title_item_actu"
             android:layout_width="0dp"
-            android:layout_margin="10dp"
             android:layout_height="wrap_content"
             android:text="Article"
             style="@style/TitleText"
+            android:layout_marginStart="16dp"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_item_actu"
@@ -34,18 +35,24 @@
 
         <TextView
             android:id="@+id/tv_pubDate_item_actu"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="14/04/2019"
+            style="@style/DateText"
+            android:layout_marginStart="16dp"
+            android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@id/tv_title_item_actu"
             app:layout_constraintStart_toEndOf="@id/iv_item_actu"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/tv_author_item_actu"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Ambre"
+            style="@style/SubtitleText"
+            android:layout_marginStart="16dp"
+            android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@id/tv_pubDate_item_actu"
             app:layout_constraintStart_toEndOf="@id/iv_item_actu"
             app:layout_constraintEnd_toEndOf="parent" />
