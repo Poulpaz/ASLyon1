@@ -50,15 +50,21 @@ class DetailsOfferActivity : BaseActivity() {
                 )
     }
 
+
     private fun displayOffer(offer: Offer) {
         tv_title_offer_details.text = offer.title
         tv_place_offer_details.text = offer.nbParticipants+" places disponibles"
-        tv_price_offer_details.text = offer.price+" euros"
-        tv_date_offer_details.text = "Du "+ offer.startDate+" au "+offer.endDate
+        tv_price_offer_details.text = offer.price+" €"
+        tv_date_offer_details.text = "Du "+getDateToString(offer.startDate)+" au "+getDateToString(offer.endDate)
         tv_description_offer_details.text = offer.description
 
 
 
+    }
+
+    private fun getDateToString(date: Date?): String {
+        val df: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
+        return df.format(date)
     }
 
 

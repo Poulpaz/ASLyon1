@@ -41,8 +41,17 @@ class ActuFragment : BaseFragment() {
         viewModel.actuList
                 .subscribe(
                         {
-                            adapter.submitList(it)
-                            swiperefrsh_fragment_actu.isRefreshing=false
+                            if (it.isNullOrEmpty()) {
+                                tv_actu_fragment.visibility = View.VISIBLE
+                                swiperefrsh_fragment_actu.visibility = View.GONE
+                                swiperefrsh_fragment_actu.isRefreshing = false
+
+                            } else {
+                                tv_actu_fragment.visibility = View.GONE
+                                adapter.submitList(it)
+                                swiperefrsh_fragment_actu.visibility = View.VISIBLE
+                                swiperefrsh_fragment_actu.isRefreshing = false
+                            }
                         },
                         { Timber.e(it) }
                 )

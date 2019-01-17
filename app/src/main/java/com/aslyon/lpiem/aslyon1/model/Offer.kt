@@ -10,7 +10,6 @@ class Offer (
         @SerializedName("endDate") var endDate: Date,
         @SerializedName("nbParticipants") var nbParticipants: String,
         @SerializedName("price") var price: String,
-     //   @SerializedName("link") var link: String?,
         @SerializedName("description") var description: String
 
 )

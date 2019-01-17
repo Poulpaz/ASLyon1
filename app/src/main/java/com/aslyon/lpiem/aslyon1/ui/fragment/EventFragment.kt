@@ -63,8 +63,17 @@ class EventFragment : BaseFragment() {
         viewModel.eventList
                 .subscribe(
                         {
-                            adapter.submitList(it)
-                            swiperefrsh_fragment_event.isRefreshing = false
+                            if (it.isNullOrEmpty()) {
+                                tv_event_fragment.visibility = View.VISIBLE
+                                swiperefrsh_fragment_event.visibility = View.GONE
+                                swiperefrsh_fragment_event.isRefreshing = false
+
+                            } else {
+                                tv_event_fragment.visibility = View.GONE
+                                adapter.submitList(it)
+                                swiperefrsh_fragment_event.visibility = View.VISIBLE
+                                swiperefrsh_fragment_event.isRefreshing = false
+                            }
                         },
                         { Timber.e(it) }
                 )

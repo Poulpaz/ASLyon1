@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.aslyon.lpiem.aslyon1.R
@@ -23,6 +24,7 @@ import java.util.*
 class AddEventActivity : BaseActivity(){
 
     private val viewModel : AddEventViewModel by instance(arg=this)
+    private var addEventButtonMenu : MenuItem? = null
     var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
     var timeFormat = SimpleDateFormat("HH:mm ", Locale.FRANCE)
 
@@ -67,19 +69,17 @@ class AddEventActivity : BaseActivity(){
                                     // Nothing
                                 }
                                 NetworkEvent.InProgress -> {
-                                    //onSignUpStateInProgress()
+                                    onEventStateInProgress()
 
                                 }
                                 is NetworkEvent.Error -> {
-                                    Toast.makeText(this@AddEventActivity, "Erreur!", Toast.LENGTH_SHORT).show()
-                                    //   onSignUpStateError(it)
+                                    onEventStateError(it)
                                 }
                                 is NetworkEvent.Success -> {
-                                    Toast.makeText(this@AddEventActivity, "Votre évenement à été ajouté !", Toast.LENGTH_SHORT).show()
-                                    finish()
 
 
-                                    //   onSignUpStateSuccess()
+
+                                    onEventStateSuccess()
                                 }
                             }
                         }, { Timber.e(it) }
@@ -90,10 +90,25 @@ class AddEventActivity : BaseActivity(){
         return super.onOptionsItemSelected(item)
     }
 
+    private fun onEventStateSuccess() {
+        Toast.makeText(this@AddEventActivity, getString(R.string.tv_add_event_succes), Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
+    private fun onEventStateError(it: NetworkEvent.Error) {
+        Toast.makeText(this@AddEventActivity, getString(R.string.tv_add_event_error), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onEventStateInProgress() {
+        progress_bar_add_event.visibility = View.VISIBLE
+        addEventButtonMenu?.isVisible = false
+    }
+
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_add_new_item, menu)
+        addEventButtonMenu = menu?.findItem(R.id.button_validate_new_item)
         return super.onCreateOptionsMenu(menu)
     }
     val now = Calendar.getInstance()

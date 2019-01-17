@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,7 @@ import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.ui.fragment.OfferFragment
 import com.aslyon.lpiem.aslyon1.viewModel.AddOfferViewModel
+import kotlinx.android.synthetic.main.activity_add_event.*
 
 
 import kotlinx.android.synthetic.main.activity_add_offer.*
@@ -33,8 +35,9 @@ class AddOfferActivity : BaseActivity(){
 
     private val viewModel: AddOfferViewModel by instance(arg = this)
     var formate = SimpleDateFormat("dd/MM/yyyy",Locale.FRANCE)
+    private var addOfferButtonMenu : MenuItem? = null
 
-   lateinit var offerStartDate: Date
+    lateinit var offerStartDate: Date
    lateinit var offerEndDate: Date
     companion object {
         fun start(fromActivity: AppCompatActivity) {
@@ -73,19 +76,17 @@ class AddOfferActivity : BaseActivity(){
                                     // Nothing
                                 }
                                 NetworkEvent.InProgress -> {
-                                    //onSignUpStateInProgress()
-                                    Toast.makeText(this@AddOfferActivity, "Its toast!", Toast.LENGTH_SHORT).show()
+                                    onOfferStateInProgress()
+
                                 }
                                 is NetworkEvent.Error -> {
-                                    Toast.makeText(this@AddOfferActivity, "Erreur!", Toast.LENGTH_SHORT).show()
-                                 //   onSignUpStateError(it)
+                                    onOfferStateError(it)
                                 }
                                 is NetworkEvent.Success -> {
-                                    Toast.makeText(this@AddOfferActivity, "Fonctionne!", Toast.LENGTH_SHORT).show()
-                                    finish()
 
 
-                                    //   onSignUpStateSuccess()
+
+                                    onOfferStateSuccess()
                                 }
                             }
                         }, { Timber.e(it) }
@@ -96,9 +97,25 @@ class AddOfferActivity : BaseActivity(){
         return super.onOptionsItemSelected(item)
     }
 
+    private fun onOfferStateSuccess() {
+        Toast.makeText(this@AddOfferActivity, getString(R.string.tv_add_offer_success), Toast.LENGTH_SHORT).show()
+        finish()
+    }
+
+    private fun onOfferStateError(it: NetworkEvent.Error) {
+        Toast.makeText(this@AddOfferActivity, getString(R.string.tv_add_offer_error), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun onOfferStateInProgress() {
+        progress_bar_add_offer.visibility = View.VISIBLE
+        addOfferButtonMenu?.isVisible = false
+
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         menuInflater.inflate(R.menu.menu_add_new_item, menu)
+        addOfferButtonMenu = menu?.findItem(R.id.button_validate_new_item)
 
         return super.onCreateOptionsMenu(menu)
     }
