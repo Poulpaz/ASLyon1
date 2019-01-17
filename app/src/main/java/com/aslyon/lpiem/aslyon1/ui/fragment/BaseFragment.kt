@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 
-abstract class BaseFragment: Fragment(), KodeinAware {
+abstract class BaseFragment : Fragment(), KodeinAware {
 
     private val rxDelegate = RxLifecycleDelegate()
     override val kodein by closestKodein()
@@ -44,21 +44,21 @@ abstract class BaseFragment: Fragment(), KodeinAware {
         return rxDelegate.lifecycle(event)
     }
 
-    protected fun displayDisconnectProfileButton(value : Boolean) {
+    protected fun displayDisconnectProfileButton(value: Boolean) {
         (activity as MainActivity).displayDisconnectProfileButton(value)
     }
 
-    protected fun setDisplayHomeAsUpEnabled(value : Boolean) {
+    protected fun setDisplayHomeAsUpEnabled(value: Boolean) {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(value)
     }
 
-    protected fun setDisplayBotomBarNavigation(value : Boolean) {
-        if(value){
+    protected fun setDisplayBotomBarNavigation(value: Boolean) {
+        if (value) {
             (activity as AppCompatActivity).navigation.visibility = View.VISIBLE
         } else (activity as AppCompatActivity).navigation.visibility = View.GONE
     }
 
-    protected fun closeMainActivity(){
+    protected fun closeMainActivity() {
         (activity as MainActivity).finish()
     }
 

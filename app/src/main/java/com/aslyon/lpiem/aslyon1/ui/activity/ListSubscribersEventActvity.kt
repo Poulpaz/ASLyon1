@@ -19,7 +19,7 @@ import org.kodein.di.generic.M
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
-class ListSubscribersEventActvity: BaseActivity() {
+class ListSubscribersEventActvity : BaseActivity() {
 
     private lateinit var viewModel: DetailsEventViewModel
 
@@ -47,10 +47,10 @@ class ListSubscribersEventActvity: BaseActivity() {
 
         viewModel.listSubscribersEvent.subscribe(
                 {
-                    if(it.isNullOrEmpty()){
+                    if (it.isNullOrEmpty()) {
                         rv_activity_subscribers_event.visibility = View.GONE
                         tv_no_subscribers_event.visibility = View.VISIBLE
-                    } else{
+                    } else {
                         adapter.submitList(it)
                         rv_activity_subscribers_event.visibility = View.VISIBLE
                         tv_no_subscribers_event.visibility = View.GONE

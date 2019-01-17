@@ -20,12 +20,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
+class AddEventActivity : BaseActivity() {
 
-
-class AddEventActivity : BaseActivity(){
-
-    private val viewModel : AddEventViewModel by instance(arg=this)
-    private var addEventButtonMenu : MenuItem? = null
+    private val viewModel: AddEventViewModel by instance(arg = this)
+    private var addEventButtonMenu: MenuItem? = null
     var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
     var timeFormat = SimpleDateFormat("HH:mm ", Locale.FRANCE)
 
@@ -40,7 +38,7 @@ class AddEventActivity : BaseActivity(){
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_event)
         setSupportActionBar(toolbarAddEvent)
@@ -57,12 +55,12 @@ class AddEventActivity : BaseActivity(){
 
             R.id.button_validate_new_item -> {
 
-                val title=et_title_activity_add_event.text.toString()
-                val place =et_place_activity_add_event.text.toString()
-                val price =et_discount_price_activity_add_event.text.toString()
-                val description=et_description_activity_add_event.text.toString()
+                val title = et_title_activity_add_event.text.toString()
+                val place = et_place_activity_add_event.text.toString()
+                val price = et_discount_price_activity_add_event.text.toString()
+                val description = et_description_activity_add_event.text.toString()
 
-                viewModel.addevent(title, eventDate,eventHour ,place,price, description)
+                viewModel.addevent(title, eventDate, eventHour, place, price, description)
 
                 viewModel.saveEventState.subscribe(
                         {
@@ -80,7 +78,6 @@ class AddEventActivity : BaseActivity(){
                                 is NetworkEvent.Success -> {
 
 
-
                                     onEventStateSuccess()
                                 }
                             }
@@ -93,11 +90,15 @@ class AddEventActivity : BaseActivity(){
     }
 
     private fun onEventStateSuccess() {
+        progress_bar_add_event.visibility = View.GONE
+        addEventButtonMenu?.isVisible = true
         Toast.makeText(this@AddEventActivity, getString(R.string.tv_add_event_succes), Toast.LENGTH_SHORT).show()
         finish()
     }
 
     private fun onEventStateError(it: NetworkEvent.Error) {
+        progress_bar_add_event.visibility = View.GONE
+        addEventButtonMenu?.isVisible = true
         Toast.makeText(this@AddEventActivity, getString(R.string.tv_add_event_error), Toast.LENGTH_SHORT).show()
     }
 
@@ -107,12 +108,12 @@ class AddEventActivity : BaseActivity(){
     }
 
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_add_new_item, menu)
         addEventButtonMenu = menu?.findItem(R.id.button_validate_new_item)
         return super.onCreateOptionsMenu(menu)
     }
+
     val now = Calendar.getInstance()
 
     private fun initChipDatePicker() {
@@ -136,30 +137,26 @@ class AddEventActivity : BaseActivity(){
         }
     }
 
-        private fun initChipHourPicker() {
-            chip_hour_event_activity_add_event.setOnClickListener {
+    private fun initChipHourPicker() {
+        chip_hour_event_activity_add_event.setOnClickListener {
 
 
-                val timePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { time, hourOfDay, minute ->
-                    val selectedTime = Calendar.getInstance()
-                    selectedTime.set(Calendar.HOUR_OF_DAY,hourOfDay)
-                    selectedTime.set(Calendar.MINUTE,minute)
-                    eventHour=selectedTime.time
-                    eventHour.toString()
-                    chip_hour_event_activity_add_event.text = timeFormat.format(selectedTime.time)
-                },
+            val timePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { time, hourOfDay, minute ->
+                val selectedTime = Calendar.getInstance()
+                selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                selectedTime.set(Calendar.MINUTE, minute)
+                eventHour = selectedTime.time
+                eventHour.toString()
+                chip_hour_event_activity_add_event.text = timeFormat.format(selectedTime.time)
+            },
 
-                        now.get(Calendar.HOUR_OF_DAY),now.get(Calendar.MINUTE),true)
+                    now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), true)
 
-                timePicker.show()
-
-
+            timePicker.show()
 
 
-            }
+        }
     }
-
-
 
 
     override fun onSupportNavigateUp(): Boolean {

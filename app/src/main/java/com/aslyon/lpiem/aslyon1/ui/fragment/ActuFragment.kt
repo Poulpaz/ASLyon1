@@ -37,7 +37,7 @@ class ActuFragment : BaseFragment() {
         rv_actu_fragment.setLayoutManager(mLayoutManager)
         rv_actu_fragment.setItemAnimator(DefaultItemAnimator())
         rv_actu_fragment.adapter = adapter
-        swiperefrsh_fragment_actu.setOnRefreshListener {viewModel.getListActu()}
+        swiperefrsh_fragment_actu.setOnRefreshListener { viewModel.getListActu() }
         viewModel.actuList
                 .subscribe(
                         {
@@ -66,7 +66,7 @@ class ActuFragment : BaseFragment() {
     }
 
 
-    override fun onResume(){
+    override fun onResume() {
         super.onResume()
         viewModel.getListActu()
     }

@@ -37,7 +37,6 @@ class DetailsOfferActivity : BaseActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-
         val offerId = intent.getIntExtra(DetailsOfferActivity.ExtraOfferId, -1)
         viewModel = kodein.direct.instance(arg = M(this, offerId))
 
@@ -46,18 +45,17 @@ class DetailsOfferActivity : BaseActivity() {
                         {
                             displayOffer(it)
                         },
-                        { Timber.e(it)}
+                        { Timber.e(it) }
                 )
     }
 
 
     private fun displayOffer(offer: Offer) {
         tv_title_offer_details.text = offer.title
-        tv_place_offer_details.text = offer.nbParticipants+" places disponibles"
-        tv_price_offer_details.text = offer.price+" €"
-        tv_date_offer_details.text = "Du "+getDateToString(offer.startDate)+" au "+getDateToString(offer.endDate)
+        tv_place_offer_details.text = offer.nbParticipants + " places disponibles"
+        tv_price_offer_details.text = offer.price + " €"
+        tv_date_offer_details.text = "Du " + getDateToString(offer.startDate) + " au " + getDateToString(offer.endDate)
         tv_description_offer_details.text = offer.description
-
 
 
     }
@@ -72,8 +70,6 @@ class DetailsOfferActivity : BaseActivity() {
         onBackPressed()
         return true
     }
-
-
 
 
 }

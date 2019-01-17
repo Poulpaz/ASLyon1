@@ -43,11 +43,12 @@ class AccountInformationsFragment : BaseFragment(), DisconnectUserInterface {
 
     private fun onConnectedUserChange(user: User?) {
         user?.let {
-            tv_name_fragment_account_informations.text = it.lastname+" "+it.firstname
+            tv_name_fragment_account_informations.text = it.lastname + " " + it.firstname
             tv_birthdate_fragment_account_informations.text = getDateToString(it.dateOfBirth)
             tv_mail_fragment_account_informations.text = it.email
 
-            tv_phone_fragment_account_informations.text = it.phoneNumber  }
+            tv_phone_fragment_account_informations.text = it.phoneNumber
+        }
 
     }
 

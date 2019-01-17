@@ -8,7 +8,7 @@ import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ProfileViewPagerAdapter
 import kotlinx.android.synthetic.main.fragment_authentification.*
 
-class AuthentificationFragment: BaseFragment() {
+class AuthentificationFragment : BaseFragment() {
 
     companion object {
         const val TAG = "AUTHENTIFICATIONFRAGMENT"

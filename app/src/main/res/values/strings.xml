@@ -14,8 +14,8 @@
     <string name="title_subscribers_event">Inscrits à l\'évènement</string>
 
     <!-- Home Fragment -->
-    <string name="ti_events_home_fragment">Events</string>
-    <string name="ti_actus_home_fragment">Actus</string>
+    <string name="ti_events_home_fragment">Evenements</string>
+    <string name="ti_actus_home_fragment">Actualités</string>
 
     <!-- Profile Fragment -->
     <string name="ti_signin_profile_fragment">Connexion</string>

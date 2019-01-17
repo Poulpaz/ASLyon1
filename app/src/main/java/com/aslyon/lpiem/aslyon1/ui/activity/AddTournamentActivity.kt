@@ -21,10 +21,10 @@ import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AddTournamentActivity: BaseActivity() {
+class AddTournamentActivity : BaseActivity() {
 
     private val viewModel: AddTournamentViewModel by instance(arg = this)
-    private var addTournamentButtonMenu : MenuItem? = null
+    private var addTournamentButtonMenu: MenuItem? = null
     var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
     var timeFormat = SimpleDateFormat("HH:mm ", Locale.FRANCE)
 
@@ -59,7 +59,7 @@ class AddTournamentActivity: BaseActivity() {
                 val price = et_price_activity_add_tournament.text.toString()
                 val description = et_description_activity_add_tournament.text.toString()
 
-                viewModel.addtournament(title, nbTeam, nbPlayersTeams, tournamentDate,tournamentHour, place, description, price)
+                viewModel.addtournament(title, nbTeam, nbPlayersTeams, tournamentDate, tournamentHour, place, description, price)
                 viewModel.registerState.subscribe(
                         {
                             when (it) {
@@ -76,7 +76,6 @@ class AddTournamentActivity: BaseActivity() {
                                 is NetworkEvent.Success -> {
 
 
-
                                     onTournamentStateSuccess()
                                 }
                             }
@@ -90,19 +89,20 @@ class AddTournamentActivity: BaseActivity() {
 
     private fun onTournamentStateSuccess() {
         Toast.makeText(this@AddTournamentActivity, getString(R.string.tv_add_tournament_success), Toast.LENGTH_SHORT).show()
+        progress_bar_add_tournament.visibility = View.GONE
+        addTournamentButtonMenu?.isVisible = true
         finish()
     }
 
     private fun onTournamentStateError(it: NetworkEvent.Error) {
         Toast.makeText(this@AddTournamentActivity, getString(R.string.tv_add_tournament_error), Toast.LENGTH_SHORT).show()
+        progress_bar_add_tournament.visibility = View.GONE
+        addTournamentButtonMenu?.isVisible = true
     }
 
     private fun onTournamentStateInProgress() {
         progress_bar_add_tournament.visibility = View.VISIBLE
         addTournamentButtonMenu?.isVisible = false
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -111,6 +111,7 @@ class AddTournamentActivity: BaseActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
+
     val now = Calendar.getInstance()
 
     private fun initChipDatePicker() {
@@ -133,6 +134,7 @@ class AddTournamentActivity: BaseActivity() {
 
         }
     }
+
     private fun initChipHourPicker() {
         chip_hour_tournament_activity_add_tournament.setOnClickListener {
 
@@ -152,7 +154,6 @@ class AddTournamentActivity: BaseActivity() {
 
         }
     }
-
 
 
     override fun onSupportNavigateUp(): Boolean {

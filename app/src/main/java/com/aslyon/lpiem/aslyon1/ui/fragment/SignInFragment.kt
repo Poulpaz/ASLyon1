@@ -62,7 +62,6 @@ class SignInFragment : BaseFragment() {
     }
 
 
-
     private fun onSignInStateSuccess() {
         val frg = parentFragment?.parentFragment?.childFragmentManager?.findFragmentById(R.id.content_profile)
         if (frg is ProfileFragmentInterface) {
