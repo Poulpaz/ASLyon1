@@ -65,4 +65,7 @@ interface AsLyonService {
     //region actu
     @GET("xml")
     fun getRSSActus(): Flowable<List<ItemsItem>>
+
+    @POST("sendNotification")
+    fun sendNotification(@Body notification: NotificationData): Observable<BaseResponse>
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.datasource.request.LoginData
+import com.aslyon.lpiem.aslyon1.datasource.request.NotificationData
 import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
 import com.aslyon.lpiem.aslyon1.datasource.response.TokenData
 import com.aslyon.lpiem.aslyon1.manager.KeystoreManager
@@ -88,6 +89,18 @@ class UserRepository(private val service: AsLyonService,
                 .startWith(NetworkEvent.InProgress)
                 .share()
         return obs
+    }
+
+    fun sendNotification(title: String, description: String): Observable<NetworkEvent> {
+        val notificationData = NotificationData(title, description)
+
+        return service.sendNotification(notificationData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<NetworkEvent> { NetworkEvent.Success }
+                .onErrorReturn { NetworkEvent.Error(it) }
+                .startWith(NetworkEvent.InProgress)
+                .share()
     }
 
     //region load User

@@ -65,7 +65,7 @@ class FBMessagingService : FirebaseMessagingService() {
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentText(title)
                     .setContentIntent(pendingIntent)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setSmallIcon(R.drawable.logo_lyon)
                     .setAutoCancel(true)
 

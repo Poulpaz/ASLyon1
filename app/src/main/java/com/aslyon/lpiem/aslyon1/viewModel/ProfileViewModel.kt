@@ -23,9 +23,13 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
     //region login
     val loginState: BehaviorSubject<NetworkEvent> = BehaviorSubject.createDefault(NetworkEvent.None)
 
+    //region notification
+    val notificationState: BehaviorSubject<NetworkEvent> = BehaviorSubject.createDefault(NetworkEvent.None)
+
     //region error
     val errorEditTextSignUp: PublishSubject<Int> = PublishSubject.create()
     val errorEditTextSignIn: PublishSubject<Int> = PublishSubject.create()
+    val errorEditTextNotification: PublishSubject<Int> = PublishSubject.create()
 
     val connectedUser: BehaviorSubject<Optional<User>>
         get() {
@@ -43,6 +47,22 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
     fun connectedUser(): Boolean {
         val token = repository.token
         return !TextUtils.isEmpty(token)
+    }
+
+    fun sendNotification(title : String, description : String){
+        if(validateNotificationText(title, description)){
+            repository.sendNotification(title, description).subscribe(
+                    { notificationState.onNext(it) },
+                    { Timber.e(it) }
+            )
+        }
+    }
+
+    private fun validateNotificationText(title: String, description: String): Boolean {
+        if(title.isNullOrEmpty() || description.isNullOrEmpty()){
+            errorEditTextNotification.onNext(R.string.error_empty_edit_text)
+            return false
+        }else{ return true }
     }
 
     fun signup(lastname: String, firstname: String, dateOfBirth: Date?, email: String, password: String, confirmPassword: String, phoneNumber: String) {

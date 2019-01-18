@@ -22,6 +22,9 @@
     <string name="ti_signup_profile_fragment">Inscription</string>
     <string name="tv_sign_profile_fragment">Veuillez vous connecter ou vous inscrire</string>
     <string name="tv_admin_profile_fragment">Vous êtes administrateur</string>
+    <string name="tv_profile_notification">Envoyer une notification</string>
+    <string name="b_send_notification_profile_fragment">Envoyer la notification</string>
+    <string name="tv_notification_sended">La notification a été envoyée</string>
 
     <!-- Tournament Fragment -->
     <string name="tv_title">Title</string>
