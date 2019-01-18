@@ -27,7 +27,7 @@
     <string name="tv_notification_sended">La notification a été envoyée</string>
 
     <!-- Tournament Fragment -->
-    <string name="tv_title">Title</string>
+    <string name="tv_title">Titre</string>
     <string name="tv_nb_team_tournament">Nombre d\'équipes</string>
     <string name="tv_nb_players_team_tournament">Nombre de joueurs par équipe</string>
     <string name="tv_date_tournament">Choisissez la date du tournoi</string>
