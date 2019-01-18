@@ -55,7 +55,7 @@
         android:id="@+id/iv_image_activity_add_offer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_medal"
+        android:src="@drawable/ic_coins"
         android:layout_marginStart="120dp"
         android:layout_marginEnd="120dp"
         android:layout_marginTop="16dp"
