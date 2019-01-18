@@ -40,10 +40,9 @@ class ListActuAdapter : ListAdapter<ItemsItem, ListActuAdapter.ActuViewHolder>(D
         }
 
         private fun bindPositionClick(guid: String) {
-            itemView.clicks()
-                    .takeUntil(RxView.detaches(itemView))
-                    .filter { adapterPosition != RecyclerView.NO_POSITION }
-                    .subscribe { indexClickPublisher.onNext(guid) }
+            itemView.setOnClickListener {
+                indexClickPublisher.onNext(guid)
+            }
         }
     }
 
