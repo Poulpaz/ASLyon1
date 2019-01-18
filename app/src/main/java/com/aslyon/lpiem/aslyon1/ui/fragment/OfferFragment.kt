@@ -53,17 +53,16 @@ class OfferFragment : BaseFragment() {
         rv_offer_fragment.setItemAnimator(DefaultItemAnimator())
         rv_offer_fragment.adapter = adapter
 
-        fab_offer_fragment.setOnClickListener{
+        fab_offer_fragment.setOnClickListener {
             AddOfferActivity.start(activity as MainActivity)
         }
-        swiperefrsh_fragment_offer.setOnRefreshListener {viewModel.getListOffer()}
+        swiperefrsh_fragment_offer.setOnRefreshListener { viewModel.getListOffer() }
 
         viewModel.connectedUser.subscribe(
                 {
-                    if(it.toNullable()?.isAdmin == 1){
+                    if (it.toNullable()?.isAdmin == 1) {
                         fab_offer_fragment.show()
-                    }
-                    else{
+                    } else {
                         fab_offer_fragment.hide()
                     }
                 },
@@ -102,5 +101,5 @@ class OfferFragment : BaseFragment() {
         viewModel.getListOffer()
     }
 
-    }
+}
 

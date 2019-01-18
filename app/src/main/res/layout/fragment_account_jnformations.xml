@@ -26,6 +26,18 @@
         app:layout_constraintTop_toBottomOf="@id/iv_photo_fragment_account_informations"
         android:text="Nom Prenom" />
 
+    <TextView
+        android:id="@+id/tv_admin_fragment_account_informations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        style="@style/BodyText"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_name_fragment_account_informations"
+        android:text="@string/tv_admin_profile_fragment" />
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier_fragment_account"
         android:layout_width="wrap_content"
@@ -41,7 +53,7 @@
         style="@style/BodyText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_name_fragment_account_informations"
+        app:layout_constraintTop_toBottomOf="@id/tv_admin_fragment_account_informations"
         android:text="Date de naissance" />
 
 

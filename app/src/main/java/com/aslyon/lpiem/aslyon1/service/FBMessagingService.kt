@@ -9,6 +9,11 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.aslyon.lpiem.aslyon1.R
+import com.aslyon.lpiem.aslyon1.ui.activity.AddTournamentActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity.Companion.ExtraEventId
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsOfferActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsOfferActivity.Companion.ExtraOfferId
 import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -38,10 +43,21 @@ class FBMessagingService : FirebaseMessagingService() {
             Timber.d("Message data payload: " + remoteMessage.data)
 
             val title = remoteMessage.notification?.body
-            val id = remoteMessage.data["storyId"]
+            val id = remoteMessage.data["idNotif"]
+            val type = remoteMessage.data["type"]
 
             // Create an explicit intent for an Activity in your app
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = when(type){
+                "event" -> {
+                    Intent(this, DetailsEventActivity::class.java).putExtra(ExtraEventId, id?.toInt())
+                }
+                "offer" -> {
+                    Intent(this, DetailsOfferActivity::class.java).putExtra(ExtraOfferId, id?.toInt())
+                }
+                else -> {
+                    Intent(this, MainActivity::class.java)
+                }
+            }
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
 
@@ -49,7 +65,7 @@ class FBMessagingService : FirebaseMessagingService() {
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentText(title)
                     .setContentIntent(pendingIntent)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setSmallIcon(R.drawable.logo_lyon)
                     .setAutoCancel(true)
 

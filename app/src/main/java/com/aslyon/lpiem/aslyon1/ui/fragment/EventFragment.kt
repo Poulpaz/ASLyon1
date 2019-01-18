@@ -45,10 +45,9 @@ class EventFragment : BaseFragment() {
 
         viewModel.connectedUser.subscribe(
                 {
-                    if(it.toNullable()?.isAdmin == 1){
+                    if (it.toNullable()?.isAdmin == 1) {
                         fab_event_fragment.show()
-                    }
-                    else{
+                    } else {
                         fab_event_fragment.hide()
                     }
                 },

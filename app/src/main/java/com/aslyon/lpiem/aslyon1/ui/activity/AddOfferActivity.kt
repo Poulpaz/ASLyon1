@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_add_event.*
 
 
 import kotlinx.android.synthetic.main.activity_add_offer.*
+import kotlinx.android.synthetic.main.activity_event_details.*
 import org.kodein.di.direct
 import org.kodein.di.generic.M
 import org.kodein.di.generic.instance
@@ -30,12 +31,11 @@ import java.time.LocalDateTime
 import java.util.*
 
 
-
-class AddOfferActivity : BaseActivity(){
+class AddOfferActivity : BaseActivity() {
 
     private val viewModel: AddOfferViewModel by instance(arg = this)
-    var formate = SimpleDateFormat("dd/MM/yyyy",Locale.FRANCE)
-    private var addOfferButtonMenu : MenuItem? = null
+    var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
+    private var addOfferButtonMenu: MenuItem? = null
 
      var offerStartDate : Date?=null
      var offerEndDate    : Date?=null
@@ -48,25 +48,27 @@ class AddOfferActivity : BaseActivity(){
     }
 
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_offer)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initChipDatePicker()
         initChipDateEndPicker()
-        setSupportActionBar(toolbar)
+
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
 
             R.id.button_validate_new_item -> {
-                val title=et_title_activity_add_offer.text.toString()
+                val title = et_title_activity_add_offer.text.toString()
 
-                val description=et_description_activity_add_offer.text.toString()
-                val nbParticipants =et_participants_activity_add_offer.text.toString()
+                val description = et_description_activity_add_offer.text.toString()
+                val nbParticipants = et_participants_activity_add_offer.text.toString()
 
-                val reduction=et_discount_price_activity_add_offer.text.toString()
+                val reduction = et_discount_price_activity_add_offer.text.toString()
 
                 viewModel.errorEditTextAddOffer.subscribe(
                         {
@@ -92,7 +94,6 @@ class AddOfferActivity : BaseActivity(){
                                 is NetworkEvent.Success -> {
 
 
-
                                     onOfferStateSuccess()
                                 }
                             }
@@ -108,11 +109,15 @@ class AddOfferActivity : BaseActivity(){
 
     private fun onOfferStateSuccess() {
         Toast.makeText(this@AddOfferActivity, getString(R.string.tv_add_offer_success), Toast.LENGTH_SHORT).show()
+        progress_bar_add_offer.visibility = View.GONE
+        addOfferButtonMenu?.isVisible = true
         finish()
     }
 
     private fun onOfferStateError(it: NetworkEvent.Error) {
         Toast.makeText(this@AddOfferActivity, getString(R.string.tv_add_offer_error), Toast.LENGTH_SHORT).show()
+        progress_bar_add_offer.visibility = View.GONE
+        addOfferButtonMenu?.isVisible = true
     }
 
     private fun onOfferStateInProgress() {
@@ -133,20 +138,18 @@ class AddOfferActivity : BaseActivity(){
         chip_date_offer_activity_add_offer.setOnClickListener {
 
             val now = Calendar.getInstance()
-         val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-             val selectedDate = Calendar.getInstance()
-             selectedDate.set(Calendar.YEAR,year)
-             selectedDate.set(Calendar.MONTH,month)
-             selectedDate.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(Calendar.YEAR, year)
+                selectedDate.set(Calendar.MONTH, month)
+                selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-             val date = formate.format(selectedDate.time)
-             offerStartDate = selectedDate.time
-             chip_date_offer_activity_add_offer.text = date
-         },
-                 now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
-         datePicker.show()
-
-
+                val date = formate.format(selectedDate.time)
+                offerStartDate = selectedDate.time
+                chip_date_offer_activity_add_offer.text = date
+            },
+                    now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH))
+            datePicker.show()
 
 
         }
@@ -158,23 +161,20 @@ class AddOfferActivity : BaseActivity(){
             val now = Calendar.getInstance()
             val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 val selectedDate = Calendar.getInstance()
-                selectedDate.set(Calendar.YEAR,year)
-                selectedDate.set(Calendar.MONTH,month)
-                selectedDate.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+                selectedDate.set(Calendar.YEAR, year)
+                selectedDate.set(Calendar.MONTH, month)
+                selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
                 val date = formate.format(selectedDate.time)
                 offerEndDate = selectedDate.time
                 chip_date_end_offer_activity_add_offer.text = date
             },
-                    now.get(Calendar.YEAR),now.get(Calendar.MONTH),now.get(Calendar.DAY_OF_MONTH))
+                    now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH))
             datePicker.show()
-
-
 
 
         }
     }
-
 
 
     override fun onSupportNavigateUp(): Boolean {
@@ -183,6 +183,6 @@ class AddOfferActivity : BaseActivity(){
     }
 
 
-    }
+}
 
 

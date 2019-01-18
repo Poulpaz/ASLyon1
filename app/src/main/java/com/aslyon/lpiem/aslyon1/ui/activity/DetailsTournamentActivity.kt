@@ -30,7 +30,6 @@ class DetailsTournamentActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_tournament_details)
         setSupportActionBar(toolbarDetailsTournament)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -43,14 +42,14 @@ class DetailsTournamentActivity : BaseActivity() {
                         {
                             displayTournament(it)
                         },
-                        { Timber.e(it)}
+                        { Timber.e(it) }
                 )
     }
 
     private fun displayTournament(tournament: Tournament) {
         tv_title_tournament_details.text = tournament.title
         tv_place_tournament_details.text = tournament.place
-        tv_price_tournament_details.text = tournament.price+" €"
+        tv_price_tournament_details.text = tournament.price + " €"
         tv_team_tournament_details.text = tournament.nbTeam.toString() + " équipes de " + tournament.nbPlayersTeam.toString() + " joueurs"
         tv_date_tournament_details.text = getDateToString(tournament.date)
 

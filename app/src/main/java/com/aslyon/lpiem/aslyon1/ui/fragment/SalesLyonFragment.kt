@@ -12,7 +12,7 @@ import androidx.annotation.RequiresApi
 import com.aslyon.lpiem.aslyon1.R
 import kotlinx.android.synthetic.main.fragment_sales.*
 
-class SalesLyonFragment : BaseFragment(){
+class SalesLyonFragment : BaseFragment() {
 
     companion object {
         const val TAG = "SALESLYONFRAGMENT"

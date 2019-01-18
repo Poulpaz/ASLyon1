@@ -42,7 +42,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private var disconnectProfileButtonMenu : MenuItem? = null
+    private var disconnectProfileButtonMenu: MenuItem? = null
 
     private lateinit var currentController: NavController
     private lateinit var navControllerHome: NavController
@@ -55,7 +55,7 @@ class MainActivity : BaseActivity() {
     private lateinit var tournamentWrapper: FrameLayout
     private lateinit var shopWrapper: FrameLayout
 
-    private lateinit var mOnNavigationItemSelectedListener : BottomNavigationView.OnNavigationItemSelectedListener
+    private lateinit var mOnNavigationItemSelectedListener: BottomNavigationView.OnNavigationItemSelectedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +64,7 @@ class MainActivity : BaseActivity() {
 
         val userRepository: UserRepository by instance()
 
-        mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener  { item ->
+        mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
             var returnValue = false
 
             when (item.itemId) {
@@ -90,7 +90,7 @@ class MainActivity : BaseActivity() {
                     tournamentWrapper.visibility = View.INVISIBLE
                     shopWrapper.visibility = View.INVISIBLE
                     app_bar.visibility = View.VISIBLE
-                    if(!TextUtils.isEmpty(userRepository.token)) displayDisconnectProfileButton(true) else displayDisconnectProfileButton(false)
+                    if (!TextUtils.isEmpty(userRepository.token)) displayDisconnectProfileButton(true) else displayDisconnectProfileButton(false)
                     supportActionBar?.setTitle(R.string.title_profile)
 
                     returnValue = true
@@ -141,7 +141,7 @@ class MainActivity : BaseActivity() {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
-    private fun initView(){
+    private fun initView() {
         navControllerHome = (supportFragmentManager
                 .findFragmentById(R.id.content_home) as NavHostFragment)
                 .navController
@@ -176,7 +176,7 @@ class MainActivity : BaseActivity() {
     override fun onBackPressed() {
         currentController
                 .let { if (it.popBackStack().not()) finish() }
-                .or { finish ()}
+                .or { finish() }
     }
 
     fun displayDisconnectProfileButton(value: Boolean) {

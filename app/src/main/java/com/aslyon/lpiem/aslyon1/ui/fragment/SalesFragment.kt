@@ -15,8 +15,7 @@ import kotlinx.android.synthetic.main.fragment_sales.*
 import android.view.MotionEvent
 
 
-
-class SalesFragment : BaseFragment(){
+class SalesFragment : BaseFragment() {
 
     companion object {
         const val TAG = "SALESFRAGMENT"

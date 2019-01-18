@@ -17,7 +17,7 @@ class DetailsActuActivity : BaseActivity() {
         })
     }
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actu_details)
         setSupportActionBar(toolbarDetailsActu)
@@ -26,7 +26,7 @@ class DetailsActuActivity : BaseActivity() {
 
         val actuUrl = intent.getStringExtra(DetailsActuActivity.ExtraActuUrl)
 
-        if (actuUrl.isNullOrEmpty()){
+        if (actuUrl.isNullOrEmpty()) {
             Toast.makeText(this, getString(R.string.error_display_actu), Toast.LENGTH_SHORT).show()
         } else {
             wv_activity_actu_details.loadUrl(actuUrl)

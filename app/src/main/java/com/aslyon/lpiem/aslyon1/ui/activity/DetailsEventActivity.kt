@@ -46,19 +46,17 @@ class DetailsEventActivity : BaseActivity() {
         viewModel.isSubscribeEvent
                 .subscribe(
                         {
-                            if(it == 0){
+                            if (it == 0) {
                                 b_subscribe_fragment_event_details.text = getString(R.string.b_subscribe_event)
                                 b_subscribe_fragment_event_details.isEnabled = true
-                            }
-                            else if(it == 1){
+                            } else if (it == 1) {
                                 b_subscribe_fragment_event_details.text = getString(R.string.b_logout_event)
                                 b_subscribe_fragment_event_details.isEnabled = true
-                            }
-                            else{
+                            } else {
                                 b_subscribe_fragment_event_details.isEnabled = false
                             }
                         },
-                        { Timber.e(it)}
+                        { Timber.e(it) }
                 )
 
         viewModel.event
@@ -66,7 +64,7 @@ class DetailsEventActivity : BaseActivity() {
                         {
                             displayEvent(it)
                         },
-                        { Timber.e(it)}
+                        { Timber.e(it) }
                 )
 
         viewModel.subscribeEventState.subscribe(
@@ -88,11 +86,16 @@ class DetailsEventActivity : BaseActivity() {
                 }, { Timber.e(it) }
         )
 
+        viewModel.errorSubscribeEvent.subscribe(
+                {
+                    Toast.makeText(this, getString(it), Toast.LENGTH_SHORT).show()
+                }, { Timber.e(it) }
+        )
+
         b_subscribe_fragment_event_details.setOnClickListener {
-            if(viewModel.isSubscribeEvent.value == 0){
+            if (viewModel.isSubscribeEvent.value == 0) {
                 subscribeEvent()
-            }
-            else if(viewModel.isSubscribeEvent.value == 1){
+            } else if (viewModel.isSubscribeEvent.value == 1) {
                 unsubscribeEvent()
             }
         }
@@ -129,7 +132,7 @@ class DetailsEventActivity : BaseActivity() {
     private fun displayEvent(event: Event) {
         tv_title_actu_details.text = event.title
         tv_author_actu_details.text = event.place
-        tv_price_event_details.text = event.price+" €"
+        tv_price_event_details.text = event.price + " €"
         tv_date_actu_details.text = getDateToString(event.date)
         tv_content_actu_details.text = event.description
     }
@@ -148,7 +151,7 @@ class DetailsEventActivity : BaseActivity() {
         when (item.itemId) {
 
             R.id.button_list_subscribers_event -> {
-                if(idEvent != -1){
+                if (idEvent != -1) {
                     ListSubscribersEventActvity.start(this, idEvent)
                 }
             }
