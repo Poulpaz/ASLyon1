@@ -8,7 +8,7 @@ import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ProfileViewPagerAdapter
 import kotlinx.android.synthetic.main.fragment_authentification.*
 
-class AuthentificationFragment: BaseFragment() {
+class AuthentificationFragment : BaseFragment() {
 
     companion object {
         const val TAG = "AUTHENTIFICATIONFRAGMENT"
@@ -35,11 +35,6 @@ class AuthentificationFragment: BaseFragment() {
         adapter.addFragment(SignUpFragment.newInstance(), getString(R.string.ti_signup_profile_fragment))
         vp_sign_authentification_fragment.adapter = adapter
         tl_sign_authentification_fragment.setupWithViewPager(vp_sign_authentification_fragment)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        displayDisconnectProfileButton(false)
     }
 
 }

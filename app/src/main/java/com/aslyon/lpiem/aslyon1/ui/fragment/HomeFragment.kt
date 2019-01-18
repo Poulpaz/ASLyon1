@@ -29,6 +29,7 @@ class HomeFragment : BaseFragment() {
         setDisplayBotomBarNavigation(true)
 
     }
+
     private fun setupViewPager() {
         val adapter = HomeViewPagerAdapter(childFragmentManager)
         adapter.addFragment(EventFragment.newInstance(), getString(R.string.ti_events_home_fragment))

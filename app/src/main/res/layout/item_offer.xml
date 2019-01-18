@@ -13,9 +13,9 @@
 
         <ImageView
             android:id="@+id/iv_image_item_offer"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:src="@drawable/ic_medal"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_coins"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,36 +23,44 @@
 
         <TextView
             android:id="@+id/tv_title_item_offer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Run in Lyon"
+            style="@style/TitleText"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_image_item_offer"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_date_item_offer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="08/01/2019"
+            style="@style/DateText"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_image_item_offer"
             app:layout_constraintTop_toBottomOf="@id/tv_title_item_offer" />
 
         <TextView
             android:id="@+id/tv_number_team_item_offer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="150 participants"
+            android:text="150 places diponibles"
+            android:textAlignment="center"
+            style="@style/BodyText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_image_item_offer"
             app:layout_constraintTop_toBottomOf="@id/tv_date_item_offer" />
 
         <TextView
             android:id="@+id/tv_price_item_offer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="8 €"
+            style="@style/BodyText"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_image_item_offer"
             app:layout_constraintTop_toBottomOf="@id/tv_number_team_item_offer" />

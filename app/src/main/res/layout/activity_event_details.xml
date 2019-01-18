@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:fillViewport="true"
+        android:paddingBottom="54dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -38,9 +39,9 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <ImageView
-                android:id="@+id/iv_item_event_details"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:id="@+id/iv_item_actu_details"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_marginStart="150dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="150dp"
@@ -51,25 +52,26 @@
                 app:layout_constraintTop_toBottomOf="@id/app_bar" />
 
             <TextView
-                android:id="@+id/tv_title_event_details"
+                android:id="@+id/tv_title_actu_details"
                 style="@style/TitleText"
+                android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Event"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_item_event_details" />
+                app:layout_constraintTop_toBottomOf="@id/iv_item_actu_details" />
 
             <TextView
-                android:id="@+id/tv_place_event_details"
+                android:id="@+id/tv_author_actu_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Lyon 7ème"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title_event_details" />
+                app:layout_constraintTop_toBottomOf="@id/tv_title_actu_details" />
 
             <TextView
                 android:id="@+id/tv_price_event_details"
@@ -79,43 +81,47 @@
                 android:text="9.50 euros"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_place_event_details" />
+                app:layout_constraintTop_toBottomOf="@id/tv_author_actu_details" />
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup_date_fragment_event_details"
-                style="@style/Widget.MaterialComponents.Chip.Action"
+            <TextView
+                android:id="@+id/tv_date_actu_details"
+                android:text="18/05/2019"
+                style="@style/DateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
-                app:chipSpacingHorizontal="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_price_event_details" />
 
             <TextView
-                android:id="@+id/tv_description_event_details"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_content_actu_details"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Match de basket formidable."
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                style="@style/BodyText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chipGroup_date_fragment_event_details" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/b_subscribe_fragment_event_details"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="S'INSCRIRE"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/tv_date_actu_details" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/b_subscribe_fragment_event_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="S'INSCRIRE"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

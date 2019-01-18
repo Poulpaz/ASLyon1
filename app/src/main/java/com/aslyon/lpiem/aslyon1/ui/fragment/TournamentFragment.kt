@@ -12,6 +12,7 @@ import com.aslyon.lpiem.aslyon1.ui.activity.AddTournamentActivity
 import com.aslyon.lpiem.aslyon1.ui.activity.DetailsTournamentActivity
 import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.aslyon.lpiem.aslyon1.viewModel.TournamentViewModel
+import kotlinx.android.synthetic.main.fragment_event.*
 import kotlinx.android.synthetic.main.fragment_tournament.*
 import org.kodein.di.generic.instance
 import timber.log.Timber
@@ -41,10 +42,31 @@ class TournamentFragment : BaseFragment() {
         rv_tournament_fragment.setItemAnimator(DefaultItemAnimator())
         rv_tournament_fragment.adapter = adapter
 
+        viewModel.connectedUser.subscribe(
+                {
+                    if (it.toNullable()?.isAdmin == 1) {
+                        fab_tournament_fragment.show()
+                    } else {
+                        fab_tournament_fragment.hide()
+                    }
+                },
+                { Timber.e(it) }
+        )
+
         viewModel.tournamentList
                 .subscribe(
                         {
-                            adapter.submitList(it)
+                            if (it.isNullOrEmpty()) {
+                                tv_tournament_fragment.visibility = View.VISIBLE
+                                swiperefrsh_fragment_tournament.visibility = View.GONE
+                                swiperefrsh_fragment_tournament.isRefreshing = false
+
+                            } else {
+                                tv_tournament_fragment.visibility = View.GONE
+                                adapter.submitList(it)
+                                swiperefrsh_fragment_tournament.visibility = View.VISIBLE
+                                swiperefrsh_fragment_tournament.isRefreshing = false
+                            }
                         },
                         { Timber.e(it) }
                 )
@@ -57,8 +79,18 @@ class TournamentFragment : BaseFragment() {
                         { Timber.e(it) }
                 )
 
+
         fab_tournament_fragment.setOnClickListener {
             AddTournamentActivity.start(activity as MainActivity)
         }
+
+        swiperefrsh_fragment_tournament.setOnRefreshListener { viewModel.getListTournament() }
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getListTournament()
+    }
+
 }
+

@@ -6,6 +6,15 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
+import androidx.core.app.NotificationCompat
+import com.aslyon.lpiem.aslyon1.R
+import com.aslyon.lpiem.aslyon1.ui.activity.AddTournamentActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity.Companion.ExtraEventId
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsOfferActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.DetailsOfferActivity.Companion.ExtraOfferId
+import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import timber.log.Timber
@@ -17,8 +26,9 @@ import timber.log.Timber
  */
 class FBMessagingService : FirebaseMessagingService() {
 
-    companion object {
-        val ExtraNotifStoryId = "ExtraNotifStoryId"
+    override fun onNewToken(s: String?) {
+        super.onNewToken(s)
+        Log.e("NEW_TOKEN", s)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
@@ -29,15 +39,25 @@ class FBMessagingService : FirebaseMessagingService() {
         Timber.d("From: " + remoteMessage.from)
 
         // Check if message contains a data payload.
-        /*if (remoteMessage.notification != null && remoteMessage.data.isNotEmpty()) {
+        if (remoteMessage.notification != null && remoteMessage.data.isNotEmpty()) {
             Timber.d("Message data payload: " + remoteMessage.data)
 
             val title = remoteMessage.notification?.body
-            val id = remoteMessage.data["storyId"]
+            val id = remoteMessage.data["idNotif"]
+            val type = remoteMessage.data["type"]
 
             // Create an explicit intent for an Activity in your app
-            val intent = Intent(this, StoryActivity::class.java)
-            intent.putExtra(ExtraStoryId, id?.toInt())
+            val intent = when(type){
+                "event" -> {
+                    Intent(this, DetailsEventActivity::class.java).putExtra(ExtraEventId, id?.toInt())
+                }
+                "offer" -> {
+                    Intent(this, DetailsOfferActivity::class.java).putExtra(ExtraOfferId, id?.toInt())
+                }
+                else -> {
+                    Intent(this, MainActivity::class.java)
+                }
+            }
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
 
@@ -46,7 +66,7 @@ class FBMessagingService : FirebaseMessagingService() {
                     .setContentText(title)
                     .setContentIntent(pendingIntent)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                    .setSmallIcon(R.drawable.ic_notification)
+                    .setSmallIcon(R.drawable.logo_lyon)
                     .setAutoCancel(true)
 
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -64,6 +84,10 @@ class FBMessagingService : FirebaseMessagingService() {
 
             // notificationId is a unique int for each notification that you must define
             notificationManager.notify(10, mBuilder.build())
-        }*/
+        }
+    }
+
+    override fun onDeletedMessages() {
+        super.onDeletedMessages()
     }
 }

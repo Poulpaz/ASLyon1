@@ -13,8 +13,8 @@
 
         <ImageView
             android:id="@+id/iv_image_item_tournament"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_trophy"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
@@ -23,9 +23,11 @@
 
         <TextView
             android:id="@+id/tv_title_item_tournament"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Tournoi de football"
+            style="@style/TitleText"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_image_item_tournament"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,6 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="08/01/2019"
+            style="@style/DateText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_image_item_tournament"
             app:layout_constraintTop_toBottomOf="@id/tv_title_item_tournament" />
@@ -44,6 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="8/36 équipes"
+            style="@style/BodyText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_image_item_tournament"
             app:layout_constraintTop_toBottomOf="@id/tv_date_item_tournament" />
@@ -53,9 +57,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="12 €"
+            style="@style/BodyText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_image_item_tournament"
             app:layout_constraintTop_toBottomOf="@id/tv_number_team_item_tournament" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

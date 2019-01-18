@@ -1,20 +1,31 @@
 package com.aslyon.lpiem.aslyon1.repository
 
 import android.content.SharedPreferences
+import android.util.Log
 import com.aslyon.lpiem.aslyon1.datasource.AsLyonService
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.datasource.request.LoginData
+import com.aslyon.lpiem.aslyon1.datasource.request.NotificationData
+import com.aslyon.lpiem.aslyon1.datasource.request.SignUpData
+import com.aslyon.lpiem.aslyon1.datasource.response.TokenData
 import com.aslyon.lpiem.aslyon1.manager.KeystoreManager
 import com.aslyon.lpiem.aslyon1.model.User
 import com.gojuno.koptional.None
 import com.gojuno.koptional.Optional
 import com.gojuno.koptional.toOptional
+
 import com.google.firebase.iid.FirebaseInstanceId
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import timber.log.Timber
+import java.util.*
+import java.text.SimpleDateFormat
+
+
+
+
 
 class UserRepository(private val service: AsLyonService,
                      private val keystoreManager: KeystoreManager,
@@ -25,6 +36,7 @@ class UserRepository(private val service: AsLyonService,
     private val tokenKey = "TOKEN"
     private val tokenAlias = "TOKEN"
     private val pushToken = "PUSHTOKEN"
+    private var tokenSignUp: String? = null
 
     var token: String? = null
         get() {
@@ -32,7 +44,7 @@ class UserRepository(private val service: AsLyonService,
                 field = loadToken()
             }
             return if (!field.isNullOrBlank()) {
-                "Bearer $field"
+                field
             } else {
                 null
             }
@@ -41,8 +53,25 @@ class UserRepository(private val service: AsLyonService,
             field = value
             saveToken(field)
         }
-    //region login
 
+    init {
+        initToken()
+    }
+
+    //region signup
+    fun signUp(lastname: String, firstname: String, dateOfBirth: Date, email: String, password: String, phoneNumber: String): Observable<NetworkEvent> {
+        val registerData = SignUpData(lastname, firstname, getDateToString(dateOfBirth), email, password, phoneNumber)
+
+        return service.signup(tokenSignUp, registerData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<NetworkEvent> { NetworkEvent.Success }
+                .onErrorReturn { NetworkEvent.Error(it) }
+                .startWith(NetworkEvent.InProgress)
+                .share()
+    }
+
+    //region login
     fun login(email: String, password: String): Observable<NetworkEvent> {
         val loginData = LoginData(email, password)
 
@@ -50,7 +79,7 @@ class UserRepository(private val service: AsLyonService,
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext {
-                    val user = User(it.id, it.lastname, it.firstname, it.dateOfBirth, it.email,it.password, it.phoneNumber)
+                    val user = User(it.id, it.lastname, it.firstname, getStringToDate(it.dateOfBirth), it.email,it.password, it.phoneNumber, it.isAdmin)
                     connectedUser.onNext(user.toOptional())
                     token = it.token
                 }
@@ -60,6 +89,42 @@ class UserRepository(private val service: AsLyonService,
                 .startWith(NetworkEvent.InProgress)
                 .share()
         return obs
+    }
+
+    fun sendNotification(title: String, description: String): Observable<NetworkEvent> {
+        val notificationData = NotificationData(title, description)
+
+        return service.sendNotification(notificationData)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map<NetworkEvent> { NetworkEvent.Success }
+                .onErrorReturn { NetworkEvent.Error(it) }
+                .startWith(NetworkEvent.InProgress)
+                .share()
+    }
+
+    //region load User
+
+    fun loadUser(): Observable<User> {
+        return  service.getConnectedUser(token)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map { User(it.id, it.lastname, it.firstname, getStringToDate(it.dateOfBirth), it.email,it.password, it.phoneNumber, it.isAdmin) }
+                .doOnNext {
+                    connectedUser.onNext(it.toOptional())
+                }
+                .share()
+    }
+
+
+    private fun getDateToString(date : Date): String{
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm")
+        return sdf.format(date)
+    }
+
+    private fun getStringToDate(date : String): Date{
+        val sdf = SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.getDefault())
+        return sdf.parse(date)
     }
 
     fun logout() {
@@ -80,42 +145,20 @@ class UserRepository(private val service: AsLyonService,
         return if (passwordEncrypt != null) {
             keystoreManager.decryptString(tokenAlias, passwordEncrypt)
         } else {
-            null
+            return null
         }
+    }
+
+    fun initToken(){
+        FirebaseInstanceId.getInstance().instanceId
+                .addOnSuccessListener { result ->
+                    tokenSignUp = result.token
+                }
     }
 
     private fun deleteToken() {
         token = null
         keystoreManager.deleteAlias(tokenAlias)
-    }
-
-    fun updateToken() {
-        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener {
-            val newPushToken = it.token
-            val oldPushToken = sharedPref.getString(pushToken, null)
-
-            if (newPushToken != null) {
-                val editor = sharedPref.edit()
-                editor.putString(pushToken, newPushToken)
-                editor.apply()
-
-                if (oldPushToken.equals(newPushToken, false)) {
-                    service.updateFireBaseToken(token, newPushToken)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe({}, {
-                                Timber.e(it)
-                            })
-                } else {
-                    service.updateFireBaseToken(token, newPushToken)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe({}, {
-                                Timber.e(it)
-                            })
-                }
-            }
-        }
     }
 
 }

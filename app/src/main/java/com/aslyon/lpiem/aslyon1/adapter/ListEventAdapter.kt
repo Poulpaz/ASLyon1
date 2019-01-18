@@ -37,7 +37,7 @@ class ListEventAdapter : ListAdapter<Event, ListEventAdapter.EventViewHolder>(Di
             itemView.tv_title_item_event.text = event.title
             itemView.tv_date_item_event.text = getDateToString(event.date)
             itemView.tv_place_item_event.text = event.place
-            itemView.tv_price_item_event.text = event.price
+            itemView.tv_price_item_event.text = event.price+" €"
             bindPositionClick(event.idEvent)
         }
 
@@ -47,20 +47,20 @@ class ListEventAdapter : ListAdapter<Event, ListEventAdapter.EventViewHolder>(Di
                     .filter { adapterPosition != RecyclerView.NO_POSITION }
                     .subscribe { indexClickPublisher.onNext(idEvent) }
         }
-    }
+        private fun getDateToString(date: Date?): String {
+            val df: DateFormat = SimpleDateFormat("dd/MM/yyyy' à 'HH:mm", Locale.FRANCE)
+            return df.format(date)
+        }
 
+    }
     class DiffCardCallback : DiffUtil.ItemCallback<Event>() {
+
         override fun areItemsTheSame(oldItem: Event, newItem: Event): Boolean {
             return oldItem.idEvent == newItem.idEvent
         }
-
         override fun areContentsTheSame(oldItem: Event, newItem: Event): Boolean {
             return oldItem.idEvent == newItem.idEvent
         }
-    }
 
-    private fun getDateToString(date: Date?): String {
-        val df: DateFormat = SimpleDateFormat("dd/MM/yyyy' à 'HH:mm", Locale.FRANCE)
-        return df.format(date)
     }
 }

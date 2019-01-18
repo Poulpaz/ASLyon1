@@ -25,12 +25,19 @@
             app:title="@string/title_add_offer"
             />
 
-
-
     </com.google.android.material.appbar.AppBarLayout>
 
+    <ProgressBar
+        android:id="@+id/progress_bar_add_offer"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/app_bar"
+        app:layout_constraintTop_toTopOf="@id/app_bar"
 
-
+        />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -43,11 +50,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
         <ImageView
         android:id="@+id/iv_image_activity_add_offer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/ic_medal"
+        android:src="@drawable/ic_coins"
         android:layout_marginStart="120dp"
         android:layout_marginEnd="120dp"
         android:layout_marginTop="16dp"
@@ -92,6 +100,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_title_activity_add_offer" />
 
+
+   <com.google.android.material.chip.Chip
+       android:id="@+id/chip_date_end_offer_activity_add_offer"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="8dp"
+       android:text="@string/c_date_end_offer_activity_add_offer"
+       android:textColor="@color/white"
+       app:chipBackgroundColor="@color/colorAccent"
+       app:chipIcon="@drawable/ic_calendar"
+       app:chipStartPadding="16dp"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@id/chip_date_offer_activity_add_offer" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_discount_price_activity_add_offer"
         android:layout_width="match_parent"
@@ -101,14 +124,14 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chip_date_offer_activity_add_offer">
+        app:layout_constraintTop_toBottomOf="@+id/chip_date_end_offer_activity_add_offer">
 
         <EditText
             android:id="@+id/et_discount_price_activity_add_offer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/et_hint_discount_price_activity_add_offer"
-            android:inputType="textMultiLine"
+            android:inputType="numberDecimal"
             android:maxLength="100" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -124,15 +147,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/til_discount_price_activity_add_offer">
 
-        <EditText
-            android:id="@+id/et_discount_percentage_activity_add_offer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/et_hint_discount_percentage_activity_add_offer"
-            android:inputType="textMultiLine"
-            android:maxLength="100" />
-
     </com.google.android.material.textfield.TextInputLayout>
+
+      <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/til_participants_activity_add_offer"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
+      android:layout_marginEnd="16dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/til_discount_price_activity_add_offer">
+
+      <EditText
+          android:id="@+id/et_participants_activity_add_offer"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="@string/et_participants_activity_add_offer"
+          android:inputType="number"
+          android:maxLength="100" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+         <com.google.android.material.textfield.TextInputLayout
+             android:id="@+id/til_link_activity_add_offer"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="16dp"
+             android:layout_marginTop="16dp"
+             android:layout_marginEnd="16dp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_participants_activity_add_offer">
+
+         </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -144,7 +193,7 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/til_discount_percentage_activity_add_offer">
+        app:layout_constraintTop_toBottomOf="@id/til_participants_activity_add_offer">
 
     <EditText
         android:id="@+id/et_description_activity_add_offer"

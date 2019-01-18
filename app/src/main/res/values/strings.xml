@@ -2,25 +2,32 @@
     <string name="app_name">AS Lyon 1</string>
 
     <!-- Title -->
-    <string name="title_home">Home</string>
-    <string name="title_tournament">Tournament</string>
-    <string name="title_shop">Shop</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_home">Accueil</string>
+    <string name="title_tournament">Tournoi</string>
+    <string name="title_shop">Boutique</string>
+    <string name="title_profile">Profil</string>
     <string name="title_add_tournament">Ajout d\'un tournoi</string>
     <string name="title_details_tournament">Détails d\'un tournoi</string>
-    <string name="title_details_event">Détails d\'un événement</string>
+    <string name="title_details_event">Détails d\'un évènement</string>
+    <string name="title_add_event">Ajouter un évènement</string>
+    <string name="title_details_actu">Details d\'une actualité</string>
+    <string name="title_subscribers_event">Inscrits à l\'évènement</string>
 
     <!-- Home Fragment -->
-    <string name="ti_events_home_fragment">Events</string>
-    <string name="ti_actus_home_fragment">Actus</string>
+    <string name="ti_events_home_fragment">Evenements</string>
+    <string name="ti_actus_home_fragment">Actualités</string>
 
     <!-- Profile Fragment -->
     <string name="ti_signin_profile_fragment">Connexion</string>
     <string name="ti_signup_profile_fragment">Inscription</string>
     <string name="tv_sign_profile_fragment">Veuillez vous connecter ou vous inscrire</string>
+    <string name="tv_admin_profile_fragment">Vous êtes administrateur</string>
+    <string name="tv_profile_notification">Envoyer une notification</string>
+    <string name="b_send_notification_profile_fragment">Envoyer la notification</string>
+    <string name="tv_notification_sended">La notification a été envoyée</string>
 
     <!-- Tournament Fragment -->
-    <string name="tv_title">Title</string>
+    <string name="tv_title">Titre</string>
     <string name="tv_nb_team_tournament">Nombre d\'équipes</string>
     <string name="tv_nb_players_team_tournament">Nombre de joueurs par équipe</string>
     <string name="tv_date_tournament">Choisissez la date du tournoi</string>
@@ -37,6 +44,7 @@
     <string name="tv_email">Email</string>
     <string name="tv_password">Mot de passe</string>
     <string name="b_signin">Se connecter</string>
+    <string name="tv_signin_success">Vous êtes connectés</string>
 
     <!-- Sign Up Fragment -->
     <string name="tv_lastname">Nom</string>
@@ -45,19 +53,76 @@
     <string name="tv_phone">Téléphone</string>
     <string name="tv_confirm_password">Confirmation du mot de passe</string>
     <string name="b_signup">S\'inscrire</string>
+    <string name="tv_signup_success">Vous êtes bien inscrits</string>
+
 
     <!-- Shop Fragment -->
-    <string name="ti_sales_shop_fragment">Boutique</string>
+    <string name="ti_sales_shop_fragment">Lyon 1</string>
+    <string name="ti_offer_shop_lyon_fragment">UDL</string>
     <string name="ti_offer_shop_fragment">Offres</string>
+
+    <!-- Actu Fragment -->
+    <string name="error_display_actu">Une erreur a eu lieu lors de l\'affichage de l\'actualité</string>
 
     <!-- Add Offer Activity-->
     <string name="title_add_offer">Ajouter une offre</string>
-    <string name="c_date_offer_activity_add_offer">Veuillez choisir la date de l\'offre</string>
-    <string name="et_hint_discount_price_activity_add_offer">Réduction en euros</string>
-    <string name="et_hint_discount_percentage_activity_add_offer">Pourcentage de réduction</string>
+    <string name="c_date_offer_activity_add_offer">Veuillez choisir la date de début de l\'offre</string>
+    <string name="c_date_end_offer_activity_add_offer">Veuillez choisir la date de fin de l\'offre</string>
+    <string name="et_hint_discount_price_activity_add_offer">Prix en euros</string>
     <string name="et_hint_description_activity_add_offer">Description</string>
+    <string name="et_participants_activity_add_offer">Nombre de places disponibles</string>
+    <string name="tv_add_offer_success">Votre offre a été ajoutée</string>
+    <string name="tv_add_offer_error">Un problème est survenu lors de l\'ajout d\'une offre</string>
+
+    <!--Add Tournament Activity-->
+    <string name="tv_add_tournament_success">Votre tournoi a été ajouté</string>
+    <string name="tv_add_tournament_error">Un problème est survenu lors de l\'ajout d\'un tournoi</string>
+
+
+    <!--Add Event Activity-->
+    <string name="et_title_activity_add_event">Titre de l\'évènement</string>
+    <string name="c_date_event_activity_add_event">Veuillez choisir la date de l\'évènement</string>
+    <string name="et_hint_discount_price_activity_add_event">Prix en euros</string>
+    <string name="et_place_activity_add_event">Adresse de l\'évènement</string>
+    <string name="et_hint_description_activity_add_event">Description</string>
+    <string name="chip_hour_event_activity_add_event">Veuillez choisir l\'heure de l\'évènement</string>
+    <string name="tv_add_event_succes">Votre évènement à été ajouté !</string>
+    <string name="tv_add_event_error">Un problème est survenu lors de l\'ajout d\'un évènement</string>
+    <string name="tv_event_fragment">Il n\'y a pas d\'évènements en cours</string>
+
+    <!-- Home Fragment -->
+    <string name="tv_no_subscribers_event">Il n\'y a pas d\'inscrits à cet évènement</string>
+
+    <!--Details Event Activity-->
+    <string name="tv_dialog_susbscribe_title_event">Inscription à l\'évènement</string>
+    <string name="tv_dialog_susbscribe_message_event">Voulez-vous vraiment vous inscrire à cet évènement</string>
+    <string name="tv_dialog_subscribe_validate">Oui</string>
+    <string name="tv_dialog_susbscribe_cancel">Non</string>
+    <string name="b_subscribe_event">S\'inscrire</string>
+    <string name="b_logout_event">Se désinscrire</string>
 
     <!-- Error -->
-    <string name="error_connexion">Un problème est survenu lors de la connexion</string>
+    <string name="error">Une erreur est survenue</string>
+    <string name="error_login">Un problème est survenu lors de la connexion</string>
+    <string name="error_signup">Un problème est survenu lors de l\'inscription</string>
+    <string name="error_invalidate_email">L\'email est invalide</string>
+    <string name="error_empty_edit_text">Vous devez remplir tous les champs</string>
+    <string name="error_same_password">Les deux mots de passe ne sont pas similaires"</string>
+    <string name="error_selected_date">Vous devez sélectionner une date</string>
+
+
+    <!-- Firebase -->
+    <string name="chip_hour_tournament_activity_add_tournament">Veuillez choisir l\'heure du tournoi</string>
+    <string name="default_notification_channel_id">Channel ID</string>
+    <string name="channelName">News</string>
+    <string name="et_place_tournament_fragment">Adresse</string>
+    <string name="et_place_activity_add_tournament">Adresse</string>
+    <string name="error_subscribe_event_connected">Vous devez être connecté pour vous inscrire</string>
+    <string name="tv_tournament_fragment">Il n\'y a pas de tournois en cours</string>
+    <string name="tv_offer_fragment">Il n\'y a pas d\'offres en cours</string>
+    <string name="tv_actu_fragment">Il n\'y a pas d\'actualités en cours</string>
+
+
+
 
 </resources>

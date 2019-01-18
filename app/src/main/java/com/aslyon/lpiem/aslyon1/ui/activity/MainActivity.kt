@@ -2,23 +2,37 @@ package com.aslyon.lpiem.aslyon1.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.aslyon.lpiem.aslyon1.R
+import com.aslyon.lpiem.aslyon1.model.User
+import com.aslyon.lpiem.aslyon1.repository.UserRepository
 import com.aslyon.lpiem.aslyon1.ui.fragment.DisconnectUserInterface
 import com.aslyon.lpiem.aslyon1.utils.or
+import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
 import com.facebook.AccessToken
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.FirebaseApp
+import com.google.firebase.iid.FirebaseInstanceId
+import io.reactivex.internal.operators.maybe.MaybeToPublisher.instance
 import kotlinx.android.synthetic.main.activity_main.*
+import org.kodein.di.direct
+import org.kodein.di.generic.M
+import org.kodein.di.generic.instance
+import com.google.firebase.iid.InstanceIdResult
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.messaging.FirebaseMessaging
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : BaseActivity() {
 
     companion object {
         fun start(fromActivity: AppCompatActivity) {
@@ -28,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private var disconnectProfileButtonMenu : MenuItem? = null
+    private var disconnectProfileButtonMenu: MenuItem? = null
 
     private lateinit var currentController: NavController
     private lateinit var navControllerHome: NavController
@@ -41,83 +55,93 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tournamentWrapper: FrameLayout
     private lateinit var shopWrapper: FrameLayout
 
-    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-        var returnValue = false
-
-        when (item.itemId) {
-            R.id.navigation_home -> {
-                currentController = navControllerHome
-
-                homeWrapper.visibility = View.VISIBLE
-                profileWrapper.visibility = View.INVISIBLE
-                tournamentWrapper.visibility = View.INVISIBLE
-                shopWrapper.visibility = View.INVISIBLE
-                app_bar.visibility = View.VISIBLE
-                displayDisconnectProfileButton(false)
-                supportActionBar?.setTitle(R.string.title_home)
-
-                returnValue = true
-            }
-            R.id.navigation_profile -> {
-
-                currentController = navControllerProfile
-
-                homeWrapper.visibility = View.INVISIBLE
-                profileWrapper.visibility = View.VISIBLE
-                tournamentWrapper.visibility = View.INVISIBLE
-                shopWrapper.visibility = View.INVISIBLE
-                app_bar.visibility = View.VISIBLE
-                displayDisconnectProfileButton(true)
-                supportActionBar?.setTitle(R.string.title_profile)
-
-                returnValue = true
-            }
-            R.id.navigation_tournament -> {
-
-                currentController = navControllerProfile
-
-                homeWrapper.visibility = View.INVISIBLE
-                profileWrapper.visibility = View.INVISIBLE
-                tournamentWrapper.visibility = View.VISIBLE
-                shopWrapper.visibility = View.INVISIBLE
-                app_bar.visibility = View.VISIBLE
-                displayDisconnectProfileButton(false)
-                supportActionBar?.setTitle(R.string.title_tournament)
-
-                returnValue = true
-            }
-            R.id.navigation_shop -> {
-
-                currentController = navControllerProfile
-
-                homeWrapper.visibility = View.INVISIBLE
-                profileWrapper.visibility = View.INVISIBLE
-                tournamentWrapper.visibility = View.INVISIBLE
-                shopWrapper.visibility = View.VISIBLE
-                app_bar.visibility = View.VISIBLE
-                displayDisconnectProfileButton(false)
-                supportActionBar?.setTitle(R.string.title_shop)
-
-                returnValue = true
-            }
-        }
-        return@OnNavigationItemSelectedListener returnValue
-    }
+    private lateinit var mOnNavigationItemSelectedListener: BottomNavigationView.OnNavigationItemSelectedListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        val userRepository: UserRepository by instance()
+
+        mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            var returnValue = false
+
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    currentController = navControllerHome
+
+                    homeWrapper.visibility = View.VISIBLE
+                    profileWrapper.visibility = View.INVISIBLE
+                    tournamentWrapper.visibility = View.INVISIBLE
+                    shopWrapper.visibility = View.INVISIBLE
+                    app_bar.visibility = View.VISIBLE
+                    displayDisconnectProfileButton(false)
+                    supportActionBar?.setTitle(R.string.title_home)
+
+                    returnValue = true
+                }
+                R.id.navigation_profile -> {
+
+                    currentController = navControllerProfile
+
+                    homeWrapper.visibility = View.INVISIBLE
+                    profileWrapper.visibility = View.VISIBLE
+                    tournamentWrapper.visibility = View.INVISIBLE
+                    shopWrapper.visibility = View.INVISIBLE
+                    app_bar.visibility = View.VISIBLE
+                    if (!TextUtils.isEmpty(userRepository.token)) displayDisconnectProfileButton(true) else displayDisconnectProfileButton(false)
+                    supportActionBar?.setTitle(R.string.title_profile)
+
+                    returnValue = true
+                }
+                R.id.navigation_tournament -> {
+
+                    currentController = navControllerProfile
+
+                    homeWrapper.visibility = View.INVISIBLE
+                    profileWrapper.visibility = View.INVISIBLE
+                    tournamentWrapper.visibility = View.VISIBLE
+                    shopWrapper.visibility = View.INVISIBLE
+                    app_bar.visibility = View.VISIBLE
+                    displayDisconnectProfileButton(false)
+                    supportActionBar?.setTitle(R.string.title_tournament)
+
+                    returnValue = true
+                }
+                R.id.navigation_shop -> {
+
+                    currentController = navControllerProfile
+
+                    homeWrapper.visibility = View.INVISIBLE
+                    profileWrapper.visibility = View.INVISIBLE
+                    tournamentWrapper.visibility = View.INVISIBLE
+                    shopWrapper.visibility = View.VISIBLE
+                    app_bar.visibility = View.VISIBLE
+                    displayDisconnectProfileButton(false)
+                    supportActionBar?.setTitle(R.string.title_shop)
+
+                    returnValue = true
+                }
+            }
+            return@OnNavigationItemSelectedListener returnValue
+        }
+
+        FirebaseMessaging.getInstance().subscribeToTopic("aslyon")
+                .addOnCompleteListener { task ->
+                }
+
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true
         FirebaseApp.initializeApp(this)
         initView()
+
 
         currentController = navControllerHome
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
-    private fun initView(){
+    private fun initView() {
         navControllerHome = (supportFragmentManager
                 .findFragmentById(R.id.content_home) as NavHostFragment)
                 .navController
@@ -152,7 +176,7 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         currentController
                 .let { if (it.popBackStack().not()) finish() }
-                .or { finish ()}
+                .or { finish() }
     }
 
     fun displayDisconnectProfileButton(value: Boolean) {

@@ -34,7 +34,9 @@ class ShopFragment : BaseFragment() {
         val adapter = ProfileViewPagerAdapter(childFragmentManager)
 
         adapter.addFragment(SalesFragment.newInstance(), getString(R.string.ti_sales_shop_fragment))
+        adapter.addFragment(SalesLyonFragment.newInstance(), getString(R.string.ti_offer_shop_lyon_fragment))
         adapter.addFragment(OfferFragment.newInstance(), getString(R.string.ti_offer_shop_fragment))
+
         vp_shop_fragment.adapter = adapter
         tl_shop_fragment.setupWithViewPager(vp_shop_fragment)
     }

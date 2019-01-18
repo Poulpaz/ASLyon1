@@ -34,9 +34,9 @@ class ListOfferAdapter : ListAdapter<Offer, ListOfferAdapter.OfferViewHolder>(Di
 
         fun bind(offer: Offer) {
             itemView.tv_title_item_offer.text = offer.title
-            itemView.tv_date_item_offer.text = getDateToString(offer.date)
-            itemView.tv_number_team_item_offer.text=offer.teams
-            itemView.tv_price_item_offer.text = offer.price
+            itemView.tv_date_item_offer.text = "Du "+ getDateToString(offer.startDate)+" au " +getDateToString(offer.endDate)
+            itemView.tv_number_team_item_offer.text=offer.nbParticipants+" places disponible(s)"
+            itemView.tv_price_item_offer.text = offer.price+" €"
             bindPositionClick(offer.idOffer)
         }
 
@@ -46,7 +46,10 @@ class ListOfferAdapter : ListAdapter<Offer, ListOfferAdapter.OfferViewHolder>(Di
                     .filter { adapterPosition != RecyclerView.NO_POSITION }
                     .subscribe { indexClickPublisher.onNext(idOffer) }
         }
-
+        private fun getDateToString(date: Date?): String {
+            val df: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
+            return df.format(date)
+        }
     }
 
 
@@ -58,12 +61,11 @@ class ListOfferAdapter : ListAdapter<Offer, ListOfferAdapter.OfferViewHolder>(Di
         override fun areContentsTheSame(oldItem: Offer, newItem: Offer): Boolean {
             return oldItem.idOffer == newItem.idOffer
         }
+
     }
 
-    private fun getDateToString(date: Date?): String {
-        val df: DateFormat = SimpleDateFormat("dd/MM/yyyy' à 'HH:mm", Locale.FRANCE)
-        return df.format(date)
-    }
+
+
 
 
 

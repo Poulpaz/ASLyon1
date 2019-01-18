@@ -6,10 +6,10 @@ import java.util.*
 class Tournament(
         @SerializedName("idTournament") var idTournament: Int,
         @SerializedName("title") var title: String,
-        @SerializedName("nbTeam") var nbTeam: Int,
-        @SerializedName("nbPlayersTeam") var nbPlayersTeam: Int,
+        @SerializedName("nbTeam") var nbTeam: String,
+        @SerializedName("nbPlayersTeam") var nbPlayersTeam: String,
         @SerializedName("date") var date: Date,
         @SerializedName("place") var place: String,
-        @SerializedName("price") var price: String,
-        @SerializedName("description") var description: String
+        @SerializedName("description") var description: String,
+        @SerializedName("price") var price: String
 )

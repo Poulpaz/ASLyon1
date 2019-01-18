@@ -13,10 +13,9 @@
 
         <ImageView
             android:id="@+id/iv_item_event"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:src="@drawable/ic_calendar"
-            android:padding="15dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -24,19 +23,22 @@
 
         <TextView
             android:id="@+id/tv_title_item_event"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Event"
             style="@style/TitleText"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_item_event"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_place_item_event"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Lyon 7ème"
+            style="@style/SubtitleText"
+            android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@id/tv_title_item_event"
             app:layout_constraintStart_toEndOf="@id/iv_item_event"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -46,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="7 euros"
+            style="@style/BodyText"
             app:layout_constraintTop_toBottomOf="@id/tv_place_item_event"
             app:layout_constraintStart_toEndOf="@id/iv_item_event"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -55,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="14/04/2019"
+            style="@style/DateText"
             app:layout_constraintTop_toBottomOf="@id/tv_price_item_event"
             app:layout_constraintStart_toEndOf="@id/iv_item_event"
             app:layout_constraintEnd_toEndOf="parent" />

@@ -20,6 +20,12 @@
             android:text="@string/ti_sales_shop_fragment" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/ti_offer_shop_lyon_fragment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ti_offer_shop_lyon_fragment" />
+
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/ti_offer_shop_fragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

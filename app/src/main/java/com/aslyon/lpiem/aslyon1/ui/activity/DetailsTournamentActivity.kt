@@ -30,7 +30,6 @@ class DetailsTournamentActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_tournament_details)
         setSupportActionBar(toolbarDetailsTournament)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -43,29 +42,18 @@ class DetailsTournamentActivity : BaseActivity() {
                         {
                             displayTournament(it)
                         },
-                        { Timber.e(it)}
+                        { Timber.e(it) }
                 )
     }
 
     private fun displayTournament(tournament: Tournament) {
         tv_title_tournament_details.text = tournament.title
         tv_place_tournament_details.text = tournament.place
-        tv_price_tournament_details.text = tournament.price
+        tv_price_tournament_details.text = tournament.price + " €"
         tv_team_tournament_details.text = tournament.nbTeam.toString() + " équipes de " + tournament.nbPlayersTeam.toString() + " joueurs"
-
-        //Display Chip
-        chipGroup_date_fragment_tournament_details.addView(getChip(getDateToString(tournament.date)))
+        tv_date_tournament_details.text = getDateToString(tournament.date)
 
         tv_description_tournament_details.text = tournament.description
-    }
-
-    private fun getChip(textChip : String?): Chip {
-        val chip = Chip(this)
-        chip.chipBackgroundColor = ContextCompat.getColorStateList(chip.context, R.color.colorAccent)
-        chip.isClickable = false
-        chip.text = textChip
-        chip.setTextAppearance(R.style.ChipTextStyle)
-        return chip
     }
 
     private fun getDateToString(date: Date?): String {

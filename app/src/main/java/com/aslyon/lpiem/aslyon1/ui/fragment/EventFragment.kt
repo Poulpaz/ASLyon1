@@ -11,10 +11,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.adapter.ListEventAdapter
+import com.aslyon.lpiem.aslyon1.ui.activity.AddEventActivity
+import com.aslyon.lpiem.aslyon1.ui.activity.AddOfferActivity
 import com.aslyon.lpiem.aslyon1.ui.activity.DetailsEventActivity
 import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.aslyon.lpiem.aslyon1.viewModel.EventViewModel
 import kotlinx.android.synthetic.main.fragment_event.*
+import kotlinx.android.synthetic.main.fragment_offer.*
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 import org.kodein.di.generic.instance
 import timber.log.Timber
 
@@ -39,12 +43,38 @@ class EventFragment : BaseFragment() {
         rv_event_fragment.setItemAnimator(DefaultItemAnimator())
         rv_event_fragment.adapter = adapter
 
+        viewModel.connectedUser.subscribe(
+                {
+                    if (it.toNullable()?.isAdmin == 1) {
+                        fab_event_fragment.show()
+                    } else {
+                        fab_event_fragment.hide()
+                    }
+                },
+                { Timber.e(it) }
+        )
+
+        fab_event_fragment.setOnClickListener {
+            AddEventActivity.start(activity as MainActivity)
+        }
+
+        swiperefrsh_fragment_event.setOnRefreshListener { viewModel.getListEvent() }
         viewModel.eventList
                 .subscribe(
-                    {
-                        adapter.submitList(it)
-                    },
-                    { Timber.e(it) }
+                        {
+                            if (it.isNullOrEmpty()) {
+                                tv_event_fragment.visibility = View.VISIBLE
+                                swiperefrsh_fragment_event.visibility = View.GONE
+                                swiperefrsh_fragment_event.isRefreshing = false
+
+                            } else {
+                                tv_event_fragment.visibility = View.GONE
+                                adapter.submitList(it)
+                                swiperefrsh_fragment_event.visibility = View.VISIBLE
+                                swiperefrsh_fragment_event.isRefreshing = false
+                            }
+                        },
+                        { Timber.e(it) }
                 )
 
         adapter.indexClickPublisher
@@ -54,5 +84,10 @@ class EventFragment : BaseFragment() {
                         },
                         { Timber.e(it) }
                 )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getListEvent()
     }
 }

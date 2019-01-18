@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.datasource.NetworkEvent
 import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
+import kotlinx.android.synthetic.main.activity_event_details.*
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import org.kodein.di.generic.instance
 import org.kodein.di.newInstance
@@ -52,23 +53,35 @@ class SignInFragment : BaseFragment() {
                     }
                 }, { Timber.e(it) }
         )
+
+        viewModel.errorEditTextSignIn.subscribe(
+                {
+                    Toast.makeText(context, getString(it), Toast.LENGTH_SHORT).show()
+                }, { Timber.e(it) }
+        )
     }
+
 
     private fun onSignInStateSuccess() {
         val frg = parentFragment?.parentFragment?.childFragmentManager?.findFragmentById(R.id.content_profile)
         if (frg is ProfileFragmentInterface) {
             frg.setActiveFragment()
-            progress_bar_signin.visibility = View.INVISIBLE
+            progress_bar_signin.visibility = View.GONE
+            b_signin_fragment.isEnabled = true
+            displayDisconnectProfileButton(true)
+            Toast.makeText(context, getString(R.string.tv_signin_success), Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun onSignInStateError(error: NetworkEvent.Error) {
-        progress_bar_signin.visibility = View.INVISIBLE
-        Toast.makeText(context, getString(R.string.error_connexion), Toast.LENGTH_SHORT).show()
+        progress_bar_signin.visibility = View.GONE
+        b_signin_fragment.isEnabled = true
+        Toast.makeText(context, getString(R.string.error_login), Toast.LENGTH_SHORT).show()
     }
 
     private fun onSignInStateInProgress() {
         progress_bar_signin.visibility = View.VISIBLE
+        b_signin_fragment.isEnabled = false
     }
 
     private fun login() {

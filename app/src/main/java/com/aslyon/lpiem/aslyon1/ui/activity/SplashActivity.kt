@@ -9,27 +9,24 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.aslyon.lpiem.aslyon1.R
 
-class SplashActivity: AppCompatActivity(){
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //Hiding title bar of SplashActivity
         window.requestFeature(Window.FEATURE_NO_TITLE)
         //Making the activity full screen
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_splash)
-
-
 
         Handler().postDelayed({
 
-            startActivity(Intent(this@SplashActivity,MainActivity::class.java))
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
 
-        },3000)
+        }, 3000)
 
     }
-
 
 
 }
