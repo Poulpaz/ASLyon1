@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.renderscript.RenderScript
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.aslyon.lpiem.aslyon1.R
@@ -17,6 +18,7 @@ import com.aslyon.lpiem.aslyon1.ui.activity.DetailsOfferActivity.Companion.Extra
 import com.aslyon.lpiem.aslyon1.ui.activity.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.squareup.picasso.Picasso
 import timber.log.Timber
 
 
@@ -59,13 +61,13 @@ class FBMessagingService : FirebaseMessagingService() {
                 }
             }
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
             val mBuilder = NotificationCompat.Builder(this, getString(R.string.default_notification_channel_id))
                     .setSmallIcon(R.mipmap.ic_launcher)
                     .setContentText(title)
                     .setContentIntent(pendingIntent)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
                     .setSmallIcon(R.drawable.logo_lyon)
                     .setAutoCancel(true)
 
