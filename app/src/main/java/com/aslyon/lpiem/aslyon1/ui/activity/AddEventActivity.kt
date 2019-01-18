@@ -27,8 +27,8 @@ class AddEventActivity : BaseActivity() {
     var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
     var timeFormat = SimpleDateFormat("HH:mm ", Locale.FRANCE)
 
-    lateinit var eventDate: Date
-    lateinit var eventHour: Date
+     var eventDate: Date? = null
+     var eventHour: Date? = null
 
 
     companion object {
@@ -43,10 +43,8 @@ class AddEventActivity : BaseActivity() {
         setContentView(R.layout.activity_add_event)
         setSupportActionBar(toolbarAddEvent)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         initChipDatePicker()
         initChipHourPicker()
-        setSupportActionBar(toolbarAddEvent)
     }
 
 
@@ -55,12 +53,18 @@ class AddEventActivity : BaseActivity() {
 
             R.id.button_validate_new_item -> {
 
-                val title = et_title_activity_add_event.text.toString()
-                val place = et_place_activity_add_event.text.toString()
-                val price = et_discount_price_activity_add_event.text.toString()
-                val description = et_description_activity_add_event.text.toString()
+                val title=et_title_activity_add_event.text.toString()
+                val place =et_place_activity_add_event.text.toString()
+                val price =et_discount_price_activity_add_event.text.toString()
+                val description=et_description_activity_add_event.text.toString()
 
-                viewModel.addevent(title, eventDate, eventHour, place, price, description)
+                viewModel.errorEditIntAddEvent.subscribe(
+                        {
+                            Toast.makeText(this@AddEventActivity, getString(it), Toast.LENGTH_SHORT).show()
+                        }, { Timber.e(it)}
+                )
+
+                viewModel.addevent(title, eventDate,eventHour ,place,price, description)
 
                 viewModel.saveEventState.subscribe(
                         {
@@ -83,6 +87,8 @@ class AddEventActivity : BaseActivity() {
                             }
                         }, { Timber.e(it) }
                 )
+
+
 
             }
         }

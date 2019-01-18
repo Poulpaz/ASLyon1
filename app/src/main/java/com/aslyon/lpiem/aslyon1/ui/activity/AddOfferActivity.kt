@@ -37,8 +37,8 @@ class AddOfferActivity : BaseActivity() {
     var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
     private var addOfferButtonMenu: MenuItem? = null
 
-    lateinit var offerStartDate: Date
-    lateinit var offerEndDate: Date
+     var offerStartDate : Date?=null
+     var offerEndDate    : Date?=null
 
     companion object {
         fun start(fromActivity: AppCompatActivity) {
@@ -56,7 +56,7 @@ class AddOfferActivity : BaseActivity() {
 
         initChipDatePicker()
         initChipDateEndPicker()
-        setSupportActionBar(toolbar)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -70,7 +70,13 @@ class AddOfferActivity : BaseActivity() {
 
                 val reduction = et_discount_price_activity_add_offer.text.toString()
 
-                viewModel.addoffer(title, offerStartDate, offerEndDate, nbParticipants, reduction, description)
+                viewModel.errorEditTextAddOffer.subscribe(
+                        {
+                            Toast.makeText(this@AddOfferActivity, getString(it), Toast.LENGTH_SHORT).show()
+                        }, { Timber.e(it) }
+                )
+                viewModel.addoffer(title,offerStartDate,offerEndDate,nbParticipants,reduction, description)
+
 
                 viewModel.registerState.subscribe(
                         {
@@ -93,6 +99,8 @@ class AddOfferActivity : BaseActivity() {
                             }
                         }, { Timber.e(it) }
                 )
+
+
 
             }
         }

@@ -2,6 +2,7 @@ package com.aslyon.lpiem.aslyon1.viewModel
 
 import android.text.TextUtils
 import android.util.Patterns
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.aslyon.lpiem.aslyon1.R
@@ -73,6 +74,7 @@ class ProfileViewModel(private val repository: UserRepository): BaseViewModel() 
                             { Timber.e(it) }
                     )
         }
+
     }
 
     fun login(email: String, password: String) {

@@ -28,8 +28,8 @@ class AddTournamentActivity : BaseActivity() {
     var formate = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
     var timeFormat = SimpleDateFormat("HH:mm ", Locale.FRANCE)
 
-    lateinit var tournamentDate: Date
-    lateinit var tournamentHour: Date
+     var tournamentDate: Date? = null
+     var tournamentHour: Date? = null
 
     companion object {
         fun start(fromActivity: AppCompatActivity) {
@@ -59,7 +59,13 @@ class AddTournamentActivity : BaseActivity() {
                 val price = et_price_activity_add_tournament.text.toString()
                 val description = et_description_activity_add_tournament.text.toString()
 
-                viewModel.addtournament(title, nbTeam, nbPlayersTeams, tournamentDate, tournamentHour, place, description, price)
+                viewModel.errorEditTextAddTournament.subscribe(
+                        {
+                            Toast.makeText(this@AddTournamentActivity, getString(it), Toast.LENGTH_SHORT).show()
+                        }, { Timber.e(it) }
+                )
+
+                viewModel.addtournament(title, nbTeam, nbPlayersTeams, tournamentDate,tournamentHour, place, description, price)
                 viewModel.registerState.subscribe(
                         {
                             when (it) {
@@ -81,6 +87,8 @@ class AddTournamentActivity : BaseActivity() {
                             }
                         }, { Timber.e(it) }
                 )
+
+
 
             }
         }
@@ -144,6 +152,8 @@ class AddTournamentActivity : BaseActivity() {
                 selectedTime.set(Calendar.HOUR_OF_DAY, hourOfDay)
                 selectedTime.set(Calendar.MINUTE, minute)
                 tournamentHour = selectedTime.time
+
+
                 tournamentHour.toString()
                 chip_hour_tournament_activity_add_tournament.text = timeFormat.format(selectedTime.time)
             },
