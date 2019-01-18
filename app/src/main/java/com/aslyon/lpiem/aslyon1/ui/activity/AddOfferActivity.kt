@@ -68,7 +68,13 @@ class AddOfferActivity : BaseActivity(){
 
                 val reduction=et_discount_price_activity_add_offer.text.toString()
 
+                viewModel.errorEditTextAddOffer.subscribe(
+                        {
+                            Toast.makeText(this@AddOfferActivity, getString(it), Toast.LENGTH_SHORT).show()
+                        }, { Timber.e(it) }
+                )
                 viewModel.addoffer(title,offerStartDate,offerEndDate,nbParticipants,reduction, description)
+
 
                 viewModel.registerState.subscribe(
                         {
@@ -93,11 +99,7 @@ class AddOfferActivity : BaseActivity(){
                         }, { Timber.e(it) }
                 )
 
-                viewModel.errorEditTextAddOffer.subscribe(
-                        {
-                            Toast.makeText(this@AddOfferActivity, getString(it), Toast.LENGTH_SHORT).show()
-                        }, { Timber.e(it) }
-                )
+
 
             }
         }

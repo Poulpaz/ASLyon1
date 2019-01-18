@@ -60,6 +60,12 @@ class AddEventActivity : BaseActivity(){
                 val price =et_discount_price_activity_add_event.text.toString()
                 val description=et_description_activity_add_event.text.toString()
 
+                viewModel.errorEditIntAddEvent.subscribe(
+                        {
+                            Toast.makeText(this@AddEventActivity, getString(it), Toast.LENGTH_SHORT).show()
+                        }, { Timber.e(it)}
+                )
+
                 viewModel.addevent(title, eventDate,eventHour ,place,price, description)
 
                 viewModel.saveEventState.subscribe(
@@ -84,11 +90,7 @@ class AddEventActivity : BaseActivity(){
                             }
                         }, { Timber.e(it) }
                 )
-                viewModel.errorEditIntAddEvent.subscribe(
-                        {
-                            Toast.makeText(this@AddEventActivity, getString(it), Toast.LENGTH_SHORT).show()
-                        }, { Timber.e(it)}
-                )
+
 
 
             }

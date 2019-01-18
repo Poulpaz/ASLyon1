@@ -56,6 +56,12 @@ class AddTournamentActivity: BaseActivity() {
                 val price = et_price_activity_add_tournament.text.toString()
                 val description = et_description_activity_add_tournament.text.toString()
 
+                viewModel.errorEditTextAddTournament.subscribe(
+                        {
+                            Toast.makeText(this@AddTournamentActivity, getString(it), Toast.LENGTH_SHORT).show()
+                        }, { Timber.e(it) }
+                )
+
                 viewModel.addtournament(title, nbTeam, nbPlayersTeams, tournamentDate,tournamentHour, place, description, price)
                 viewModel.registerState.subscribe(
                         {
@@ -79,11 +85,7 @@ class AddTournamentActivity: BaseActivity() {
                             }
                         }, { Timber.e(it) }
                 )
-                viewModel.errorEditTextAddTournament.subscribe(
-                        {
-                            Toast.makeText(this@AddTournamentActivity, getString(it), Toast.LENGTH_SHORT).show()
-                        }, { Timber.e(it) }
-                )
+
 
 
             }
