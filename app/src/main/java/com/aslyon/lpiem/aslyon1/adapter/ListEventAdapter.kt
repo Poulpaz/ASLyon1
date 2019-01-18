@@ -42,10 +42,9 @@ class ListEventAdapter : ListAdapter<Event, ListEventAdapter.EventViewHolder>(Di
         }
 
         private fun bindPositionClick(idEvent: Int) {
-            itemView.clicks()
-                    .takeUntil(RxView.detaches(itemView))
-                    .filter { adapterPosition != RecyclerView.NO_POSITION }
-                    .subscribe { indexClickPublisher.onNext(idEvent) }
+            itemView.setOnClickListener {
+                indexClickPublisher.onNext(idEvent)
+            }
         }
         private fun getDateToString(date: Date?): String {
             val df: DateFormat = SimpleDateFormat("dd/MM/yyyy' à 'HH:mm", Locale.FRANCE)

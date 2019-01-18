@@ -41,10 +41,9 @@ class ListOfferAdapter : ListAdapter<Offer, ListOfferAdapter.OfferViewHolder>(Di
         }
 
         private fun bindPositionClick(idOffer: Int) {
-            itemView.clicks()
-                    .takeUntil(RxView.detaches(itemView))
-                    .filter { adapterPosition != RecyclerView.NO_POSITION }
-                    .subscribe { indexClickPublisher.onNext(idOffer) }
+            itemView.setOnClickListener {
+                indexClickPublisher.onNext(idOffer)
+            }
         }
         private fun getDateToString(date: Date?): String {
             val df: DateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)

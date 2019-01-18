@@ -40,10 +40,9 @@ class ListSubscribersEventAdapter : ListAdapter<SubscribersEventResponse, ListSu
         }
 
         private fun bindPositionClick(idSubscriber: Int) {
-            itemView.clicks()
-                    .takeUntil(RxView.detaches(itemView))
-                    .filter { adapterPosition != RecyclerView.NO_POSITION }
-                    .subscribe { indexClickPublisher.onNext(idSubscriber) }
+            itemView.setOnClickListener {
+                indexClickPublisher.onNext(idSubscriber)
+            }
         }
     }
 
