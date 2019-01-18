@@ -44,7 +44,8 @@ class FBMessagingService : FirebaseMessagingService() {
         if (remoteMessage.notification != null && remoteMessage.data.isNotEmpty()) {
             Timber.d("Message data payload: " + remoteMessage.data)
 
-            val title = remoteMessage.notification?.body
+            val title = remoteMessage.notification?.title
+            val text = remoteMessage.notification?.body
             val id = remoteMessage.data["idNotif"]
             val type = remoteMessage.data["type"]
 
@@ -62,12 +63,12 @@ class FBMessagingService : FirebaseMessagingService() {
             }
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-
             val mBuilder = NotificationCompat.Builder(this, getString(R.string.default_notification_channel_id))
                     .setSmallIcon(R.mipmap.ic_launcher)
-                    .setContentText(title)
+                    .setContentText(text)
+                    .setContentTitle(title)
                     .setContentIntent(pendingIntent)
-                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setSmallIcon(R.drawable.logo_lyon)
                     .setAutoCancel(true)
 
