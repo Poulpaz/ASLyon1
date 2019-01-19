@@ -86,7 +86,8 @@ class FBMessagingService : FirebaseMessagingService() {
             }
 
             // notificationId is a unique int for each notification that you must define
-            notificationManager.notify(10, mBuilder.build())
+            val idNotification = System.currentTimeMillis().toInt()
+            notificationManager.notify(idNotification, mBuilder.build())
         }
     }
 
