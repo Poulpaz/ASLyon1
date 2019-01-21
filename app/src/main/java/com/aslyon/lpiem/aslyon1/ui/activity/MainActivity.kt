@@ -54,6 +54,7 @@ class MainActivity : BaseActivity() {
     private lateinit var profileWrapper: FrameLayout
     private lateinit var tournamentWrapper: FrameLayout
     private lateinit var shopWrapper: FrameLayout
+    private var lastimeBackPressed = 0L
 
     private lateinit var mOnNavigationItemSelectedListener: BottomNavigationView.OnNavigationItemSelectedListener
 
@@ -174,9 +175,12 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        currentController
-                .let { if (it.popBackStack().not()) finish() }
-                .or { finish() }
+        if (supportFragmentManager.backStackEntryCount == 0 &&
+                lastimeBackPressed < System.currentTimeMillis() - 3000) {
+            lastimeBackPressed = System.currentTimeMillis()
+        } else{
+            super.onBackPressed()
+        }
     }
 
     fun displayDisconnectProfileButton(value: Boolean) {

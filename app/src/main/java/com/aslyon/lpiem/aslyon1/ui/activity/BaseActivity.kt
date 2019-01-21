@@ -31,4 +31,8 @@ open class BaseActivity : AppCompatActivity(), KodeinAware {
     protected fun lifecycle(event: RxLifecycleDelegate.ActivityEvent): Observable<RxLifecycleDelegate.ActivityEvent> {
         return rxDelegate.lifecycle(event)
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
 }

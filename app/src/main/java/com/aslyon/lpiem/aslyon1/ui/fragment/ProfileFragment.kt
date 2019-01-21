@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
 import com.aslyon.lpiem.aslyon1.R
 import com.aslyon.lpiem.aslyon1.viewModel.ProfileViewModel
 import org.kodein.di.generic.instance
@@ -34,6 +35,7 @@ class ProfileFragment : BaseFragment(), ProfileFragmentInterface {
         val fragment = if (viewModel.connectedUser()) AccountInformationsFragment.newInstance() else AuthentificationFragment.newInstance()
         if (fragment == AccountInformationsFragment()) displayDisconnectProfileButton(true) else displayDisconnectProfileButton(false)
         childFragmentManager?.popBackStack()
+        fragmentManager?.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         fragmentManager?.beginTransaction()
                 ?.replace(R.id.container_profile_fragment, fragment)
                 ?.addToBackStack(null)
